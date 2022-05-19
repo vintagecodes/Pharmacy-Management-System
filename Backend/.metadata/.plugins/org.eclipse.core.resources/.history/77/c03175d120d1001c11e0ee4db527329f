@@ -1,0 +1,5 @@
+package com.drugs.repository;
+
+public interface PhotoRepository {
+
+}

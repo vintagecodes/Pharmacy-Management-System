@@ -1,0 +1,5 @@
+package com.drugs.controller;
+
+public class PhotoController {
+
+}

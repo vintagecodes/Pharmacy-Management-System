@@ -1,0 +1,5 @@
+package com.o.order.entity;
+
+public class Address {
+
+}

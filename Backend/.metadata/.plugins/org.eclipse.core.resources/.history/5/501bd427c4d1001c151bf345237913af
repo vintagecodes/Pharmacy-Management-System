@@ -1,0 +1,55 @@
+package com.drugs.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.drugs.models.Cart;
+import com.drugs.repository.CartRepository;
+
+
+@Service
+public class CartService {
+	
+	@Autowired
+	private CartRepository cartRepository;
+	
+	
+	public Cart addUser(Cart cart) {
+		
+		cart.setTotal(cart.getDrugsCost()* 1);
+		return cartRepository.save(cart);
+	}
+	
+	public List<Cart> getAllUsers() {
+		return cartRepository.findAll();
+	}
+
+	public List<Cart> getByUserName(String username) {
+		return cartRepository.findByUsername(username);
+	}
+	
+	public Cart updateCartQty(Cart carts) {
+		carts.setTotal(carts.getDrugsQty()*carts.getDrugsCost());
+		return cartRepository.save(carts);
+	}
+
+	public List<Cart> getCartByDrugsId(String drugsId) {
+		
+		return cartRepository.findByDrugsId(drugsId);
+	}
+	
+public List<Cart> getCartByCartId(String cartId) {
+		
+		return cartRepository.findByCartId(cartId);
+	}
+
+	public Cart getByUserNameAndDrugsId(String username, String drugsId) {
+		return cartRepository.findByUsernameAndDrugsId(drugsId, username);
+	}
+	
+	
+	
+
+}

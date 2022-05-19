@@ -1,0 +1,32 @@
+package com.o.order.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.drugs.exception.CustomException;
+import com.drugs.models.Drugs;
+import com.drugs.models.MessageResponse;
+import com.o.order.entity.Address;
+import com.o.order.repository.AddressRepository;
+
+@Service
+public class AddressService {
+	
+	@Autowired
+	private AddressRepository addressRepository;
+	
+	public ResponseEntity<?> saveAddressDetails(Address address) throws CustomException, Exception{
+		Address address1 = new Address();
+		if(addressRepository.existsByUsername(address1.getUsername())) {
+//				throw new CustomException("The drug Id is already registered");
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: SupplierID is already taken!"));
+		}else {
+			LOGGER.info("Sucessfully Registered new Drug");
+			address1 = addressRepository.save(address);
+		}
+		
+		return ResponseEntity.ok(address1);
+		
+	}
+}

@@ -1,0 +1,77 @@
+package com.drugs.service;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.drugs.exception.CustomException;
+import com.drugs.models.Cart;
+import com.drugs.models.MessageResponse;
+import com.drugs.repository.CartRepository;
+
+
+@Service
+public class CartService {
+	
+	@Autowired
+	private CartRepository cartRepository;
+	
+	private static final Logger LOGGER=LoggerFactory.getLogger(CartService.class);
+	
+	
+	public ResponseEntity<?> addUser(Cart cart) throws CustomException, Exception {
+		Cart cart1 = new Cart();
+		if(cartRepository.existsByUsernameAndDrugsId(cart.getDrugsId(), cart.getUsername())) {
+			LOGGER.error(null);
+			return ResponseEntity.badRequest().body( new MessageResponse("Error: The DrugsId has already been taken in the Cart"));
+		} else {
+			LOGGER.info("Sucessfully Registered new Cart");
+			cart.setTotal(cart.getDrugsCost()* 1);
+			cart1 = cartRepository.save(cart);
+		}
+		return ResponseEntity.ok(cart1);
+		
+		
+	}
+	
+	public List<Cart> getAllUsers() {
+		return cartRepository.findAll();
+	}
+
+	public List<Cart> getByUserName(String username) {
+		return cartRepository.findByUsername(username);
+	}
+	
+	public Cart updateCartQty(Cart carts) {
+		carts.setTotal(carts.getDrugsQty()*carts.getDrugsCost());
+		return cartRepository.save(carts);
+	}
+
+	public List<Cart> getCartByDrugsId(String drugsId) {
+		
+		return cartRepository.findByDrugsId(drugsId);
+	}
+	
+public List<Cart> getCartByCartId(String cartId) {
+		
+		return cartRepository.findByCartId(cartId);
+	}
+
+	public Cart getByUserNameAndDrugsId(String username, String drugsId) {
+		return cartRepository.findByUsernameAndDrugsId(drugsId, username);
+	}
+	
+	
+	public String deleteCartsByUsername(String username) {
+		cartRepository.deleteByUsername(username);
+		return "Deleted Successfully";
+	}
+	
+	
+	
+
+}

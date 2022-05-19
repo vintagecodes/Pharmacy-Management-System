@@ -1,0 +1,161 @@
+package com.drugs.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.drugs.exception.CustomException;
+import com.drugs.models.Cart;
+import com.drugs.models.Drugs;
+import com.drugs.models.Inventory;
+import com.drugs.models.MessageResponse;
+import com.drugs.models.Supplier;
+import com.drugs.repository.DrugsRepository;
+
+@Service
+public class DrugsService {
+	
+	@Autowired
+	private DrugsRepository drugsRepository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	private static final Logger LOGGER=LoggerFactory.getLogger(DrugsService.class);
+
+	public ResponseEntity<?> saveDrugsDetails(Drugs drugs) throws CustomException, Exception{
+		Drugs drugs1 = new Drugs();
+		if(drugsRepository.existsByDrugsId(drugs.getDrugsId())) {
+//				throw new CustomException("The drug Id is already registered");
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: SupplierID is already taken!"));
+		}else {
+			LOGGER.info("Sucessfully Registered new Drug");
+			drugs1 = drugsRepository.save(drugs);
+		}
+		
+		return ResponseEntity.ok(drugs1);
+		
+	}
+
+	public List<Drugs> getAllDetails() {
+		return drugsRepository.findAll();
+	}
+
+	public Optional<Drugs> getDrugsByID(String drugsId) throws CustomException, Exception{
+		Optional<Drugs> drugs = Optional.empty();
+		try {
+			if(drugsRepository.existsByDrugsId(drugsId)) {
+				drugs = drugsRepository.findById(drugsId);
+			}else {
+				throw new CustomException("The mentioned ID is not listed");
+			}
+		} catch(CustomException e) {
+			LOGGER.error("The mentioned ID is not listed"+e);
+		}
+		return drugs;
+	}
+	
+	public List<Drugs> getDrugsBySupplierName(String supplierName){
+		return drugsRepository.findBySupplierName(supplierName);
+	}
+	
+	public List<Drugs> getDrugsByName(String drugsName){
+		return drugsRepository.findByDrugsName(drugsName);
+	}
+	
+	public List<Drugs> getDrugsByCategory(String categories){
+		return drugsRepository.findBycategories(categories);
+	}
+	
+	
+	public Inventory getDrugsWithSupplierDetails(String supplierName) throws CustomException, Exception {
+		String name = null;
+		Inventory response = new Inventory();
+		try {
+			if(drugsRepository.existsBySupplierName(supplierName)) {
+				List<Drugs> drugs = drugsRepository.findBySupplierName(supplierName);
+				for(Drugs var : drugs) {
+					 name = var.getSupplierName();
+				}
+				
+			
+				
+				Supplier supplier = restTemplate.getForObject("http://SUPPLIER-SERVICE/supplier/details/"+ name, Supplier.class);
+				response.setDrugs(drugs);
+				response.setSupplier(supplier);
+			}else {
+				LOGGER.error("The result could not be fetched");
+				throw new CustomException("The supplierName couldn't be fetched");
+			}
+		} catch(CustomException e) {
+			LOGGER.error("The supplierName couldn't be fetched"+e);
+		}
+		
+		return response;
+				
+		
+	}
+	
+	
+	public Drugs updateDrugsByCart(String username, String drugsId, Drugs drugs) {
+		
+		Cart cart = restTemplate.getForObject("http://localhost:5004/drugs/cart/username/"+drugsId+"/"+username, Cart.class);
+		int x = cart.getDrugsQty();
+		
+		Drugs drugs1 = restTemplate.getForObject("http://localhost:5004/drugs/"+drugsId,Drugs.class);
+		int y = drugs1.getStockQty();
+		
+		int z = y - x;
+		
+		drugs.setStockQty(z);
+		
+		drugsRepository.save(drugs);
+		
+		return drugs;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public Drugs updateDrugsDetails(Drugs drugs, String drugsId) throws CustomException, Exception{
+		Drugs storingVar = new Drugs();
+			storingVar = drugsRepository.save(drugs);
+		
+		return storingVar;
+	}
+	
+	public Drugs updateDrugsDetail(Drugs drugs, String drugsName) throws CustomException, Exception{
+		Drugs storingVar = new Drugs();
+			storingVar = drugsRepository.save(drugs);
+		
+		return storingVar;
+	}
+
+	public String deleteDrugs(String drugsId) {
+		drugsRepository.deleteById(drugsId);
+		return "Deleted Successfully";
+	}
+	
+
+}

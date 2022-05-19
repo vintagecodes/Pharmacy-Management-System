@@ -1,0 +1,5 @@
+package com.o.order.controller;
+
+public class AddressController {
+
+}
