@@ -1,0 +1,70 @@
+
+
+
+
+<mat-toolbar>
+  <div class="cont">
+    <span><h1>GET MEDS</h1></span>
+    <p></p>
+   </div>
+  <app-nav-bar class="app-nav"></app-nav-bar>
+
+</mat-toolbar>
+
+
+
+
+
+<div class="register-form mt-3 mb-3" *ngIf="isLoggedIn">
+  <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-none d-md-block bg-light">
+              <!-- <h1 class="text-center pt-3">Billing Details<br></h1> -->
+              <img
+              id="profile-img"
+              src="/assets/img/pharma_shop-removebg-preview.png"
+              class="-img-card"
+            />
+          </div>
+          <div class="col-md-6 bg-dark">
+             <h1 class="text-center">Billing Details<br></h1>
+              <form [formGroup]="checkoutForm" class="p-4 text-white" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Name</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Enter Name">
+                    <div *ngIf="checkoutForm.controls['name'].invalid && checkoutForm.controls['name'].touched" class="text-danger">
+                      
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                    <input type="email" class="form-control" formControlName="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="pincode"><i class="fas fa-user"></i> Pincode</label>
+                  <input type="text" class="form-control" formControlName="pincode" placeholder="Enter PinCode">
+              </div>
+              <div class="form-group">
+                <label for="address"><i class="fas fa-user"></i>Address</label>
+                <input type="text" class="form-control" formControlName="address" placeholder="Enter Address">
+            </div>
+            <div class="form-group">
+              <label for="contactNo"><i class="fas fa-user"></i>Contact No</label>
+              <input type="text" class="form-control" formControlName="contactNo" placeholder="Enter Contact No">
+          </div>
+               <div class="form-group">
+                
+                <input type="submit" value="Register" class="btn btn-success">
+                </div>
+              </form>
+              <!-- <div *ngIf="formData">
+                <strong>Form Value</strong>: {{ formData.value | json }}
+              </div> -->
+          </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-6" *ngIf="isLoggedIn">
+  <button type="submit" class="btn btn-warning mb-3 mt-3 float-right" (click)="orderSection()">Next</button>
+
+</div>

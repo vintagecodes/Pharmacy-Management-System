@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div style="display: flex; flex-grow: grow; margin: 5px;" *ngFor="let data of res">
+    
+        <app-nav></app-nav>
+        <div class="con">
+          <mat-card class="mat-card"  >
+            <mat-card-title>
+              User Name - {{data.userId}}</mat-card-title>
+            <mat-card-subtitle>Order Id - {{data.orderId}}</mat-card-subtitle>
+            <mat-card-subtitle>Order Status - {{data.orderStatus}}</mat-card-subtitle>
+          </mat-card>
+          <br>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Product Name</th>
+                <th scope="col">Cost</th>
+                <th scope="col">User Set Quantity</th>
+                <th scope="col">Stock Quantity</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let cart of data.cart">
+              <tr>
+                <td>{{cart.drugsName}}</td>
+                <td>{{cart.drugsCost}}</td>
+                <td>{{cart.drugsQty}}</td>
+                <td>{{cart.stockQty}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+       
+        
+
+
+
+    
+    </div>
+    
+</body>
+</html>

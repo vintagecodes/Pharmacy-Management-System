@@ -1,0 +1,102 @@
+
+<div style="display: flex; flex-grow: grow; margin: 5px;">
+
+    <app-nav></app-nav>
+    <div class="tab">
+        <div class="mt-10" data-bs-target="#drugs">
+          <table class="table table-bordered">
+            <thead class="thead">
+              <tr>
+                <th>Drugs Id</th>
+                <th>Drugs Name</th>
+                <th>Drugs Cost</th>
+                <th>Stoc kQty</th>
+                <th>Drugs Description</th>
+                <th>Supplier Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+    
+              </tr>
+            </thead>
+            <tbody  class="tbody">
+              <tr *ngFor="let drug  of DrugsDetails ">
+                <td>{{drug.drugsId}}</td>
+                <td>{{drug.drugsName}}</td>
+                <td>{{drug.drugsCost}}</td>
+                <td>{{drug.stockQty}}</td>
+                <td>{{drug.drugsDescription}}</td>
+                <td>{{drug.supplierName}}</td>
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(drug)">Edit</button></td>
+                <td><button type="button" class="btn btn-danger" (click)="confirmDelete(drug)">Delete</button></td>
+              </tr>
+    
+            </tbody>
+          </table>
+        </div>
+        </div>
+    
+    
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Drugs</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+  
+          <div class="card" style="padding: 20px;">
+            <form #updatedForm="ngForm" (ngSubmit)="updateDrugs(updatedForm)">
+              <div class="form-group">
+                <label for="drugsId">drugsId :</label>
+                <input type="text" #drugsId [(ngModel)]="DrugsToUpdate.drugsId" name="drugsId" id="drugsId" class="form-control" placeholder="drugsId">
+              </div>
+              <div class="form-group">
+                <label for="drugsName">drugsName :</label>
+                <input type="text" #drugsName [(ngModel)]="DrugsToUpdate.drugsName" name="drugsName" id="drugsName" class="form-control"
+                  placeholder="drugsName">
+              </div>
+              <div class="form-group">
+                <label for="drugsCost">drugsCost :</label>
+                <input type="drugsCost" #drugsCost [(ngModel)]="DrugsToUpdate.drugsCost" name="drugsCost" id="drugsCost" class="form-control"
+                  placeholder="drugsCost">
+              </div>
+              <div class="form-group">
+                <label for="stockQty">StockQty :</label>
+                <input type="stockQty" #stockQty [(ngModel)]="DrugsToUpdate.stockQty" name="stockQty" id="stockQty" class="form-control"
+                  placeholder="stockQty">
+              </div>
+    
+              <div class="form-group">
+                <label for="drugsDescription">drugsDescription :</label>
+                <input type="drugsDescription" #drugsDescription [(ngModel)]="DrugsToUpdate.drugsDescription" name="drugsDescription" id="drugsDescription" class="form-control"
+                  placeholder="drugsDescription">
+              </div>
+    
+              <div class="form-group">
+                <label for="supplierName">supplierName :</label>
+                <input type="supplierName" #supplierName [(ngModel)]="DrugsToUpdate.supplierName" name="supplierName" id="supplierName" class="form-control"
+                  placeholder="supplierName">
+              </div>
+    
+              <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-danger w-100">
+              </div>
+            </form>
+            </div>
+        </div>
+      </div>
+    </div>
+ </div>
+
+
+
+
+
+

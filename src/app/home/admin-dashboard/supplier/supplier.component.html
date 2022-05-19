@@ -1,0 +1,57 @@
+
+<div style="display: flex; flex-grow: grow; margin: 5px;">
+  <app-nav style="width: 200px;"></app-nav>
+  <div class="wrapper">
+    <div class="form_container">
+      <div class="heading">
+        <h2>Supplier Form</h2>
+     </div>
+   
+      <form name="form"  #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+        <div class="form_wrap fullname">
+  
+          <div class="form_item">
+              <label>Supplier ID</label>
+              <input type="text"  name="supplierId" id="supplierId" class="form-control" placeholder="supplierId" required ngModel #supplierId="ngModel">
+              <span class="help-bpx" *ngIf="supplierId.touched && !supplierId.valid">Please Enter the Supplier ID</span>
+            </div>
+        
+        
+          <div class="form_item">
+            <label for="supplierName">SupplierName :</label>
+            <input type="text" name="supplierName" id="supplierName" class="form-control"
+              placeholder="supplierName" required ngModel #supplierName="ngModel">
+              <span class="help-bpx" *ngIf="supplierName.touched && !supplierName.valid">Please Enter the Supplier Name</span>
+          </div>
+  
+         
+        
+        </div>
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="email">Email :</label>
+              <input type="email"  name="email" id="email" class="form-control"
+                placeholder="email" eamil required ngModel #email="ngModel">
+                <span class="help-bpx" *ngIf="email.touched && !email.valid">Please Enter the Supplier Email</span>
+          </div>
+        </div>
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="availableDrugs">Availability Drugs:</label>
+            <input type="availableDrugs" name="availableDrugs" id="availableDrugs" class="form-control"
+              placeholder="availableDrugs" required ngModel #availableDrugs="ngModel">
+              <span class="help-bpx" *ngIf="availableDrugs.touched && !availableDrugs.valid">Please Enter the Availability Drugs</span>
+          </div>
+        </div>
+  
+        <div class="btn">
+          <input type="submit" value="Get Started" [disabled]="!registerForm.valid">
+       </div>
+       <div class="alert alert-warning" *ngIf="!registerForm.submitted && isRegistrationFailed">
+        Adding failed!<br />{{ errorMessage }}
+      </div>
+     </form>
+    </div>
+   </div>
+</div>
+

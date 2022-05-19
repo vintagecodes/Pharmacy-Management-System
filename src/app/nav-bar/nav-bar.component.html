@@ -1,0 +1,80 @@
+
+
+
+
+
+<div class="navigation-left">
+    <ul>
+        <li class="list">
+            <a  routerLink="/">
+                <span class="icon"> <img src="/assets/img/icons8-home-64.png"/></span>
+               
+                <span class="text">Home</span>
+            </a>
+        </li>
+        <li class="list" *ngIf="showAdminBoard && !isLoggedIn">
+            <a  routerLink="/admin">
+                <span class="icon"> <img src="/assets/img/icons8-home-64.png"/></span>
+               
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<div class="navigation">
+    
+    <ul>
+        
+        
+        <li class="list" *ngIf="showUserBoard">
+            <a  routerLink="/user">
+                <span class="icon"> <img src="/assets/img/icons8-home-64.png"/></span>
+               
+                <span class="text">User</span>
+            </a>
+        </li>
+        <li class="list" *ngIf="showUserBoard">
+            <a  routerLink="/cart" >
+                <span class="icon"> <img src="/assets/img/icons8-home-64.png"/></span>
+               
+                <span class="text">Cart</span>
+            </a>
+        </li>
+        
+        <li class="list">
+            <a routerLink="/shop" >
+                <span class="icon"> <img src="/assets/img/icons8-shop-100.png"/></span>
+               
+                <span class="text">Shop</span>
+            </a>
+        </li>
+        <ul *ngIf="!isLoggedIn">
+        <li class="list">
+            <a routerLink="/login" >
+                <span class="icon"><img src="/assets/img/icons8-login-64.png"/></span>
+                
+                <span class="text">Sign In</span>
+            </a>
+        </li>
+        <li class="list">
+            <a routerLink="/register">
+                <span class="icon"> <img src="/assets/img/icons8-sign-up-64.png"/></span>
+               
+                <span class="text">Register</span>
+            </a>
+        </li>
+        </ul>
+        <li class="list"  *ngIf="isLoggedIn">
+            <a href   (click)="logout()">
+                <span class="icon" ><img src="/assets/img/icons8-sign-up-64.png"/></span>
+               
+                <span class="text">Logout</span>
+            </a>
+        </li>
+    </ul>
+    </div>
+
+   
+

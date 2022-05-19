@@ -1,0 +1,56 @@
+<mat-toolbar>
+  <div class="cont">
+    <span><h1>GET MEDS</h1></span>
+    <p></p>
+   </div>
+  <app-nav-bar class="app-nav"></app-nav-bar>
+
+</mat-toolbar>
+
+<app-image-slider></app-image-slider><br>
+
+<h1 style="text-align:center">Shop Now</h1>
+
+
+<!-- <div class="containers">
+
+    <div class="card" *ngFor="let item of content">
+        <div class="card__description">
+          <div class="card__descriptionIcon"><i class="fas fa-capsules"></i></div>
+          <h4>{{item.drugsName}}</h4>
+          <div class="card__descriptionText">{{item.drugsDescription}}</div>
+        </div>
+        <div class="card__price">{{item.drugsCost}}</div>
+        <div class="btn" >
+          <button style="font-size:25px" *ngIf="isLoggedIn" (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></button>
+        </div>
+      </div>
+      </div> -->
+      <section class="section-products">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+            </div>
+            <div class="row">
+                <!-- Single Product -->
+                <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let item of content">
+                    <div id="product-1" class="single-product">
+                        <div class="part-1">
+                            <!-- <ul>
+                                <li><a (click)="addToCart(item)"><i class="fas fa-shopping-cart"></i></a></li>
+                               
+                            </ul> -->
+                            <ul >
+                              <li><a (click)="outsider()" ><i class="fas fa-shopping-cart"></i></a></li>
+                              <li><a (click)="addToCart(item)" *ngIf="isLoggedIn"><i class="fas fa-shopping-cart"></i></a></li>
+                             
+                          </ul>
+                        </div>
+                        <div class="part-2">
+                            <h3 class="product-title">{{item.drugsName}}</h3>
+                            <h4 class="product-price">{{item.drugsCost | currency:'INR':'symbol-narrow'}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
