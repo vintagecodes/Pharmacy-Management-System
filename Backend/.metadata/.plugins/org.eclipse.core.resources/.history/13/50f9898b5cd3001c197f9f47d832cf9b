@@ -1,0 +1,42 @@
+package com.o.order.service;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.drugs.exception.CustomException;
+import com.o.order.entity.Address;
+import com.o.order.entity.MessageResponse;
+import com.o.order.repository.AddressRepository;
+
+@Service
+public class AddressService {
+	
+	@Autowired
+	private AddressRepository addressRepository;
+	
+	private static final Logger LOGGER=LoggerFactory.getLogger(AddressService.class);
+	
+	public ResponseEntity<?> saveAddressDetails(Address address) throws CustomException, Exception{
+		Address address1 = new Address();
+		if(addressRepository.existsByUsername(address1.getUsername())) {
+//				throw new CustomException("The drug Id is already registered");
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+		}else {
+			LOGGER.info("Sucessfully Registered new Billing Address");
+			address1 = addressRepository.save(address);
+		}
+		
+		return ResponseEntity.ok(address1);
+		
+	}
+	
+	
+	public List<Address> getAllDetails() {
+		return addressRepository.findAll();
+	}
+}

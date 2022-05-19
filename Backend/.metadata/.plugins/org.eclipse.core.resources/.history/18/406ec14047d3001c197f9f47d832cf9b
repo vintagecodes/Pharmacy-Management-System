@@ -1,0 +1,18 @@
+package com.o.order.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Address {
+	
+	private String name;
+	private String email;
+	private long pincode;
+	private String address;
+	private long contactNo;
+
+}
