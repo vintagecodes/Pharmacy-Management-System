@@ -1,0 +1,179 @@
+<mat-toolbar *ngIf="isLoggedIn">
+  <div class="cont">
+    <span><h1>GET MEDS</h1></span>
+    <p></p>
+   </div>
+  <app-nav-bar class="app-nav"></app-nav-bar>
+
+</mat-toolbar>
+
+<div class="card text-center" *ngIf="isLoggedIn">
+    <div class="card-header">
+      Your Cart Items
+      <button type="button" class="btn btn-sm btn-warning float-right">
+          Total items <span class="badge badge-light">{{cartList.length}}</span>        
+      </button>
+      <button type="button" class="btn btn-sm btn-danger mr-2 float-right" (click)="confirmDelete()">
+         Empty Cart       
+      </button>
+    </div>
+    <div class="card-body">  
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">UserName</th>
+            <th scope="col">Cart Id</th>
+            <th scope="col">Product Id</th>  
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Qty</th>
+            <th scope="col" style="visibility: hidden">Stock Qty</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+           
+          
+          </tr>
+          <tr *ngFor="let i of cartList">
+            <td>{{i.username}}</td>
+            <td>{{i.cartId}}</td>
+            <td>{{i.drugsId}}</td>
+            <td class="text-left" >{{i.drugsName}}</td>
+            <td>{{i.drugsDescription}}</td>
+            <td>{{i.drugsCost}}</td>
+            <td class="w30">
+              <div class="input-group input-group-sm mb-3">
+                <input type="text" class="form-control text-center"  value="{{i.drugsQty}}" >
+              </div>
+            </td>
+            <td style="visibility: hidden">{{i.stockQty}}</td>
+            <td>{{i.total}}</td>
+            <td>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(i)">Edit</button>
+            </td>
+            
+          </tr>
+          
+          </tbody>
+      </table>
+    
+       
+        <a  (click)="addToOrder(cartList)" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#amount" *ngIf="isLoggedIn">Checkout</a>
+    </div>
+    
+  </div>
+
+  
+<!-- Modal for Checkout  -->
+<div class="modal fade" id="amount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card mt-5" style="padding: 20px;">
+          <h3>Your Total Amount is {{this.amount}}</h3>
+          </div>
+          <a href="/billing" class="btn btn-sm btn-primary">Click Here to Proceed</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Cart</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+  
+          <div class="card mt-5" style="padding: 20px;">
+            <form #updatedForm="ngForm" (ngSubmit)="updateCart(updatedForm)">
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="username">User Name :</label>
+                  <input type="username" #username [(ngModel)]="CartToUpdate.username" name="username" id="username" class="form-control"
+                    placeholder="username" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="cartId">Cart Id :</label>
+                  <input type="cartId" #cartId [(ngModel)]="CartToUpdate.cartId" name="cartId" id="cartId" class="form-control"
+                    placeholder="cartId" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="drugsId">Drugs Id :</label>
+                  <input type="drugsId" #drugsId [(ngModel)]="CartToUpdate.drugsId" name="drugsId" id="drugsId" class="form-control"
+                    placeholder="drugsId" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="drugsName">drugs Name :</label>
+                  <input type="drugsName" #drugsName [(ngModel)]="CartToUpdate.drugsName" name="drugsName" id="drugsName" class="form-control"
+                    placeholder="drugsName" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="drugsDescription">drugs Description</label>
+                  <input type="drugsDescription" #drugsDescription [(ngModel)]="CartToUpdate.drugsDescription" name="drugsDescription" id="drugsDescription" class="form-control"
+                    placeholder="drugsDescription" readonly>
+                </div>
+                <div class="form-group">
+                <label for="drugsCost">drug Cost :</label>
+                <input type="drugsCost" #drugsCost [(ngModel)]="CartToUpdate.drugsCost" name="drugsCost" id="drugsCost" class="form-control"
+                  placeholder="drugsCost" readonly>
+              </div>
+              <div class="form-group">
+                <label for="drugsQty">drug Qty :</label>
+                <input type="drugsQty" #drugsQty [(ngModel)]="CartToUpdate.drugsQty" name="drugsQty" id="drugsQty" class="form-control"
+                  placeholder="drugsQty">
+              </div>
+              <div class="form-group" style="visibility: hidden">
+                <label for="stockQty">Stock Qty :</label>
+                <input type="stockQty" #stockQty [(ngModel)]="CartToUpdate.stockQty" name="stockQty" id="stockQty" class="form-control"
+                  placeholder="drugsQty">
+              </div>
+              <div class="form-group">
+                <label for="total">Total :</label>
+                <input type="total" #total [(ngModel)]="CartToUpdate.total" name="total" id="total" class="form-control"
+                  placeholder="total" readonly>
+              </div>
+    
+              <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-danger w-100">
+              </div>
+              </div>
+            </form>
+            </div>
+        </div>
+      </div>
+    </div>
+ </div>
+
+
+
+
+  <!-- // click)="emptyCart()" *ngIf="cart.cartItemsList && cart.cartTotal" -->
+
+  <!-- *ngIf="cart.cartItemsList && cart.cartTotal" -->
+  <!-- {{cart.cartTotal}} -->
+
+
+  <!-- (keyup)="changeQty(itm.pid,qtyRef.value,'replace')" -->
+
+  <!-- (click)="changeQty(itm.pid,-1,'')" -->
+
+  <!-- (click)="changeQty(itm.pid,1,'')" -->
+
+  <!-- *ngFor="let itm of cart.cartItemsList  -->

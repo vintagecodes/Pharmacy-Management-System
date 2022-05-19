@@ -1,0 +1,95 @@
+
+
+<div style="display: flex; flex-grow: grow; margin-top: 0px;">
+
+  <app-nav></app-nav>
+
+  <div class="container">
+    <table class="table table-striped">
+        <thead>
+            <h1>ORDER LIST</h1>
+          <tr>
+            <th scope="col">Order Id</th>
+            <th scope="col">Order Value</th>
+            <th scope="col">User Id</th>
+            <th scope="col">Products</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Show details</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let order of orderList">
+          <tr >
+            <th scope="row">{{order.orderId}}</th>
+            <td>{{order.total | currency:'INR':'symbol-narrow'}}</td>
+            <th scope="row">{{order.userId}}</th>
+           <td>
+             <ul >
+               <li *ngFor="let order of order.cart">
+                 Products Name : - {{order.drugsName}}, 
+                 Product Cost : {{order.drugsCost}}, 
+                 Product Qty : {{order.drugsQty}},
+                 User Name : {{order.username}}
+               </li>
+             </ul>
+           </td>
+            <td>{{order.orderStatus}}</td>
+            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(order)">Edit</button></td>
+            <td><button type="button" class="btn btn-primary" (click)="getParticularDetails(order)">Details</button></td>
+
+           
+          </tr>
+        </tbody>
+      </table>
+
+</div>
+
+
+</div>
+
+ 
+
+<div class="modal fade" id="exampleModal" tabindex="2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Drugs</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="card" style="padding: 20px;">
+          <form #updatedForm="ngForm" (ngSubmit)="updateOrder(updatedForm)">
+            <div class="form-group">
+              <label for="orderId">OrderId :</label>
+              <input type="text" #orderId [(ngModel)]="OrderToUpdate.orderId" name="orderId" id="orderId" class="form-control" placeholder="orderId">
+            </div>
+            <div class="form-group">
+              <label for="userId">User Id :</label>
+              <input type="text" #userId [(ngModel)]="OrderToUpdate.userId" name="userId" id="userId" class="form-control" placeholder="userId">
+            </div>
+            <div class="form-group" style="visibility: hidden">
+              <label for="total">Cart :</label>
+              <input type="text" #cart [(ngModel)]="OrderToUpdate.cart" name="cart" id="cart" class="form-control" placeholder="Cart">
+            </div>
+            <div class="form-group">
+              <label for="total">Total :</label>
+              <input type="text" #total [(ngModel)]="OrderToUpdate.total" name="total" id="total" class="form-control" placeholder="total">
+            </div>
+            <div class="form-group">
+              <label for="orderStatus">Order Status :</label>
+              <input type="text" #orderStatus [(ngModel)]="OrderToUpdate.orderStatus" name="orderStatus" id="orderStatus" class="form-control" placeholder="orderStatus">
+            </div>
+  
+            <div class="form-group">
+              <input type="submit" value="Update" class="btn btn-danger w-100">
+            </div>
+          </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 

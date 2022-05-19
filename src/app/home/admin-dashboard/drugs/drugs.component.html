@@ -1,0 +1,87 @@
+
+<div style="display: flex; flex-grow: grow; margin: 5px;">
+
+  <app-nav></app-nav>
+
+  <div class="wrapper">
+    <div class="form_container">
+      <div class="heading">
+        <h2>Drugs Registry Form</h2>
+     </div>
+   
+      <form name="form"  #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+        <div class="form_wrap fullname">
+  
+          <div class="form_item">
+              <label>DrugsId ID</label>
+              <em style="font-size:10px">Enter the Id apart from the suggested drugsId as those are already registered</em>
+              <input type="text"  name="drugsId" id="drugsId" class="form-control" placeholder="Enter Drugs ID" required ngModel #drugsId="ngModel" list="drugsId">
+              <datalist id="drugsId" *ngFor="let i of DrugsDetails">
+                <option value="{{i.drugsId}}"></option>
+              </datalist>
+              <span class="help-bpx" *ngIf="drugsId.touched && !drugsId.valid">Please Enter the Drugs ID</span>
+            </div>
+        
+        
+          <div class="form_item">
+            <label for="drugsName">Drugs Name :</label>
+            <input type="text" name="drugsName" id="drugsName" class="form-control"
+              placeholder="Enter Drugs Name" required ngModel #drugsName="ngModel">
+              <span class="help-bpx" *ngIf="drugsName.touched && !drugsName.valid">Please Enter the Drugs Name</span>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="form_item">
+            <label for="drugsCost">Drugs Cost :</label>
+            <input type="drugsCost"  name="drugsCost" id="drugsCost" class="form-control"
+              placeholder="Enter Drugs Cost" required ngModel #drugsCost="ngModel">
+              <span class="help-bpx" *ngIf="drugsCost.touched && !drugsCost.valid">Please Enter the Drugs Cost</span>
+          </div>
+  
+         
+        
+        </div>
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="stockQty">Stcok Qty :</label>
+            <input type="stockQty" name="stockQty" id="stockQty" class="form-control"
+              placeholder="Enter the Stock Quantity" required ngModel #stockQty="ngModel">
+                <span class="help-bpx" *ngIf="stockQty.touched && !stockQty.valid">Please Enter the Stock Quantity</span>
+          </div>
+        </div>
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="drugsDescription">Drugs Description :</label>
+            <input type="drugsDescription"  name="drugsDescription" id="drugsDescription" class="form-control"
+              placeholder="Enter the Description" required ngModel #drugsDescription="ngModel">
+              <span class="help-bpx" *ngIf="drugsDescription.touched && !drugsDescription.valid">Please Enter Description</span>
+          </div>
+        </div>
+        <br>
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="supplierName">Supplier Name :</label>
+            <input type="supplierName"name="supplierName" id="supplierName" class="form-control"
+              placeholder="Enter the Supplier Name" required ngModel #supplierName="ngModel" list="supplier">
+              <datalist id="supplier" *ngFor="let i of supplierList">
+                <option value="{{i.supplierName}}"></option>
+              </datalist>
+              <span class="help-bpx" *ngIf="supplierName.touched && !supplierName.valid">Please Enter Supplier Name</span>
+          </div>
+        </div>
+  
+        <div class="btn">
+          <input type="submit" value="Get Started" [disabled]="!registerForm.valid">
+       </div>
+   
+     </form>
+    </div>
+   </div>
+
+</div>
+
+
+
+
+
+
+  

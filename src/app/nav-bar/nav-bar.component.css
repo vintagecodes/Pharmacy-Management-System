@@ -1,0 +1,141 @@
+
+
+/* body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+} */
+
+
+.navigation-left{
+    margin-top:20px;
+    float: left;
+    margin-left: 400px;
+    display: flex;
+    width: 150px;
+    height: 70px;
+    align-items:center;
+    border-radius: 10px;
+}
+
+.navigation-left ul{
+    display: flex;
+    width: 350px;
+}
+
+.navigation-left ul li{
+    position: relative;
+    list-style-type: none;
+    width: 70px;
+}
+
+
+.navigation-left ul li a {
+    position: relative;
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navigation-left ul li a .icon{
+    position: relative;
+    display: block;
+    font-size: 1.5em;
+    text-align: center;
+    transition: 0.5s;
+}
+.navigation-left ul li:hover a .icon{
+    transform: translateY(-25px);
+}
+
+
+.navigation-left ul li a .text{
+    position: absolute;
+    color: black;
+    font-weight: 700;
+    font-size: 0.75em;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.navigation-left ul li:hover a .text{
+    opacity: 1;
+    transform: translateY(10px);
+}
+
+
+
+/* sgfdfsfsfsdf */
+
+.navigation{
+    float: right;
+    margin-right: 150px;
+    width: 150px;
+    height: 110px;
+    display: flex;
+    align-items:center;
+    border-radius: 10px;
+
+}
+
+.navigation ul{
+    display: flex;
+    width: 350px;
+}
+
+.navigation ul li{
+    position: relative;
+    list-style-type: none;
+    width: 70px;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navigation ul li a .icon{
+    position: relative;
+    display: block;
+    font-size: 1.5em;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.navigation ul li:hover a .icon{
+    transform: translateY(-25px);
+}
+
+.navigation ul li a .text{
+    position: absolute;
+    color: black;
+    font-weight: 700;
+    font-size: 0.75em;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.navigation ul li:hover a .text{
+    opacity: 1;
+    transform: translateY(10px);
+}
+
+
+img{
+    height: 50px;
+    width: 50px;
+}
+

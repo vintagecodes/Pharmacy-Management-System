@@ -1,0 +1,98 @@
+@import  url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300&display=swap');
+
+
+/* body{
+  height: 100vh;
+  background: #e1edf9;
+} */
+
+.wrapper{
+  margin: 150px 250px;
+  width: 50%;
+}
+
+.wrapper .form_container{
+  background: #fff;
+  padding: 30px;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+
+.wrapper .form_container .form_item{
+  margin-bottom: 25px;
+}
+
+.form_wrap.fullname,
+.form_wrap.select_box{
+  display: flex;
+}
+
+.form_wrap.fullname .form_item,
+.form_wrap.select_box .form_item{
+  width: 50%;
+}
+
+.form_wrap.fullname .form_item:first-child,
+.form_wrap.select_box .form_item:first-child{
+  margin-right: 4%;
+}
+
+.wrapper .form_container .form_item label{
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form_item input[type="text"],
+.form_item select{
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #dadce0;
+  border-radius: 3px;
+}
+
+.form_item input[type="text"]:focus{
+  border-color: #6271f0;
+}
+
+.btn input[type="submit"]{
+  background: #1598d4;
+  border: 1px solid #1598d4;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+}
+
+
+
+
+
+.cont h1{
+  color: black;
+  white-space: nowrap;
+  letter-spacing: 3px;
+  font-family: 'Saira Condensed', sans-serif;
+}
+
+.heading{
+  background: #015a80;
+  margin: -30px;
+  text-align: center;
+  color: white;
+  font-size: 19px;
+  margin-bottom: 35px;
+  padding: 10px;
+}
+
+
+
+.form-control.ng-invalid.ng-touched{
+  border-color: red;
+}
+
+

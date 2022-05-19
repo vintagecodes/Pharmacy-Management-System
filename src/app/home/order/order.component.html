@@ -1,0 +1,76 @@
+<mat-toolbar>
+    <div class="cont">
+      <span><h1>GET MEDS</h1></span>
+      <p></p>
+     </div>
+    <app-nav-bar class="app-nav"></app-nav-bar>
+  
+  </mat-toolbar>
+  
+<div class="container">
+    <button type="button" class="button" (click)="confirmOrder()">Buy Meds</button>
+
+    <table class="table table-striped">
+        <thead>
+            <h1>ORDER SUMMARY</h1>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let i of cartList">
+          <tr>
+            <th scope="row">{{i.drugsId}}</th>
+            <td>{{i.drugsName}}</td>
+            <td>{{i.drugsCost}}</td>
+            <td>{{i.total}}</td>
+
+           
+          </tr>
+        </tbody>
+      </table>
+
+</div>
+<br>
+
+<mat-accordion class="card" >
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+       Address
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Address</th>
+            <th scope="col">Email</th>
+            <th scope="col">PinCode</th>
+            <th scope="col">Contact No</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let data of address">
+          <tr>
+            <th scope="row">{{data.address}}}</th>
+            <td>{{data.email}}</td>
+            <td>{{data.pincode}}</td>
+            <td>{{data.contactNo}}</td>
+
+           
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+<!-- <div *ngFor="let data of address">
+  <tr>
+    Username: <td>{{data.username}}</td>
+  </tr>
+</div> -->

@@ -1,0 +1,27 @@
+.product{
+  padding: 20px 0;
+}
+
+.slider-wrap{
+  position: relative;
+
+}
+
+.slider-main{
+  position: absolute;
+}
+
+.item{
+  display: inline-block;
+  width: 300px;
+  height: 150px;
+  background: orangered
+}
+
+.text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
