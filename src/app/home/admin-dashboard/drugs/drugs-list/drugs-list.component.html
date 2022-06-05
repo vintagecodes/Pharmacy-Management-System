@@ -1,9 +1,10 @@
 
-<div style="display: flex; flex-grow: grow; margin: 5px;">
+<div style="display: flex; flex-grow: grow; margin: 5px;" *ngIf="isLoggedIn">
 
     <app-nav></app-nav>
     <div class="tab">
         <div class="mt-10" data-bs-target="#drugs">
+          <h1>Drugs List</h1>
           <table class="table table-bordered">
             <thead class="thead">
               <tr>
@@ -19,7 +20,7 @@
               </tr>
             </thead>
             <tbody  class="tbody">
-              <tr *ngFor="let drug  of DrugsDetails ">
+              <tr *ngFor="let drug  of DrugsDetails | paginate: { itemsPerPage: count, currentPage: p }">
                 <td>{{drug.drugsId}}</td>
                 <td>{{drug.drugsName}}</td>
                 <td>{{drug.drugsCost}}</td>
@@ -32,6 +33,9 @@
     
             </tbody>
           </table>
+          <div class="text-right">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
         </div>
         </div>
     
@@ -52,25 +56,38 @@
         <div class="modal-body">
   
           <div class="card" style="padding: 20px;">
-            <form #updatedForm="ngForm" (ngSubmit)="updateDrugs(updatedForm)">
+            <form #updatedForm="ngForm" (ngSubmit)="updatedForm.form.valid && updateDrugs(updatedForm)">
               <div class="form-group">
                 <label for="drugsId">drugsId :</label>
-                <input type="text" #drugsId [(ngModel)]="DrugsToUpdate.drugsId" name="drugsId" id="drugsId" class="form-control" placeholder="drugsId">
+                <input type="text" #drugsId [(ngModel)]="DrugsToUpdate.drugsId" name="drugsId" id="drugsId" class="form-control" placeholder="drugsId" readonly>
+              
               </div>
               <div class="form-group">
                 <label for="drugsName">drugsName :</label>
-                <input type="text" #drugsName [(ngModel)]="DrugsToUpdate.drugsName" name="drugsName" id="drugsName" class="form-control"
-                  placeholder="drugsName">
+                <input type="text" #drugsName="ngModel" [(ngModel)]="DrugsToUpdate.drugsName" name="drugsName" id="drugsName" class="form-control"
+                  placeholder="drugsName"  required>
+                  <span class="text-danger"
+                                *ngIf="(drugsName.touched || updatedForm.submitted) && drugsName.errors?.['required']">
+                                DrugsName is required
+                            </span>
               </div>
               <div class="form-group">
                 <label for="drugsCost">drugsCost :</label>
-                <input type="drugsCost" #drugsCost [(ngModel)]="DrugsToUpdate.drugsCost" name="drugsCost" id="drugsCost" class="form-control"
-                  placeholder="drugsCost">
+                <input type="drugsCost" #drugsCost="ngModel" [(ngModel)]="DrugsToUpdate.drugsCost" name="drugsCost" id="drugsCost" class="form-control"
+                  placeholder="drugsCost" required>
+                  <span class="text-danger"
+                  *ngIf="(drugsCost.touched || updatedForm.submitted) && drugsCost.errors?.['required']">
+                  DrugsCost is required
+              </span>
               </div>
               <div class="form-group">
                 <label for="stockQty">StockQty :</label>
-                <input type="stockQty" #stockQty [(ngModel)]="DrugsToUpdate.stockQty" name="stockQty" id="stockQty" class="form-control"
+                <input type="stockQty" #stockQty="ngModel" [(ngModel)]="DrugsToUpdate.stockQty" name="stockQty" id="stockQty" class="form-control"
                   placeholder="stockQty">
+                  <span class="text-danger"
+                  *ngIf="(stockQty.touched || updatedForm.submitted) && stockQty.errors?.['required']">
+                  Stock Qty is required
+              </span>
               </div>
     
               <div class="form-group">
@@ -81,8 +98,12 @@
     
               <div class="form-group">
                 <label for="supplierName">supplierName :</label>
-                <input type="supplierName" #supplierName [(ngModel)]="DrugsToUpdate.supplierName" name="supplierName" id="supplierName" class="form-control"
+                <input type="supplierName" #supplierName="ngModel" [(ngModel)]="DrugsToUpdate.supplierName" name="supplierName" id="supplierName" class="form-control"
                   placeholder="supplierName">
+                  <span class="text-danger"
+                  *ngIf="(supplierName.touched || updatedForm.submitted) && supplierName.errors?.['required']">
+                  Supplier Name is required
+              </span>
               </div>
     
               <div class="form-group">

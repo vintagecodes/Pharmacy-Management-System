@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DrugSService } from 'src/app/drug-s.service';
+import { DrugSService } from 'src/app/service/drug-s.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,8 +13,12 @@ export class SupplierComponent implements OnInit {
   SupplierDetails:any;
   isRegistrationFailed = false;
   errorMessage = '';
+  isLoggedIn = false;
+  private roles: string[] = [];
+  showUserBoard = false;
+  showAdminBoard = false;
 
-  constructor(private drugsService: DrugSService) { this.getSupplierlist();}
+  constructor(private drugsService: DrugSService,private tokenStorageService: TokenStorageService,) { this.getSupplierlist();}
   getSupplierlist() {
     this.drugsService.getSupplierlist().subscribe(
       (data) => {
@@ -87,6 +92,15 @@ export class SupplierComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if(this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showUserBoard = this.roles.includes('ROLE_USER');
+    }
   }
 
 

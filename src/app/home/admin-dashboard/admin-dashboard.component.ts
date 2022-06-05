@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DrugSService } from 'src/app/drug-s.service';
-import { TokenStorageService } from 'src/app/token-storage.service';
-import { UserServiceService } from '../../user-service.service';
+
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { DrugSService } from 'src/app/service/drug-s.service';
+import { UserServiceService } from 'src/app/service/user-service.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
   selector: 'app-admin-dashboard',

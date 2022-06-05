@@ -1,6 +1,6 @@
 <mat-toolbar>
   <div class="cont">
-    <span><h1>GET MEDS</h1></span>
+    <span><img src="/assets/img/logo.png" height="100" width="100" alt="" /></span>
     <p></p>
    </div>
   <app-nav-bar class="app-nav"></app-nav-bar>
@@ -11,28 +11,30 @@
 
 <h1 style="text-align:center">Shop Now</h1>
 
+<div class="contai">
 
-<!-- <div class="containers">
+  <div class="rows">
 
-    <div class="card" *ngFor="let item of content">
-        <div class="card__description">
-          <div class="card__descriptionIcon"><i class="fas fa-capsules"></i></div>
-          <h4>{{item.drugsName}}</h4>
-          <div class="card__descriptionText">{{item.drugsDescription}}</div>
+    <div class="col-md-8">
+
+      <form name="form">
+        <div class="search">
+          <i class="fa fa-search"></i>
+            <input type="text" class="form-control"[(ngModel)]="searchText" name="drugs"  placeholder="Search for Medicines/..." #drugs="ngModel">
         </div>
-        <div class="card__price">{{item.drugsCost}}</div>
-        <div class="btn" >
-          <button style="font-size:25px" *ngIf="isLoggedIn" (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></button>
-        </div>
-      </div>
-      </div> -->
+
+      </form>
+      
+      
+    </div>
+    
+  </div>
+</div>
       <section class="section-products">
         <div class="container">
-            <div class="row justify-content-center text-center">
-            </div>
             <div class="row">
                 <!-- Single Product -->
-                <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let item of content">
+                <div class="items" *ngFor="let item of content | filter:searchText">
                     <div id="product-1" class="single-product">
                         <div class="part-1">
                             <!-- <ul>
@@ -40,17 +42,91 @@
                                
                             </ul> -->
                             <ul >
-                              <li><a (click)="outsider()" ><i class="fas fa-shopping-cart"></i></a></li>
+                              <li><a (click)="outsider()" *ngIf="!isLoggedIn"><i class="fas fa-shopping-cart"></i></a></li>
                               <li><a (click)="addToCart(item)" *ngIf="isLoggedIn"><i class="fas fa-shopping-cart"></i></a></li>
                              
                           </ul>
                         </div>
                         <div class="part-2">
                             <h3 class="product-title">{{item.drugsName}}</h3>
-                            <h4 class="product-price">{{item.drugsCost | currency:'INR':'symbol-narrow'}}</h4>
-                        </div>
+                            <h4 class="product-price">{{item.drugsCost | currency:'INR':'symbol-narrow'}}</h4>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="more(item)">More</button>
+                            <br>
+                          </div>
                     </div>
                 </div>
             </div>
+            <div class="button-area">
+               
+              <button type="button" class="prev" appPrev>
+                <i class="fas fa-angle-left"></i></button>
+              <button type="button" class="next" appNext><i class="fas fa-angle-right"></i></button>
+            </div>
         </div>
     </section>
+
+
+    
+<div class="modal fade" id="exampleModal" tabindex="2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Drugs Details: </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="drugsList">
+        <!-- <h3>{{drugs}}: -</h3> -->
+        <h3>Drugs Cost: </h3><small>{{drugsList.drugsCost | currency:'INR':'symbol-narrow'}}</small>
+        <h3>Drugs Description: </h3><small>{{drugsList.drugsDescription}}</small>
+        <h3>Drugs Name: </h3><small>{{drugsList.drugsName}}</small>
+        <h2>Supplier: - {{drugsList.supplierName}}</h2>
+
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- <section class="product">
+      <div class="container-fluid">
+          <div class="slider-wrap">
+              <div class="slider-main">
+                  <div class="items" *ngFor="let item of content">
+                    <div class="text">
+                      
+                      <mat-card class="cards">
+                        <mat-card-header style="display:flex; flex-direction: column;">
+                            <mat-card-title> {{item.drugsName}}</mat-card-title>
+                            <img src = "/assets/img/capsules.png" width="100px;">
+                        </mat-card-header>
+                        <mat-card-actions>
+                              <button mat-button style=
+                              "background-color: #004c98; 
+                              color:white" (click)="outsider()" *ngIf="!isLoggedIn">
+                          ADD TO CART 
+                      </button>
+                            <button mat-button style=
+                                    "background-color: #004c98; 
+                                     color:white" (click)="addToCart(item)" *ngIf="isLoggedIn">
+                                ADD TO CART 
+                            </button>&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >More</button>
+                        </mat-card-actions>
+                        </mat-card>
+                    </div>
+                    
+                  </div>
+                  
+                  
+              </div>
+              <div class="button-area">
+               
+                <button type="button" class="prev" appPrev>
+                  <i class="fas fa-angle-left"></i></button>
+                <button type="button" class="next" appNext><i class="fas fa-angle-right"></i></button>
+              </div>
+          </div>
+      </div>
+    </section> -->

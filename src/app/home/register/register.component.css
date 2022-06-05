@@ -11,15 +11,19 @@ body {
     background: #ecf0f3
 }
 
+/* .app-nav{
+    background-color: #d5f8e7;
+} */
+
 mat-toolbar{
     height: 60px;
-    background-color:  #ffd4cb;
+    background-color: #d5f8e7;
   }
 
   .cont h1{
     color: black;
     white-space: nowrap;
-    letter-spacing: 3px;
+    letter-spacing: 35px;
     font-family: 'Saira Condensed', sans-serif;
   }
 
@@ -80,8 +84,7 @@ mat-toolbar{
     box-shadow: none;
     width: 100%;
     height: 40px;
-    background-color: #03A9F4;
-    color: #fff;
+    background-color: #d5f8e7;
     border-radius: 25px;
     box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
     letter-spacing: 1.3px

@@ -1,12 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CartService } from 'cartService/cart.service';
-import { Observable } from 'rxjs';
-import { Cart } from '../cart';
-import { DrugsService } from '../drugs.service';
-import { TokenStorageService } from '../token-storage.service';
+import { Cart } from 'src/app/models/cart';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { Drugs } from '../drugs';
+import { Drugs } from 'src/app/models/drugs';
+import { TokenStorageService } from '../service/token-storage.service';
+import { DrugsService } from '../service/drugs.service';
 
 @Component({
   selector: 'app-home',
@@ -28,7 +27,7 @@ export class HomeComponent implements OnInit {
   currentUser: any;
   searchText:any;
   getValues:any = null;
-  abc:any = [];
+  abc:any;
   result: any = [];
   cartId: any;
   cartLists = [];
@@ -40,7 +39,9 @@ export class HomeComponent implements OnInit {
   }
 
 
-  drugsList:any;
+  drugsList:any = {};
+  value: any;
+  drugs!: [];
 
   constructor(
     private tokenStorageService: TokenStorageService,
@@ -99,7 +100,7 @@ export class HomeComponent implements OnInit {
     this.cartService.getCartDetails(this.currentUser).subscribe((data: any) => {
     console.log(data);
     this.cartLists = data;
-    console.log(this.cartLists.length);
+    // console.log(this.cartLists.length);
     if(this.cartLists.length<1){
       this.xyz = true;
       console.log(this.xyz)
@@ -108,34 +109,23 @@ export class HomeComponent implements OnInit {
       console.log('cart',out);
     });
     Swal.fire("Added Item");
-    }else{
+    } else {
       this.xyz = false;
   console.log(this.xyz);
-  console.log(this.cartLists.length);
+  console.log(this.cartLists);
+  const found = this.cartLists.some( list => list['drugsId'] === user.drugsId);
+  if(!found){
+    this.cartService.postCart(user).subscribe((res)=>{
+      console.log(res);
+    })
+  console.log("Added item");
+  Swal.fire("Added Item");
+  window.location.reload();
 
-  for(let i in this.cartLists){
-    // console.log(typeof(this.cartLists[i].drugsId));
-    console.log(user.drugsId);
-    console.log(this.cartLists[i]['drugsId']);
-    if(user.drugsId !== this.cartLists[i]['drugsId']){
-      this.cartService.postCart(user).subscribe((res)=>{
-        console.log(res);
-      })
-    console.log("Added item");
+  } else {
+    console.log("The item has already been added");
+    Swal.fire("The item has already been added");
     window.location.reload();
-    Swal.fire("Added Item");
-
-    }
-
-    else{
-      console.log("The item has already been added");
-      window.location.reload();
-      Swal.fire("The item has already been added");
-    break;
-    
-    }
-
-  
   }
 
         
@@ -152,9 +142,11 @@ export class HomeComponent implements OnInit {
 
     more(item: any){
       console.log(item.drugsId);
-      let drugs = new Drugs(item.drugsName,item.drugsDescription, item.drugsCost);
-      this.drugsList = drugs;
-      console.log(this.drugsList);
+      let drugs = new Drugs(item.drugsName,item.drugsDescription, item.drugsCost, item.supplierName);
+      this.abc = drugs;
+      this.drugsList = this.abc;
+      console.log(this.drugsList.drugsCost);
+      // this.drugsList.pop();
       
     }
 
@@ -178,27 +170,6 @@ export class HomeComponent implements OnInit {
   })
     
   }
-
-// console.warn('drugs',item,this.currentUser);
-
-
-
-    // this.xyz.push(item);
-    // console.log(this.xyz);
-
-    // this.abc = localStorage.getItem('cart-items');
-
-    // this.result  = JSON.parse(this.abc);
-     // this.username = this.currentUser.username;
-      // console.log(username);
-      // console.log(currentUser);
-
-      // this.item.push(this.currentUser);
-      // this.cartService.postCart(item).subscribe((out)=>{
-      //   console.warn('cart',out);
-      //   console.log(item);
-      // })
-
 
 }
 

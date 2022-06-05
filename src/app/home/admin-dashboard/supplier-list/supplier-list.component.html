@@ -1,5 +1,5 @@
 
-<div style="display: flex; flex-grow: grow; margin: 5px;">
+<div style="display: flex; flex-grow: grow; margin: 5px;" *ngIf="isLoggedIn">
 
 <app-nav></app-nav>
 <div class="mt-5">
@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody  class="tbody">
-      <tr *ngFor="let supplier  of SupplierDetails ">
+      <tr *ngFor="let supplier  of SupplierDetails | paginate: { itemsPerPage: count, currentPage: p }">
         <td>{{supplier.supplierId}}</td>
         <td>{{supplier.supplierName}}</td>
         <td>{{supplier.email}}</td>
@@ -29,6 +29,9 @@
 
     </tbody>
   </table>
+  <div class="text">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>
 
 

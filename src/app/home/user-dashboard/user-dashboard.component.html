@@ -1,7 +1,56 @@
+<div style="display: flex; flex-grow: grow; margin-top: 0px;" *ngIf="isLoggedIn">
+
+
 <app-nav></app-nav>
 
-<div class="container">
-    <header class="jumbotron">
-      <p>{{ content }}</p>
-    </header>
-  </div>
+
+<table class="table table-striped" #myTable>
+  <thead>
+      <h1>ORDER HISTORY  <form name="form">
+        <div class="search">
+            <input type="text" class="form-control"[(ngModel)]="searchText" name="drugs"  placeholder="Search by username/..." #drugs="ngModel">
+        </div>
+  
+      </form></h1>
+     
+    <tr>
+      <th scope="col">Order Id</th>
+      <th scope="col">Order Value</th>
+      <th scope="col">User Id</th>
+      <th scope="col">Products</th>
+      <th scope="col">Status</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody >
+    <tr *ngFor="let order of orderList  | filter:searchText | paginate: { itemsPerPage: count, currentPage: p } ">
+      <th scope="row">{{order.orderId}}</th>
+      <td>{{order.total | currency:'INR':'symbol-narrow'}}</td>
+      <th scope="row">{{order.userId}}</th>
+     <td>
+       <ul >
+         <li *ngFor="let order of order.cart">
+           Products Name : - {{order.drugsName}}, 
+           Product Cost : {{order.drugsCost}}, 
+           Product Qty : {{order.drugsQty}},
+         </li>
+       </ul>
+     </td>
+      <td>{{order.orderStatus}}</td>
+      <td><button class="btn btn-danger" *ngIf="order.orderStatus === status"  (click)="confirmDelete(order.orderId)">Delete</button></td>
+    
+
+     
+    </tr>
+  </tbody>
+</table>
+<div class="cont">
+  <pagination-controls class="pagi" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+
+
+</div>
+
+

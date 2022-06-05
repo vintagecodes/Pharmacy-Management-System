@@ -37,7 +37,7 @@ class SupplierRepositoryTest {
 //		
 //		repository.save(supplier);
 		
-		Boolean actualResult = repository.existsBySupplierId("11");
+		Boolean actualResult = repository.existsBySupplierId(11);
 		
 		assertThat(actualResult).isTrue();
 		

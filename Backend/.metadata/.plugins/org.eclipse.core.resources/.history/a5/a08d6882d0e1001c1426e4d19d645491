@@ -1,0 +1,79 @@
+package com.supplier;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.Rollback;
+
+import com.supplier.model.Supplier;
+import com.supplier.repository.SupplierRepository;
+import com.supplier.service.SupplierService;
+
+@SpringBootTest
+class SupplierMicroservice1ApplicationTests {
+	
+	@MockBean
+	private SupplierRepository repository;
+	
+	private static final Logger LOGGER=LoggerFactory.getLogger(SupplierService.class);
+
+	@Test
+	public void testSaveSupplierInfo() {
+		Supplier supplier = new Supplier(1,"Leela Pharma","rraj02668@gmail.com","DSE2.0");
+		repository.save(supplier);
+		LOGGER.info(supplier.getSupplierName());
+		
+		assertThat(supplier.getSupplierId()).isGreaterThan(0);
+	}
+	
+	
+	@Test
+
+	public void testGetSupplierByName() {
+		Supplier supplier = new Supplier(1,"Leela Pharma","rraj02668@gmail.com","DSE2.0");
+		repository.findBySupplierName("Leela Pharma");
+		assertThat(supplier.getSupplierName()).isEqualTo("Leela Pharma");
+	}
+	
+	@Test
+
+	public void testUpdateSupplierDetails() {
+		Supplier supplier = new Supplier(1,"Leela Pharma","rraj02668@gmail.com","DSE2.0");
+		Supplier updated = new Supplier(1,"Leela Pharma","rraj02669@gmail.com","DSE2.0");
+		repository.findBySupplierName("Leela Pharma");
+		repository.save(updated);
+		assertThat(updated.getEmail()).isEqualTo("rraj02669@gmail.com");
+	}
+	
+//	@Test
+//	@Rollback(false)
+//	public void testDeleteSupplier() {
+//		Supplier supplier = repository.findBySupplierName("Medi Pharma");
+//		int s = supplier.getSupplierId();
+//		repository.deleteById(s);
+//		Supplier deletedSupplier = repository.findBySupplierName("Medi Pharma");
+//		
+//		assertThat(deletedSupplier).isNull();
+//	}
+	
+//	@AfterEach
+//	void tearDown1() {
+//		System.out.println("Tearing down");
+//		repository.deleteAll();
+//	}
+//	
+//	@BeforeEach
+//	void setUp1() {
+//		System.out.println("Setting up");
+//	}
+}

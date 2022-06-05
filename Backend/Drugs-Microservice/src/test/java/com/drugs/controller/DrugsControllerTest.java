@@ -1,71 +1,105 @@
 package com.drugs.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
+import com.drugs.exception.CustomException;
 import com.drugs.models.Drugs;
-import com.drugs.repository.DrugsRepository;
+import com.drugs.service.DrugsService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Optional;
+import com.google.common.collect.Lists;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
-@TestMethodOrder(OrderAnnotation.class)
-class DrugsControllerTest {
+@AutoConfigureMockMvc
+class DrugsControllerTest{
 	
-	private static Drugs drugs;
 	
-	@Autowired
-	DrugsRepository drugsRepository;
+	@MockBean
+    private DrugsService service;
 
+    @Autowired
+    private MockMvc mockMvc;
 
-	@Test
-	@Order(1)
-	void testSaveDrugsDetails() {
-		Drugs drugs = new Drugs();
-		drugs.setDrugsId("10");
-		drugs.setDrugsName("CSMN DPI");
-		drugs.setDrugsCost(600);
-		drugs.setDrugsDescription("Good medicine");
-		drugs.setSupplierName("Sun Pharma");
-		drugsRepository.save(drugs);
-		assertNotNull(drugsRepository.findById("1"));
-	}
+    @Test
+//    @DisplayName("GET /Drugs success")
+    public void testGetDetails() throws Exception {
+    	Drugs drugs = new Drugs("12","abcs", 15.0, 5, "Bia", "healyt","JK");
+    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK");
+    	doReturn(Lists.newArrayList(drugs, drugs1)).when(service).getAllDetails();
+    	mockMvc.perform(
+    			get("/drugs/list")).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    	.andExpect(jsonPath("$", hasSize(2)));
+    }
+    
+    @Test
+    public void testSaveDrugsDetails() throws Exception {
+    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK");
+    	 doReturn(drugs1).when(service).saveDrugsDetails(any());
+    	 
+    	 mockMvc.perform(post("/drugs/") .contentType(MediaType.APPLICATION_JSON)
+                 .content(asJsonString(drugs1))).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    	 .andExpect(jsonPath("$.drugsId", is("13")));
+    }
+    
+    
+    @Test
+    public void testGetDrugsById() throws Exception{
+    	
+    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK");
+    	doReturn(Optional.of(drugs1)).when(service).getDrugsByID("13");
+    	
+    	mockMvc.perform(get("/drugs/{id}","13")).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
+    	.andExpect(jsonPath("$.drugsId", is("13")));
+    }
+    
+    
+    @Test
+    public void testUpdateDrugsDetails() throws Exception {
+    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK");
+    	Drugs updated = new Drugs("13","abcs2", 16.0, 5, "Bias", "healyts","JK");
+    	doReturn(Optional.of(drugs1)).when(service).getDrugsByID("13");
+    	doReturn(updated).when(service).updateDrugsDetails(updated, "13");
+    	
+    	mockMvc.perform(put("/drugs/{id}","13")
+    			.contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(updated))).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON)).andExpect(jsonPath("$.drugsId", is("13"))).andExpect(jsonPath("$.drugsCost", is(16.0)));
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 	
-	@Test
-	@Order(2)
-	void testGetDetails() {
-		List<Drugs> list = drugsRepository.findAll();
-		assertThat(list).size().isGreaterThan(0);
-	}
 	
-	@Test
-	@Order(3)
-	void testGetDrugsById() {
-		Drugs drugs = drugsRepository.findById("10").get();
-		assertEquals("CSMN DPI", drugs.getDrugsName());
-	}
-	
-	
-	@Test
-	@Order(4)
-	void testUpdateSupplierDetails() {
-		Drugs drugs = drugsRepository.findById("10").get();
-		drugs.setDrugsCost(800);
-		drugsRepository.save(drugs);
-		assertNotEquals(600, drugsRepository.findById("10").get().getDrugsCost());
-	}
-	
-	@Test
-	@Order(5)
-	void testDelete() {
-		drugsRepository.deleteById("10");
-		assertThat(drugsRepository.existsByDrugsId("10")).isFalse();
-		
-	}
 }

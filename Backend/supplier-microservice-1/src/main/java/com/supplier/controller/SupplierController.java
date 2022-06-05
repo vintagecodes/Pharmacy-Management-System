@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.supplier.model.Inventory;
 import com.supplier.model.Supplier;
 
 import com.supplier.service.SupplierService;
@@ -24,7 +23,7 @@ import com.supplier.service.SupplierService;
 
 @RestController
 @RequestMapping("/supplier")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600)
 public class SupplierController {
 	
 	@Autowired
@@ -45,8 +44,8 @@ public class SupplierController {
 	}
 	
 	@GetMapping("/{id}")
-	public Supplier getDepartmentById(@PathVariable("id") String supplierId) throws CustomException, Exception{
-		return supplierService.getDepartmentByID(supplierId);
+	public Supplier getDepartmentById(@PathVariable("id") int supplierId) throws CustomException, Exception{
+		return supplierService.getSupplierByID(supplierId);
 	}
 	
 	@GetMapping("/details/{id}")
@@ -61,12 +60,12 @@ public class SupplierController {
 	
 
 	@PutMapping("/{id}")
-	public Supplier updateSupplierDeytails(@RequestBody Supplier supplier, @PathVariable("id") String supplierId) {
+	public Supplier updateSupplierDeytails(@RequestBody Supplier supplier, @PathVariable("id") int supplierId) {
 		return supplierService.updateSupplierDetails(supplier);
 	}
 	
 	@DeleteMapping("/{id}")
-	public String deleteSupplier(@PathVariable("id") String supplierId) {
+	public String deleteSupplier(@PathVariable("id") int supplierId) {
 		
 		return supplierService.deleteSupplier(supplierId);
 		

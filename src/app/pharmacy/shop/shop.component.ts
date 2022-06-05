@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from 'cartService/cart.service';
-import { Cart } from 'src/app/cart';
-import { DrugsService } from 'src/app/drugs.service';
-import { TokenStorageService } from 'src/app/token-storage.service';
+import { Cart } from 'src/app/models/cart';
+import { Drugs } from 'src/app/models/drugs';
+import { DrugsService } from 'src/app/service/drugs.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,6 +26,9 @@ export class ShopComponent implements OnInit {
   message = "";
   xyz = false;
   i= [];
+  searchText:any;
+  abc:any;
+  drugsList:any = {};
 
   constructor(private drugsService: DrugsService,
     private tokenStorageService: TokenStorageService, 
@@ -94,106 +98,49 @@ let user = new Cart(this.cartId, this.currentUser,item.drugsId,item.drugsName,it
           // this.message = "The Items have been successfully added to your cart";
           console.log('cart',out);
         });
-        Swal.fire("Added Item");
+        Swal.fire({
+          title: 'Added Item',
+          text: 'Redirecting...',
+          icon: 'success',
+          timer: 2000,
+      })
+      .then(() => {
+          {this.router.navigate(['/cart'])}
+      })
       }else{
         this.xyz = false;
     console.log(this.xyz);
     console.log(this.cartLists.length);
+    this.xyz = false;
+  console.log(this.xyz);
+  console.log(this.cartLists);
+  const found = this.cartLists.some( list => list['drugsId'] === user.drugsId);
+  if(!found){
+    this.cartService.postCart(user).subscribe((res)=>{
+      console.log(res);
+    })
+  console.log("Added item");
+  Swal.fire({
+    title: 'Added Item',
+    text: 'Redirecting...',
+    icon: 'success',
+    timer: 2000,
+})
+.then(() => {
+    {this.router.navigate(['/cart'])}
+})
+  } else {
+    console.log("The item has already been added");
+    Swal.fire("The item has already been added");
+    // window.location.reload();
+  }
 
-    for(let i in this.cartLists){
-      // console.log(typeof(this.cartLists[i].drugsId));
-      console.log(user.drugsId);
-      console.log(this.cartLists[i]['drugsId']);
-      if(user.drugsId !== this.cartLists[i]['drugsId']){
-        this.cartService.postCart(user).subscribe((res)=>{
-          console.log(res);
-        })
-    console.log("Added item");
-    window.location.reload();
-    Swal.fire("Added Item");
-    
-      }
-
-      else{
-        console.log("The item has already been added");
-        window.location.reload();
-        Swal.fire("The item has already been added");
-       break;
-       
-      }
-
-     
-    }
 
           
       }
 
     });
 
-   
-
-    // for(let i in this.cartLists){
-    //   // console.log(typeof(this.cartLists[i].drugsId));
-  
-    //   if(user.drugsId === i.){
-    //     this.message = "The Items are already added to your cart";
-        
-    //     console.log("Items already Present");
-    //     break;
-        
-    //   }else{
-    //     this.cartService.postCart(user).subscribe((res)=>{
-    //       this.message = "The Items have been successfully added to your cart";
-    //       console.log(res);
-    //     })
-    //   }
-    // }
-
-
-
-
-
-
-    
-
-   
-  // const drugsCost = 1;
-  // let user = new Cart(this.cartId,this.currentUser,item.drugsId,item.drugsName,item.drugsCost, drugsCost,item.drugsDescription, item.total);
-  //   console.log(user.drugsId);
-  // this.cartService.postCart(user).subscribe((out)=>{
-   
-  //   console.log('cart',out);
-  // })
-  // if(this.cartLists.length<1){
-  //   this.xyz = true;
-  //   console.log(this.xyz)
-  //   this.cartService.postCart(user).subscribe((out)=>{
-  //     this.message = "The Items have been successfully added to your cart";
-  //     console.log('cart',out);
-  //   });
-  // }else{
-  //   this.xyz = false;
-  //   console.log(this.xyz);
-
-
-    // for(let i = 0; i < this.cartLists.length; i++){
-    //   // console.log(typeof(this.cartLists[i].drugsId));
-  
-    //   if(user.drugsId === this.cartLists[i].drugsId){
-    //     this.message = "The Items are already added to your cart";
-        
-    //     console.log("Items already Present");
-    //     break;
-        
-    //   }else{
-    //     this.cartService.postCart(user).subscribe((out)=>{
-    //       this.message = "The Items have been successfully added to your cart";
-    //       this.cartLists.push(out);
-    //       console.log(this.cartLists);
-    //     })
-    //   }
-    // }
-  
 
   }
 
@@ -208,6 +155,18 @@ let user = new Cart(this.cartId, this.currentUser,item.drugsId,item.drugsName,it
     {this.router.navigateByUrl('/login');}
   })
   }
+
+  
+  more(item: any){
+    console.log(item.drugsId);
+    let drugs = new Drugs(item.drugsName,item.drugsDescription, item.drugsCost, item.supplierName);
+    this.abc = drugs;
+    this.drugsList = this.abc;
+    console.log(this.drugsList.drugsCost);
+    // this.drugsList.pop();
+    
+  }
+
 
   
 

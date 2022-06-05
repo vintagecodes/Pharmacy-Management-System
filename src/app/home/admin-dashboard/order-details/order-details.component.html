@@ -5,20 +5,26 @@
   <app-nav></app-nav>
 
   <div class="container">
+    
     <table class="table table-striped">
         <thead>
-            <h1>ORDER LIST</h1>
+            <h1>ORDER LIST  <form name="form">
+              <div class="search">
+                  <input type="text" class="form-control"[(ngModel)]="searchText" name="drugs"  placeholder="Search by username/..." #drugs="ngModel">
+              </div>
+        
+            </form></h1>
+           
           <tr>
             <th scope="col">Order Id</th>
             <th scope="col">Order Value</th>
             <th scope="col">User Id</th>
             <th scope="col">Products</th>
             <th scope="col">Status</th>
-            <th scope="col">Edit</th>
             <th scope="col">Show details</th>
           </tr>
         </thead>
-        <tbody *ngFor="let order of orderList">
+        <tbody *ngFor="let order of orderList | filter:searchText | paginate: { itemsPerPage: count, currentPage: p } ">
           <tr >
             <th scope="row">{{order.orderId}}</th>
             <td>{{order.total | currency:'INR':'symbol-narrow'}}</td>
@@ -29,18 +35,19 @@
                  Products Name : - {{order.drugsName}}, 
                  Product Cost : {{order.drugsCost}}, 
                  Product Qty : {{order.drugsQty}},
-                 User Name : {{order.username}}
                </li>
              </ul>
            </td>
             <td>{{order.orderStatus}}</td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(order)">Edit</button></td>
             <td><button type="button" class="btn btn-primary" (click)="getParticularDetails(order)">Details</button></td>
 
            
           </tr>
         </tbody>
       </table>
+      <div class="text-right">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
 
 </div>
 

@@ -12,10 +12,10 @@ mat-toolbar {
 }
 
 mat-sidenav {
-  margin: 20px;
+  margin: -15px 12px;
   width: 180px;
   
-  background:  #004c98;
+  background:  lightseagreen;
   border-radius: 30px;
   padding: 16px;
   display: flex;
@@ -38,7 +38,7 @@ mat-sidenav {
 }
 
 mat-sidenav-container {
-  height: calc(120vh - 35px);
+  height: calc(110vh - 55px);
  
 }
 
@@ -109,30 +109,25 @@ a {
 }
 
 .menu-button a .icon{
+  margin-left: -40px;
   position: relative;
   display: block;
   font-size: 1.5em;
   text-align: center;
-  transition: 0.5s;
 }
 
 
 
 .menu-button a .text{
+  margin-left: 95px;
   position: absolute;
     color: black;
     font-weight: 700;
     font-size: 0.75em;
     letter-spacing: 0.05em;
-    transition: 0.5s;
-    opacity: 0;
-    transform: translateY(20px);
 }
 
-.menu-button:hover a .text{
-  opacity: 1;
-    transform: translateX(60px);
-}
+
 
 ul{
   margin: 40px;
@@ -154,9 +149,7 @@ ul li a .icon{
   transition: 0.5s;
 }
 
-ul li:hover a .icon{
-  transform: translateY(-25px);
-}
+
 
 ul li a .text{
   position: absolute;
@@ -164,12 +157,4 @@ ul li a .text{
   font-weight: 700;
   font-size: 0.75em;
   letter-spacing: 0.05em;
-  transition: 0.5s;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-ul li:hover a .text{
-  opacity: 1;
-  transform: translateY(10px);
 }

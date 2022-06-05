@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 import Swal from 'sweetalert2';
-import { AuthService } from '../../auth.service';
-import { TokenStorageService } from '../../token-storage.service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
           timer: 2000,
       })
       .then(() => {
-          {this.route.navigate(['/home'])}
+          {this.route.navigate(['/hi'])}
       })
       },
       err => {

@@ -26,18 +26,9 @@
 <div class="navigation">
     
     <ul>
-        
-        
-        <li class="list" *ngIf="showUserBoard">
-            <a  routerLink="/user">
-                <span class="icon"> <img src="/assets/img/icons8-home-64.png"/></span>
-               
-                <span class="text">User</span>
-            </a>
-        </li>
-        <li class="list" *ngIf="showUserBoard">
+        <li class="list">
             <a  routerLink="/cart" >
-                <span class="icon"> <img src="/assets/img/icons8-home-64.png"/></span>
+                <span class="icon"> <img src="/assets/img/cart1.png"/></span>
                
                 <span class="text">Cart</span>
             </a>
@@ -49,7 +40,7 @@
                
                 <span class="text">Shop</span>
             </a>
-        </li>
+        </li>&nbsp;&nbsp;&nbsp;&nbsp;
         <ul *ngIf="!isLoggedIn">
         <li class="list">
             <a routerLink="/login" >
@@ -72,6 +63,10 @@
                
                 <span class="text">Logout</span>
             </a>
+        </li>
+
+        <li class="pro" *ngIf="isLoggedIn">
+           <img src="/assets/img/avatar.png" width="50" height="50"/> {{username}}
         </li>
     </ul>
     </div>

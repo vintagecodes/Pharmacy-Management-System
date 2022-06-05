@@ -15,5 +15,7 @@ public interface OrderRepository extends MongoRepository<Order, String> {
   
   Order findByOrderId(String orderId);
 
-List<Order> findByOrderStatus(boolean orderStatus);
+List<Order> findByOrderStatus(String orderStatus);
+
+void deleteByOrderId(String orderId);
 }

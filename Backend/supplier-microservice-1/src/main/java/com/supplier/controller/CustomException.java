@@ -8,6 +8,6 @@ class CustomException extends Exception{
 	}
 	
 	public String toString() {
-		return ("An Exception Occured at SupplierID: "+message);
+		return ("An Exception Occured : "+message);
 	}
 }

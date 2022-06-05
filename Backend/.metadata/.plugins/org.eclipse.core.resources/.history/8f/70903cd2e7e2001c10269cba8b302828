@@ -1,0 +1,38 @@
+server.port=8080
+spring.data.mongodb.database=order
+spring.data.mongodb.host=localhost
+spring.data.mongodb.port=27017
+
+spring.mvc.pathmatch.matching-strategy= ANT_PATH_MATCHER
+
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=rraj02668@gmail.com
+spring.mail.password=ngeybjuirfzvtndz
+# Other smtp properties
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.connectiontimeout=5000
+spring.mail.properties.mail.smtp.timeout=5000
+spring.mail.properties.mail.smtp.writetimeout=5000
+# TLS port 587
+spring.mail.properties.mail.smtp.starttls.enable=true
+
+spring.application.name=Order-Microservice
+eureka.client.register-with-eureka=true
+eureka.client.fetch-registry=true
+eureka.client.service-url.defaultZone= http://localhost:8761/eureka/
+
+paytm.payment.sandbox.merchantId:Ydpuio01310125066685
+paytm.payment.sandbox.merchantKey: mxIVN87Js72dwY5O
+paytm.payment.sandbox.channelId:WEB
+paytm.payment.sandbox.industryTypeId:Retail
+paytm.payment.sandbox.website:WEBSTAGING
+paytm.payment.sandbox.paytmUrl:https://securegw-stage.paytm.in/order/process
+paytm.payment.sandbox.callbackUrl:http://localhost:4200/payment/pgresponse
+paytm.payment.sandbox.details.MID: ${paytm.payment.sandbox.merchantId}
+paytm.payment.sandbox.details.CHANNEL_ID: ${paytm.payment.sandbox.channelId}
+paytm.payment.sandbox.details.INDUSTRY_TYPE_ID: ${paytm.payment.sandbox.industryTypeId}
+paytm.payment.sandbox.details.WEBSITE: ${paytm.payment.sandbox.website}
+paytm.payment.sandbox.details.CALLBACK_URL: ${paytm.payment.sandbox.callbackUrl}
+paytm.mobile = 8972188185
+paytm.email = rraj02668@gmail.com

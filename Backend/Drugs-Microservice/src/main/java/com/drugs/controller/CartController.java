@@ -22,7 +22,7 @@ import com.drugs.models.Cart;
 import com.drugs.service.CartService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200/",maxAge = 3600)
 @RequestMapping("/drugs/cart")
 public class CartController {
 	@Autowired
@@ -78,7 +78,7 @@ public class CartController {
 	}
 	
 	@DeleteMapping("/{username}")
-	public String deleteDrugs(@PathVariable("username") String username) {
+	public String deleteCarts(@PathVariable("username") String username) {
 		
 		return this.cartService.deleteCartsByUsername(username);
 	}

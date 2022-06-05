@@ -12,7 +12,7 @@
 
 mat-toolbar{
   height: 60px;
-  background-color:  #ffd4cb;
+  background-color:  lightseagreen;
 }
 
        .height{
@@ -35,7 +35,7 @@ mat-toolbar{
        }
 
        .app-nav{
-         margin-top:15px;
+         margin-top:1px;
        }
 
        .search input:focus{
@@ -180,7 +180,7 @@ mat-toolbar{
     
     mat-card-title {
     color: Black;
-    font-size: 35px;
+    font-size: 25px;
     justify-content: center;
     display: flex;
     }

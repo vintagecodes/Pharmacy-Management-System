@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CartService } from 'cartService/cart.service';
-import { DrugsService } from '../drugs.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DrugsService } from '../service/drugs.service';
 
 @Component({
   selector: 'app-addtocart',

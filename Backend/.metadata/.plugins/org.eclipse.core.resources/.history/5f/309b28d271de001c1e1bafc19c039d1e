@@ -1,0 +1,67 @@
+package sec.model.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.security.auth.message.AuthException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import sec.Controller.AuthController;
+import sec.payLoad.JwtResponse;
+import sec.payLoad.LoginRequest;
+import sec.payLoad.MessageResponse;
+import sec.repository.RoleRepository;
+import sec.repository.UserRepository;
+import sec.security.JwtUtils;
+import sec.security.UserDetailsImpl;
+
+@Service
+public class AuthService {
+	@Autowired
+	AuthenticationManager authenticationManager;
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	RoleRepository roleRepository;
+	@Autowired
+	PasswordEncoder encoder;
+	@Autowired
+	JwtUtils jwtUtils;
+	
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+	
+	public ResponseEntity<?> authenticateUser(LoginRequest loginRequest){
+		
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String jwt = jwtUtils.generateJwtToken(authentication);
+		
+		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+		if(userRepository.existsByUsername(loginRequest.getUsername()) == false) {
+			AuthException authException = new AuthException();
+			logger.info(authException.getMessage());
+			return ResponseEntity.badRequest().body(new MessageResponse("UserName not found!"));
+		}
+			
+		List<String> roles = userDetails.getAuthorities().stream()
+					.map(item -> item.getAuthority())
+					.collect(Collectors.toList());
+			return ResponseEntity.ok(new JwtResponse(jwt, 
+					 userDetails.getUserId(), 
+					 userDetails.getUsername(), 
+					 userDetails.getEmail(), 
+					 roles));
+	}
+
+}

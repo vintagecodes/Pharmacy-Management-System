@@ -12,28 +12,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.supplier.model.Drugs;
-import com.supplier.model.Inventory;
+
 import com.supplier.model.MessageResponse;
 import com.supplier.model.Supplier;
 import com.supplier.repository.SupplierRepository;
 
 
-class CustomException extends Exception{
-	String message;
-	CustomException(String str) {
-		message = str;
-	}
-	
-	public String toString() {
-		return ("An Exception Occured at Supplier Microservice: "+message);
-	}
-}
-
 @Service
 public class SupplierService {
 	@Autowired
 	private SupplierRepository supplierRepository;
+	
+	@Autowired
+	private SequenceGeneratorService sequenceGeneratorService;
+
 	
 	private static final Logger LOGGER=LoggerFactory.getLogger(SupplierService.class);
 	
@@ -42,12 +34,13 @@ public class SupplierService {
 	private RestTemplate restTemplate;
 	
 	public ResponseEntity<?> saveSupplierInfo(Supplier supplier) {
-		if(this.supplierRepository.existsBySupplierId(supplier.getSupplierId())) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Error: SupplierID is already taken!"));
+		if(this.supplierRepository.existsBySupplierName(supplier.getSupplierName())) {
+			return ResponseEntity.badRequest().body(new MessageResponse("Error: Supplier Name is already taken!"));
 		}
 		else if(this.supplierRepository.existsByEmail(supplier.getEmail())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already taken!"));
 		}
+		supplier.setSupplierId(sequenceGeneratorService.generateSequence(Supplier.SEQUENCE_NAME));
 		Supplier save = this.supplierRepository.save(supplier);
 		return ResponseEntity.ok(save);
 		
@@ -59,20 +52,17 @@ public class SupplierService {
 		
 	}
 	
-	public Supplier getDepartmentByID(String supplierId) throws CustomException, Exception{
+	public Supplier getSupplierByID(int supplierId) throws CustomException, Exception{
 		Supplier s = null;
 		try {
 			if(supplierRepository.existsBySupplierId(supplierId)) {
-				LOGGER.info(supplierId);
 				
 				s = supplierRepository.findBySupplierId(supplierId);
-			} else {
-				LOGGER.error("The result could not be fetched");
-				throw new CustomException("The supplierID couldn't be fetched");
 			}
+			throw new CustomException(supplierId);
 			
 		} catch(CustomException e) {
-			LOGGER.error("The result could not be fetched: "+e);
+			LOGGER.error("Supplier couldn't be found: "+e);
 		}
 		return s;
 		
@@ -113,13 +103,14 @@ public class SupplierService {
 	
 	
 	public Supplier updateSupplierDetails(Supplier supplier) {
+		supplier.setSupplierId(supplier.getSupplierId());
 		supplier.setSupplierName(supplier.getSupplierName());
 		supplier.setEmail(supplier.getEmail());
 		supplier.setAvailableDrugs(supplier.getAvailableDrugs());
 		return supplierRepository.save(supplier);
 	}
 
-	public String deleteSupplier(String supplierId) {
+	public String deleteSupplier(int supplierId) {
 		supplierRepository.deleteById(supplierId);
 		return "Deleted Successfully";
 		

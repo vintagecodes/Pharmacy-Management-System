@@ -1,28 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif
-}
 
-body {
-    background: #ecf0f3
-}
+
 
 .wrapper {
-    max-width: 350px;
-    min-height: 500px;
-    margin: 80px auto;
-    padding: 40px 30px 30px 30px;
-    background-color: #ecf0f3;
     border-radius: 15px;
-    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff
+    margin-top: 0px;
+    margin-left: 500px;
+    padding: 25px;
+    height: 450px;
+    width: 800px;
+   background-image: url('/assets/img/svg1.svg');
 }
 
+.login{
+    background-image: url('/assets/img/doc.jpg');
+    background-repeat: no-repeat;
+    margin-top: 75px;
+    height: 500px;
+    margin-left: 150px;
+
+}
+
+
 .app-nav{
-    margin-top:15px;
+    height: 20px;
+    margin-top: -115px;
   }
 
 
@@ -48,7 +51,7 @@ body {
 }
 
 .wrapper .form-field input {
-    width: 100%;
+    width: 300px;
     display: block;
     border: none;
     outline: none;
@@ -58,20 +61,27 @@ body {
     padding: 10px 15px 10px 10px
 }
 
+.cont h1{
+    color: black;
+    white-space: nowrap;
+    letter-spacing: 3px;
+    font-family: 'Saira Condensed', sans-serif;
+  }
+
+
 .wrapper .form-field {
-    padding-left: 10px;
     margin-bottom: 20px;
-    border-radius: 20px;
-    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff
+    border-radius: 10px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -18px 8px #fff;
+    width: 350px;
+    margin: 15px 165px;
 }
 
-.wrapper .form-field .fas {
-    color: #555
-}
 
 .wrapper .btn {
     box-shadow: none;
-    width: 100%;
+    width: 150px;
+    margin-left: 38%;
     height: 40px;
     background-color: #03A9F4;
     color: #fff;
@@ -93,7 +103,11 @@ body {
 .wrapper a:hover {
     color: #039BE5
 }
-
+.pss{
+    margin-top: 35px;
+    width: 40px;
+    height: 20px;
+}
 @media(max-width: 380px) {
     .wrapper {
         margin: 30px 20px;
@@ -109,6 +123,6 @@ body {
   }
 
   mat-toolbar{
-    background-color:  #f7f0f8;
+    height: 60px;
+    background-color: #d5f8e7;
   }
-  

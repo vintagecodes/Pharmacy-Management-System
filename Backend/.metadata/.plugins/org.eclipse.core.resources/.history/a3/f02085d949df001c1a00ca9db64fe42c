@@ -1,0 +1,158 @@
+package com.drugs.controller;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+import org.apache.catalina.filters.CsrfPreventionFilter;
+import org.junit.Before;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.runner.*;
+
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.drugs.models.Drugs;
+import com.drugs.repository.DrugsRepository;
+import com.drugs.service.DrugsService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.netflix.discovery.shared.Application;
+import org.springframework.web.context.WebApplicationContext;
+
+
+@RunWith(SpringRunner.class)
+@WebMvcTest(DrugsController.class)
+@ContextConfiguration(classes=Application.class)
+class DrugsControllerTest {
+	
+	@Autowired
+	private MockMvc mockMvc;
+	
+	@Autowired
+	private ObjectMapper mapper;
+
+	@MockBean
+	private DrugsRepository drugsRepository;
+	
+	@MockBean
+	private DrugsController controller;
+	
+	 @MockBean
+	    private DrugsService service;
+	 
+	 @Autowired
+		private WebApplicationContext webApplicationContext;
+	 
+	 
+	 @Before
+		public void setup() {
+			mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+		}
+
+	
+	
+	
+	@Test
+	public void testSaveDrugsDetails() throws Exception{
+		
+		
+		mockMvc.perform( MockMvcRequestBuilders
+			      .post("/drugs/post")
+			      .content(asJsonString(new Drugs("15", "xyz", 15.00, 25, "hat","sdfsdf","JK")))
+			      .contentType(MediaType.APPLICATION_JSON)
+			      .accept(MediaType.APPLICATION_JSON))
+			      .andDo(print())
+			      .andExpect(status().isOk())
+			      .andExpect((ResultMatcher) content());
+
+			}
+	
+	
+	public static String asJsonString(final Object obj) {
+	    try {
+	        return new ObjectMapper().writeValueAsString(obj);
+	    } catch (Exception e) {
+	        throw new RuntimeException(e);
+	    }
+	}
+
+//		drugsRepository.save(drugs);
+//		assertNotNull(drugsRepository.findById("15"));
+	
+	@Test
+	public void testGetDetails() throws Exception {
+		
+		Drugs d1 = new Drugs();
+		
+		
+		List<Drugs> listDrugs = new ArrayList<>(Arrays.asList(d1));
+		
+		
+		Mockito.when(drugsRepository.findAll()).thenReturn(listDrugs);
+		
+		String url = "/drugs/list";
+		
+		MvcResult actualResult = mockMvc.perform(get(url)).andExpect(status().isOk()).andReturn();
+		
+		String actualJsonResponse = actualResult.getResponse().getContentAsString();
+		System.out.println("Actuals:"+actualJsonResponse);
+		
+//		List<Drugs> list = drugsRepository.findAll();
+//		assertThat(list).size().isGreaterThan(0);
+	}
+	
+//	@Test
+//	@Order(3)
+//	public void testGetDrugsById() throws Exception {
+//		
+//		Mockito.when(drugsRepository.findById("15")).thenReturn( )
+//		
+//		Drugs drugs = drugsRepository.findById("15").get();
+//		assertEquals("abc", drugs.getDrugsName());
+//	}
+//	
+//	
+//	@Test
+//	@Order(4)
+//	void testUpdateSupplierDetails() {
+//		Drugs drugs = drugsRepository.findById("15").get();
+//		drugs.setDrugsCost(800);
+//		drugsRepository.save(drugs);
+//		assertNotEquals(600, drugsRepository.findById("15").get().getDrugsCost());
+//	}
+//	
+//	@Test
+//	@Order(5)
+//	void testDelete() {
+//		drugsRepository.deleteById("15");
+//		assertThat(drugsRepository.existsByDrugsId("15")).isFalse();
+//		
+//	}
+}

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './home/login/login.component';
@@ -19,7 +19,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PharmacyComponent } from './pharmacy/pharmacy.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
-import { CategoryComponent } from './pharmacy/category/category.component';
 import { ShopComponent } from './pharmacy/shop/shop.component';
 import { DrugsComponent } from './home/admin-dashboard/drugs/drugs.component';
 import { SupplierComponent } from './home/admin-dashboard/supplier/supplier.component';
@@ -29,8 +28,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-import { NextDirective } from './next.directive';
-import { PrevDirective } from './prev.directive';
 import {MatCardModule} from '@angular/material/card';
 import { BillingComponent } from './home/billing/billing.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -46,6 +43,12 @@ import { OrderDetailsComponent } from './home/admin-dashboard/order-details/orde
 import { DrugsPerOrderComponent } from './home/admin-dashboard/order-details/drugs-per-order/drugs-per-order.component';
 import { DrugsListComponent } from './home/admin-dashboard/drugs/drugs-list/drugs-list.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NextDirective } from './directives/next.directive';
+import { PrevDirective } from './directives/prev.directive';
+import { CatNextDirective } from './directives/cat-next.directive';
+import { CatPrevDirective } from './directives/cat-prev.directive';
+import { CategoryComponent } from './pharmacy/shop/category/category.component';
 
 
 
@@ -65,7 +68,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
     PharmacyComponent,
     NavBarComponent,
     FooterComponent,
-    CategoryComponent,
     ShopComponent,
     DrugsComponent,
     SupplierComponent,
@@ -78,6 +80,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     OrderDetailsComponent,
     DrugsPerOrderComponent,
     DrugsListComponent,
+    CatNextDirective,
+    CatPrevDirective,
+    CategoryComponent
     
   ],
   imports: [
@@ -101,9 +106,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatSelectModule,
     MatPaginatorModule,
     MatExpansionModule,
+    NgxPaginationModule
   ],
   exports:[
-    CartComponent
+    CommonModule, NgxPaginationModule
   ],
   providers: [
     CartService,

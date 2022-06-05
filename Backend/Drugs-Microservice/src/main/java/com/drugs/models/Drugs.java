@@ -1,17 +1,25 @@
 package com.drugs.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Document(collection="drugs")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Drugs {
+	
+	@Transient
+	public static final String SEQUENCE_NAME = "drugs_sequence";
+	
 	@Id
 	private String drugsId;
 	private String drugsName;
@@ -20,6 +28,8 @@ public class Drugs {
 	private String categories;
 	private String drugsDescription;
 	private String supplierName;
+
+	
 	
 	
 

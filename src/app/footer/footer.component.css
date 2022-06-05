@@ -6,25 +6,17 @@
 }
 
 .footer-distributed{
-	background-color: #DCE9FA;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	position: absolute;
+	margin-top: 150px;
+	/* margin-bottom: -50px; */
+	margin-left: 198px;
+	border: 1px solid black blurred;
 	box-sizing: border-box;
-	width: 100%;
+	width: 86%;
 	font: bold 16px sans-serif;
-	text-align: left;
 	padding: 50px 60px 40px;
 	overflow: hidden;
-}
-
-section {
-  width: 100%;
-  display: inline-block;
-  background: #ccc;
-  height: 60vh;
-  text-align: center;
-  font-size: 22px;
-  font-weight: 700;
-  text-decoration: underline;
+	background-color: lightsteelblue;
 }
 
 
@@ -95,6 +87,10 @@ section {
 
 	margin-right: 3px;
 	margin-bottom: 5px;
+}
+
+.avatar{
+	border-radius: 50%;
 }
 
 /* Footer Right */

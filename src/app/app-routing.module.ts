@@ -19,6 +19,7 @@ import { DrugsPerOrderComponent } from './home/admin-dashboard/order-details/dru
 import { SupplierComponent } from './home/admin-dashboard/supplier/supplier.component';
 import { DrugsComponent } from './home/admin-dashboard/drugs/drugs.component';
 import { DrugsListComponent } from './home/admin-dashboard/drugs/drugs-list/drugs-list.component';
+import { CategoryComponent } from './pharmacy/shop/category/category.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -26,7 +27,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'api/user-auth/user', component: UserDashboardComponent },
+  { path: 'myorders', component: UserDashboardComponent },
   { path: 'api/user-auth/admin', component: AdminDashboardComponent },
   { path: 'addtocart', component: AddtocartComponent },
   { path: 'cart', component: CartComponent },
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path: 'drugs/drugs-list', component: DrugsListComponent},
   {path: 'order-details', component: OrderDetailsComponent},
   {path: 'order-details/:orderId', component: DrugsPerOrderComponent},
+  {path: 'category/:categories', component: CategoryComponent},
   { path: '', redirectTo: 'hi', pathMatch: 'full' }
 ];
 

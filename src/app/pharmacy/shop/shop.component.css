@@ -3,11 +3,12 @@
 
 
 
-.containers{
+/* .container{
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-  }
+    width: 100%;
+  } */
   
   /* @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap"); */
 
@@ -73,6 +74,7 @@
       
       
       mat-toolbar{
+        margin-top:10px;
          height: 60px;
         }
       
@@ -113,13 +115,13 @@ a:hover {
 
 .section-products .single-product {
     margin-bottom: 26px;
+    height: 310px;
 }
 
 .section-products .single-product .part-1 {
+    margin: 15px;
     position: relative;
-    height: 290px;
-    max-height: 290px;
-    margin-bottom: 20px;
+    height: 250px;
     overflow: hidden;
 }
 
@@ -196,4 +198,78 @@ a:hover {
     display: inline-block;
     font-size: 1rem;
 }
+
+.container{
+  overflow: hidden;
+  height: 656px;
+  
+}
+
+
+.row{
+  margin: -12px 0px;
+  position: initial;
+  width: 200%;
+  
+ 
+}
+
+.contai{
+  justify-content: center;
+  margin: 30px 35%;
+  width: 50%;
+  overflow: hidden;
+}
+
+
+
+  
+  
+  .items{
+    display: inline-block;
+    width: 440px;
+    height: 330px;
+  }
+  .text{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+  }
+  .prev{
+    height: 65px;
+    background-color: transparent;
+    position: absolute;
+    left: 5px;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border: transparent;
+  }
+  .next{
+    position: absolute;
+    background-color: transparent;
+    right: -15px;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border: transparent;
+  }
+
+  .button-area{
+    border: 1px solid white;
+  }
+
+
+  
+  p {
+  font-family: "Lato", sans-serif;
+  text-align: justify;
+  }
+  
+  /* .cards{
+    width: 300px;
+    height: 180px;
+    border: 2px solid black;
+    background-color: lightblue;
+  } */
 
