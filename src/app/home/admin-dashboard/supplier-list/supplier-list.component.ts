@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DrugSService } from 'src/app/drug-s.service';
+import { DrugSService } from 'src/app/service/drug-s.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
+
 import Swal from 'sweetalert2';
 
 
@@ -10,7 +12,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./supplier-list.component.scss']
 })
 export class SupplierListComponent implements OnInit {
+
+  p = 1;
+  count = 5;
   SupplierDetails:any;
+  isLoggedIn = false;
+  private roles: string[] = [];
+  showUserBoard = false;
+  showAdminBoard = false;
 
   SupplierToUpdate = {
     supplierId:"",
@@ -20,7 +29,7 @@ export class SupplierListComponent implements OnInit {
   }
   supplierId: any;
 
-  constructor(private drugsService: DrugSService) {
+  constructor(private drugsService: DrugSService,private tokenStorageService: TokenStorageService) {
     
    }
    getSupplierlist() {
@@ -36,6 +45,14 @@ export class SupplierListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if(this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showUserBoard = this.roles.includes('ROLE_USER');
+    }
     this.getSupplierlist();
   }
 
@@ -85,6 +102,7 @@ export class SupplierListComponent implements OnInit {
         console.log(err);
       }
     );
+    window.location.reload();
   }
 
 }

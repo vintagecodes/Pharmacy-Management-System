@@ -1,6 +1,6 @@
 <mat-toolbar *ngIf="isLoggedIn">
   <div class="cont">
-    <span><h1>GET MEDS</h1></span>
+    <span><img src="/assets/img/logo.png" height="100" width="100" alt="" /></span>
     <p></p>
    </div>
   <app-nav-bar class="app-nav"></app-nav-bar>
@@ -44,7 +44,7 @@
             <td class="text-left" >{{i.drugsName}}</td>
             <td>{{i.drugsDescription}}</td>
             <td>{{i.drugsCost}}</td>
-            <td class="w30">
+            <td class="w3">
               <div class="input-group input-group-sm mb-3">
                 <input type="text" class="form-control text-center"  value="{{i.drugsQty}}" >
               </div>
@@ -60,8 +60,11 @@
           </tbody>
       </table>
     
+      <div  *ngIf="cartList.length < 1">
+        <img src="/assets/img/empty.jpg"/>
+      </div>
        
-        <a  (click)="addToOrder(cartList)" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#amount" *ngIf="isLoggedIn">Checkout</a>
+        <a  (click)="addToOrder(cartList)" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#amount" *ngIf="isLoggedIn && cartList.length > 0">Checkout</a>
     </div>
     
   </div>
@@ -72,7 +75,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Cart</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Cart details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -82,8 +85,33 @@
         <div class="card mt-5" style="padding: 20px;">
           <h3>Your Total Amount is {{this.amount}}</h3>
           </div>
-          <a href="/billing" class="btn btn-sm btn-primary">Click Here to Proceed</a>
-      </div>
+      </div><br>
+      
+      <table class="table table-striped" *ngIf="address.length>=1">
+        <thead>
+          <tr>
+            <th scope="col">Address</th>
+            <th scope="col">Email</th>
+            <th scope="col">PinCode</th>
+            <th scope="col">Contact No</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let data of address">
+          <tr>
+            <th scope="row">{{data.address}}</th>
+            <td>{{data.email}}</td>
+            <td>{{data.pincode}}</td>
+            <td>{{data.contactNo}}</td>
+
+           
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <a href="/order" class="btn btn-sm btn-primary" *ngIf="address.length>=1">Continue with the above address</a>
+      <br><p style="margin-left: 50%;" *ngIf="address.length>=1">OR</p>
+      <a href="/billing" class="btn btn-sm btn-primary" *ngIf="address.length<1">Click here to Proceed</a>
+      <a href="/billing" class="btn btn-sm btn-primary" *ngIf="address.length>=1">Go for the new billing Address</a>
     </div>
   </div>
 </div>

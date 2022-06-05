@@ -5,24 +5,34 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import exception.CustomException;
+
 @Service
 public class EmailSenderService {
 	
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
-	public void sendEmail(String toEmail, String subject, String body) {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("rraj02668@gmail.com");
-		message.setTo(toEmail);
-		message.setText(body);
-		message.setSubject(subject);
-		
+	public void sendEmail(String toEmail, String subject, String body) throws CustomException, Exception{
+		try {
+			
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setFrom("rraj02668@gmail.com");
+			message.setTo(toEmail);
+			message.setText(body);
+			message.setSubject(subject);
+			
 
+			
+			javaMailSender.send(message);
+			
+			System.out.println("Mail Send successfully");
+			
+		} catch(Exception e) {
+			System.out.println("Mail could not be sent");
+		}
 		
-		javaMailSender.send(message);
 		
-		System.out.println("Mail Send successfully");
 	}
 
 }

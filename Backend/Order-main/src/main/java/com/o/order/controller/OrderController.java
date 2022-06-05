@@ -35,6 +35,8 @@ import com.o.order.entity.Address;
 import com.o.order.entity.Order;
 import com.o.order.repository.OrderRepository;
 import com.o.order.service.OrderService;
+import com.o.order.service.PaymentService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,30 +45,27 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("unused")
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200/",maxAge = 3600)
 public class OrderController{
 	
-	public static String  x;
-	public static String  y;
-	public static String  z;
+
 	@Autowired
-	private OrderService orderRepository;    //Service
-	@Autowired
-	private PaytmDetailPojo paytmDetailPojo;
+	private OrderService orderService;    //Service
+
 	@Autowired
 	private OrderRepository repository;
 
 	
 	@GetMapping("/get")  
-	public List<Order> getAllBooks()   
+	public List<Order> getAllOrders()   
 	{  
-	return orderRepository.getAllBooks();  
+	return orderService.getAllOrders();  
 	}  
 	//creating a get mapping that retrieves the detail of a specific user  
 	@GetMapping("/get/{userId}")  
-	public List<Order> getBooks(@PathVariable("userId") String userId)   
+	public List<Order> getOrdersByUserId(@PathVariable("userId") String userId)   
 	{  
-	return orderRepository.getBooksById(userId);  
+	return orderService.getOrdersById(userId);  
 	}  
 	
 	@GetMapping("/{orderId}")
@@ -75,7 +74,7 @@ public class OrderController{
 	}
 	
 	@GetMapping("/orderStatus/{orderStatus}")
-	List<Order> getOrderByStatus(@PathVariable("orderStatus") boolean orderStatus){
+	List<Order> getOrderByStatus(@PathVariable("orderStatus") String orderStatus){
 		return repository.findByOrderStatus(orderStatus);
 	}
 	
@@ -83,73 +82,36 @@ public class OrderController{
 	@DeleteMapping("/delete/{userId}")  
 	public void deleteBook(@PathVariable("userId") String bookid)   
 	{  
-		orderRepository.delete(bookid);  
+		orderService.delete(bookid);  
 	}  
 	
 	//creating post mapping that post the user detail in the database  
 	@PostMapping("/post")  
 	public Order saveBook(@RequestBody Order books)   throws Exception
 	{  
-		return orderRepository.saveOrUpdate(books);  
+		return orderService.saveOrUpdate(books);  
 	}  
 	
 	//creating put mapping that updates the user    
 	@PutMapping("/put")  
 	public Order update(@RequestBody Order books)   
 	{  
-		orderRepository.saveOrUpdate(books);  
+		orderService.saveOrUpdate(books);  
 	return books;  
 	}  
-	 @PostMapping("/pgresponse")
-	    public String getResponseRedirect(HttpServletRequest request, Model model) {
-
-	        Map<String, String[]> mapData = request.getParameterMap();
-	        TreeMap<String, String> parameters = new TreeMap<String, String>();
-	        String paytmChecksum = "";
-	        for (Entry<String, String[]> requestParamsEntry : mapData.entrySet()) {
-	            if (" ".equalsIgnoreCase(requestParamsEntry.getKey())){
-	                paytmChecksum = requestParamsEntry.getValue()[0];
-	            } else {
-	            	parameters.put(requestParamsEntry.getKey(), requestParamsEntry.getValue()[0]);
-	            }
-	        }
-	        String result;
-
-	        boolean isValideChecksum = false;
-	        System.out.println("RESULT : "+parameters.toString());
-	        try {
-	            isValideChecksum = validateCheckSum(parameters, paytmChecksum);
-	            if (isValideChecksum && parameters.containsKey("RESPCODE")) {
-	                if (parameters.get("RESPCODE").equals("01")) {
-	                    result = "Payment Successful";
-	                } else {
-	                    result = "Payment Failed";
-	                }
-	            } else {
-	                result = "Checksum mismatched";
-	            }
-	        } catch (Exception e) {
-	            result = e.toString();
-	        }
-	        model.addAttribute("result",result);
-	        parameters.remove("CHECKSUMHASH");
-	        model.addAttribute("parameters",parameters);
-	        return "report";
-	    }
-
-	    private boolean validateCheckSum(TreeMap<String, String> parameters, String paytmChecksum) throws Exception {
-	        return PaytmChecksum.verifySignature(parameters,
-	                paytmDetailPojo.getMerchantKey(), paytmChecksum);
-	    }
-	private String getCheckSum(TreeMap<String, String> parameters) throws Exception {
-		return PaytmChecksum.generateSignature(parameters, paytmDetailPojo.getMerchantKey());
-	}
+	
+//	creating a post method to post all the details of the order and generates a receipt
 	
 	@PutMapping("/{id}")
 	public Order updateOrderDetails(@RequestBody Order order, @PathVariable("id") String orderId) {
 		
-		return orderRepository.updateOrderDetails(order);
+		return orderService.updateOrderDetails(order);
 		
+	}
+	
+	@DeleteMapping("/{orderId}")
+	public String deleteOrderByUserId(@PathVariable("orderId") String orderId) {
+		return orderService.deleteOrderbyOrderId(orderId);
 	}
 	
 	 

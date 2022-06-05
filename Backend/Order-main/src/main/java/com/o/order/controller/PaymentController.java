@@ -1,31 +1,25 @@
 package com.o.order.controller;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
+
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.o.order.entity.Order;
-import com.o.order.entity.PaytmDetailPojo;
-import com.o.order.repository.OrderRepository;
-import com.paytm.pg.merchant.PaytmChecksum;
+import com.o.order.service.PaymentService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 
 
 
@@ -34,18 +28,10 @@ import com.paytm.pg.merchant.PaytmChecksum;
 @Controller
 //@CrossOrigin(origins = "http://localhost:4200/")
 public class PaymentController {
-	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
-	@Autowired
-	private PaytmDetailPojo paytmDetailPojo;
 	
 	@Autowired
-	private RestTemplate restTemplate;
+	private PaymentService paymentService;
 	
-	@Autowired
-	private OrderRepository orderRepository;
-
-	@Autowired
-	private Environment env;
 	
 	@GetMapping("/")
 	public String home() {
@@ -56,79 +42,16 @@ public class PaymentController {
 
 	 @GetMapping(value = "/submitPaymentDetail/{orderId}")
 	    public ModelAndView getRedirect(@PathVariable("orderId") String orderId) throws Exception{
-		 String x = null;
-		 String y = null;
-		 String z = null;
-		 Order order = orderRepository.findByOrderId(orderId);
-			 x = order.getOrderId();
-			 y = order.getUserId();
-			 z = Double.toString(order.getTotal());
-		 
-		
-		 logger.info(z);
-		 logger.info(x);
-		 
-		 
-		 
-
-	        ModelAndView modelAndView = new ModelAndView("redirect:" + paytmDetailPojo.getPaytmUrl());
-	        TreeMap<String, String> parameters = new TreeMap<>();
-	        paytmDetailPojo.getDetails().forEach((k, v) -> parameters.put(k, v));
-	        parameters.put("MOBILE_NO", env.getProperty("paytm.mobile"));
-	        parameters.put("EMAIL", env.getProperty("paytm.email"));
-	        parameters.put("ORDER_ID", x);
-	        parameters.put("TXN_AMOUNT",z);
-	        parameters.put("CUST_ID",y);
-	        String checkSum = getCheckSum(parameters);
-	        parameters.put("CHECKSUMHASH", checkSum);
-	        modelAndView.addAllObjects(parameters);
-	        return modelAndView;
+		 return paymentService.getRedirect(orderId);
 	    }
 	 
 	 
 	 @PostMapping(value = "/pgresponse")
-	    public String getResponseRedirect(HttpServletRequest request, Model model) {
+	    public String getResponseRedirect( HttpServletRequest request, Model model) {
 
-	        Map<String, String[]> mapData = request.getParameterMap();
-	        TreeMap<String, String> parameters = new TreeMap<String, String>();
-	        String paytmChecksum = "";
-	        for (Entry<String, String[]> requestParamsEntry : mapData.entrySet()) {
-	            if (" ".equalsIgnoreCase(requestParamsEntry.getKey())){
-	                paytmChecksum = requestParamsEntry.getValue()[0];
-	            } else {
-	            	parameters.put(requestParamsEntry.getKey(), requestParamsEntry.getValue()[0]);
-	            }
-	        }
-	        String result;
-
-	        boolean isValideChecksum = false;
-	        System.out.println("RESULT : "+parameters.toString());
-	        try {
-	            isValideChecksum = validateCheckSum(parameters, paytmChecksum);
-	            if (isValideChecksum && parameters.containsKey("RESPCODE")) {
-	                if (parameters.get("RESPCODE").equals("01")) {
-	                    result = "Payment Successful";
-	                } else {
-	                    result = "Payment Failed";
-	                }
-	            } else {
-	                result = "Checksum mismatched";
-	            }
-	        } catch (Exception e) {
-	            result = e.toString();
-	        }
-	        model.addAttribute("result",result);
-	        parameters.remove("CHECKSUMHASH");
-	        model.addAttribute("parameters",parameters);
-	        return "report";
+	        return paymentService.getResponseRedirect(request, model);
 	    }
 
-	    private boolean validateCheckSum(TreeMap<String, String> parameters, String paytmChecksum) throws Exception {
-	        return PaytmChecksum.verifySignature(parameters,
-	                paytmDetailPojo.getMerchantKey(), paytmChecksum);
-	    }
-	private String getCheckSum(TreeMap<String, String> parameters) throws Exception {
-		return PaytmChecksum.generateSignature(parameters, paytmDetailPojo.getMerchantKey());
-	}
+	   
 	
 }

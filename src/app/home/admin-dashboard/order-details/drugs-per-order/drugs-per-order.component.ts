@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Order } from 'src/app/models/order';
 import { OrderListService } from 'src/app/service/order-list.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-drugs-per-order',
@@ -25,7 +27,7 @@ export class DrugsPerOrderComponent implements OnInit {
   }
 
   getListPerOrderId(orderId:any){
-    this.orderListService.getOrderDetailsByOrderId(this.orderId).subscribe((data)=>{
+    this.orderListService.getOrderDetailsByOrderId(orderId).subscribe((data)=>{
     // console.log(data);
     this.list = data;
     console.log(this.list);
@@ -36,6 +38,98 @@ export class DrugsPerOrderComponent implements OnInit {
     console.log(this.res);
 })
 
+
+  }
+
+
+
+
+
+  confirmStatus(orderStatus:string){
+   
+    console.log(this.res);
+
+    if(orderStatus === 'confirmed'){
+      Swal.fire('Hey!','The Order status has already been confirmed','warning');
+    }
+    else{
+      orderStatus = 'confirmed';
+      
+    let order = new Order(this.res[0]['orderId'], this.res[0]['userId'], this.res[0]['cart'],this.res[0]['total'], orderStatus,this.res[0]['address']);
+    console.log(order);
+    this.orderListService.updateOrderDetails(order, order.orderId).subscribe((data)=>{
+      console.log(data);
+    });
+    
+    setTimeout(function(){
+      Swal.fire('Yeah!','Order Verified','success'); 
+      // window.location.reload()
+   }, 1000);
+  }
+
+
+
+
+
+    // window.location.reload();
+    
+    
+
+  }
+
+
+  cancel(orderStatus:string){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Cancel it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.cancelOrder(orderStatus);
+        window.location.reload();
+        
+      }
+    })
+  }
+
+
+
+
+
+
+  cancelOrder(orderStatus:string){
+   
+    console.log(this.res);
+
+    if(orderStatus === 'cancelled'){
+      Swal.fire('Hey!','The Order status has already been cancelled','warning');
+    }
+    else{
+      orderStatus = 'cancelled';
+      
+    let order = new Order(this.res[0]['orderId'], this.res[0]['userId'], this.res[0]['cart'],this.res[0]['total'], orderStatus,this.res[0]['address']);
+    console.log(order);
+    this.orderListService.updateOrderDetails(order, order.orderId).subscribe((data)=>{
+      console.log(data);
+    });
+    
+    setTimeout(function(){
+      Swal.fire('Hey!','Order cancelled','warning'); 
+      // window.location.reload()
+   }, 1000);
+  }
+
+
+
+
+
+    // window.location.reload();
+    
+    
 
   }
 

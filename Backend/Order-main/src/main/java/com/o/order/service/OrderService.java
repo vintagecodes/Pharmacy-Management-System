@@ -25,25 +25,24 @@ public class OrderService {
 	private static final Logger LOGGER=LoggerFactory.getLogger(OrderService.class);
 	
 	//getting all books record by using the method findaAll() of CrudRepository  
-	public List<Order> getAllBooks()   
+	public List<Order> getAllOrders()   
 	{  
-	List<Order> books = new ArrayList<Order>();  
-	orderRepository.findAll().forEach(books1 -> books.add(books1));  
-	return books;  
+	List<Order> orders = new ArrayList<Order>();  
+	orderRepository.findAll().forEach(orders1 -> orders.add(orders1));  
+	return orders;  
 	}  
 	
 	//getting a specific record by using the method findById() of CrudRepository  
-	public List<Order> getBooksById(String userId)   
+	public List<Order> getOrdersById(String userId)   
 	{  
-		List<Order> books = new ArrayList<Order>();  
 	return  orderRepository.findByUserId(userId);
 	
 	}  
 	
 	//saving a specific record by using the method save() of MongoRepository  
-	public Order saveOrUpdate(Order books)   
+	public Order saveOrUpdate(Order orders)   
 	{  
-		return orderRepository.save(books); 
+		return orderRepository.save(orders); 
 		
 	} 
 	
@@ -54,24 +53,44 @@ public class OrderService {
 	}  
 	
 	//updating a record  
-	public void update(Order books, String userId)   
+	public void update(Order orders, String userId)   
 	{  
-		orderRepository.save(books);  
+		orderRepository.save(orders);  
 	} 
 	
-	public List<Order> getOrderByStatus(boolean orderStatus){
+	public List<Order> getOrderByStatus(String orderStatus){
 		return orderRepository.findByOrderStatus(orderStatus);
 	}
 	
 	
 	public Order updateOrderDetails(Order order) {
-		Address add = new Address();
-		add.getEmail();
+		String em = "";
+		List<Address> order1 = order.getAddress();
+		for(int i = 0;i<order1.size();i++) {
+			em = order1.get(i).getEmail();
+			System.out.println(order1.get(i).getEmail());
+		}
+		 String email = em;
+		 System.out.println(email);
+		 
+		 String s = order.getOrderStatus();
+		 System.out.println(s);
+		 
+		 if(order.getOrderStatus().equalsIgnoreCase("cancelled")) {
+			 String html = "Sorry!,"+order.getUserId()+ "Your Order has been cancelled";
+			 emailSenderService.sendEmail(email, "Verified Order", html);
+		 }else {
+			 String html ="Your Order has been verified and shipped";
+				emailSenderService.sendEmail(email, "Verified Order", html);
+		 }
 		
-//		LOGGER.info(address.getEmail());
-//		String html = add.getUsername()+"Your Order has been verified and shipped";
-//		emailSenderService.sendEmail(add.getEmail(), "Verified Order", html);
+		
 		return orderRepository.save(order);
+	}
+	
+	public String deleteOrderbyOrderId(String orderId) {
+		orderRepository.deleteByOrderId(orderId);
+		return "Successfully Deleted";
 	}
 	
 

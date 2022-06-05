@@ -5,7 +5,7 @@
 </ul> -->
 <mat-toolbar>
   <div class="cont">
-    <span><h1>GET MEDS</h1></span>
+    <span><img src="/assets/img/logo.png" height="100" width="100" alt="" /></span>
     <p></p>
    </div>
   <app-nav-bar class="app-nav"></app-nav-bar>
@@ -26,14 +26,14 @@
         </div>
 
       </form>
-      
+    
       
     </div>
     
   </div>
 </div>
 
-<section class="product">
+<!-- <section class="product">
   <div class="container-fluid">
       <div class="slider-wrap">
           <div class="slider-main">
@@ -73,7 +73,7 @@
           </div>
       </div>
   </div>
-</section>
+</section> -->
 
 </div>
 
@@ -87,9 +87,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" *ngFor="let drugs of drugsList | keyvalue">
-        <h3>{{drugs.key}}: -</h3>
-        <small>{{drugs.value}}</small>
+      <div class="modal-body" *ngIf="drugsList">
+        <!-- <h3>{{drugs}}: -</h3> -->
+        <h3>Drugs Cost: </h3><small>{{drugsList.drugsCost | currency:'INR':'symbol-narrow'}}</small>
+        <h3>Drugs Description: </h3><small>{{drugsList.drugsDescription}}</small>
+        <h3>Drugs Name: </h3><small>{{drugsList.drugsName}}</small>
+        <h2>Supplier: - {{drugsList.supplierName}}</h2>
 
         
       </div>

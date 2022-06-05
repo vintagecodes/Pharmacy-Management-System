@@ -1,0 +1,5 @@
+package sec.model.service;
+
+public class AuthService {
+
+}

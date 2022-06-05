@@ -203,7 +203,6 @@ INDEX VERSION 1.131+C:\Users\Lenovo\Documents\Pharamacy Management System\.metad
 1674163994.index
 963104627.index
 3898857331.index
-3654956334.index
 2667200514.index
 3643032250.index
 1295966617.index

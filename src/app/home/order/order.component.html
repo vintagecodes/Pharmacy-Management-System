@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar *ngIf="isLoggedIn">
     <div class="cont">
       <span><h1>GET MEDS</h1></span>
       <p></p>
@@ -7,7 +7,7 @@
   
   </mat-toolbar>
   
-<div class="container">
+<div class="container" *ngIf="isLoggedIn">
     <button type="button" class="button" (click)="confirmOrder()">Buy Meds</button>
 
     <table class="table table-striped">
@@ -17,6 +17,7 @@
             <th scope="col">#</th>
             <th scope="col">Product Name</th>
             <th scope="col">Cost</th>
+            <th scope="col">Product Qty</th>
             <th scope="col">Total</th>
           </tr>
         </thead>
@@ -25,6 +26,7 @@
             <th scope="row">{{i.drugsId}}</th>
             <td>{{i.drugsName}}</td>
             <td>{{i.drugsCost}}</td>
+            <td>{{i.drugsQty}}</td>
             <td>{{i.total}}</td>
 
            

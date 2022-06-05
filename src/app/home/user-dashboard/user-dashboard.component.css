@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300&display=swap');
+
+
+.container{
+    margin-top:55px;
+    width: 60%;
+}
+
+.app-nav{
+    margin-top:25px;
+}
+
+table{
+    width: 80%;
+    margin-left: 20px;
+}
+
+.cont{
+    margin-top: 40px;
+    margin-left: -650px;
+    padding: 5px;
+}
+
+/* .text-right{
+    margin-left: -65px;
+
+} */
+
+/* .pagi{
+    margin-left: -520px;
+} */

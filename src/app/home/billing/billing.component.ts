@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Address } from 'src/app/address';
+import { Address } from 'src/app/models/address';
 import { BillingService } from 'src/app/service/billing.service';
-import { TokenStorageService } from 'src/app/token-storage.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,6 +22,9 @@ export class BillingComponent implements OnInit {
   showUserBoard = false;
   showAdminBoard = false;
   username?: string;
+  add!: Address;
+  submitted = false;
+  // checkoutForm!: FormGroup;
 
   // checkoutForm = new FormGroup({
   //   name: new FormControl('name',[Validators.required]),
@@ -36,6 +39,18 @@ export class BillingComponent implements OnInit {
     
    }
 
+   currentUsers = this.tokenStorageService.getUser().username;
+   
+  adds:any = {
+    username: this.currentUsers,
+    name: null,
+    email: null,
+    pincode: null,
+    address: null,
+    contactNo: null,
+
+  };
+
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -47,35 +62,36 @@ export class BillingComponent implements OnInit {
       this.showUserBoard = this.roles.includes('ROLE_USER');
     }
 
-    this.createForm();
     this.currentUser = this.tokenStorageService.getUser().username;
     console.log(this.currentUser);
 
+
+
   }
 
-  
 
-  createForm(){
-   this.checkoutForm = this.formBuilder.group({
-     name: ['', Validators.compose([Validators.required, Validators.pattern('[a-zA-Z]+')])],
-     email: ['', Validators.compose([Validators.required, Validators.email])],
-     pincode: ['',Validators.compose([Validators.required, Validators.pattern('[0-6]+')])],
-     address: ['', Validators.compose([Validators.required])],
-     contactNo: ['', Validators.compose([Validators.required, Validators.pattern('[0-9]+')])]
-    
-     
-   })
-  }
 
-  onSubmit(): void {
-    this.formData = this.checkoutForm.getRawValue();
-    console.log(this.formData);
+  register(){
+    this.submitted = true;
+    // let add = new Address(this.currentUser, registerform.name, this.formData.email, this.formData.pincode, this.formData.address, this.formData.contactNo);
+    this.service.postAddress(this.adds).subscribe(
+      (resp) => {
+        console.log(resp);
+      },
+      (err) => {
+        console.log(err)
+      }
+    );
+    Swal.fire({
+      title: 'Good Job!',
+      text: 'Successful',
+      icon: 'success',
+      timer: 2000,
+  })
+  .then(() => {
+      {this.router.navigate(['/order'])}
+  })
 
-    let add = new Address(this.currentUser, this.formData.name, this.formData.email, this.formData.pincode, this.formData.address, this.formData.contactNo);
-    this.service.postAddress(add).subscribe((data)=>{
-      console.log(data);
-    });
-    Swal.fire('Good','Registration Successful','success');
   }
 
   // postAdress(formData:any){

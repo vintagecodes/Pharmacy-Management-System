@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../auth.service';
+import { AuthService } from 'src/app/service/auth.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -45,6 +45,7 @@ export class RegisterComponent implements OnInit {
       err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
+        Swal.fire('Oops! Something went wrong','error');
       }
     );
     

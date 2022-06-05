@@ -10,10 +10,6 @@
 
 
   </button>
-  <div class="containers">
-    <span><h1>GET MEDS</h1></span>
-    
-   </div>
   </mat-toolbar>
   
   <mat-sidenav-container>
@@ -27,7 +23,7 @@
        
           <mat-divider></mat-divider>
           <button mat-button class="menu-button">
-            <a  routerLink="/home">
+            <a  routerLink="/">
               <span class="icon"><img src="/assets/img/home.png" alt="Order"/></span>
              
               <span class="text">Home</span>
@@ -37,42 +33,42 @@
           <button mat-button class="menu-button">
     
             <a  routerLink="/order-details" *ngIf="showAdminBoard">
-                <span class="icon"><img src="/assets/img/home.png" alt="Order"/></span>
+                <span class="icon"><img src="/assets/img/order.png" alt="Order"/></span>
                
                 <span class="text">Orders</span>
             </a>
-          </button>
-          <button mat-button class="menu-button" *ngIf="showAdminBoard">
-            <a  routerLink="/supplier-list">
-            <span class="icon"> <img src="/assets/img/dashboard.png" alt="Dashboard"/></span>
-           
-            <span class="text">Supplier List</span>
-        </a>
-          </button><br><br>
+          </button><br>
           <button mat-button class="menu-button" *ngIf="showAdminBoard">
             <a  routerLink="/supplier">
-                <span class="icon"><img src="/assets/img/dashboard.png" alt=/></span>
+                <span class="icon"><img src="/assets/img/list.png" width="50"/></span>
                
                 <span class="text">Supplier</span>
             </a>
-        </button>
+        </button><br>
+        <button mat-button class="menu-button" *ngIf="showAdminBoard">
+          <a  routerLink="/supplier-list">
+          <span class="icon"><li style="color:black; margin-left: 35px;"></li></span>
+         
+          <span class="text">Supplier List</span>
+      </a>
+        </button><br><br>
         <button mat-button class="menu-button" *ngIf="showAdminBoard">
             <a  routerLink="/drugs">
-                <span class="icon"> <img src="/assets/img/dashboard.png" alt="User DashBoard"/></span>
+                <span class="icon"> <img src="/assets/img/add.png" alt="User DashBoard" height="40"/></span>
                
                 <span class="text">Add Drugs</span>
             </a>
           </button><br><br>
           <button mat-button class="menu-button" *ngIf="showAdminBoard">
             <a  routerLink="/drugs/drugs-list" >
-                <span class="icon"> <i class="fa-solid fa-list"></i></span>
+                <span class="icon"><li style="color:black; margin-left: 35px;"></li></span>
                
                 <span class="text">Drugs List</span>
             </a>
           </button><br><br>
         
           <button mat-button class="menu-button" *ngIf="isLoggedIn">
-            <a href   >
+            <a href (click)="logout()">
                 <span class="icon" ><img src="/assets/img/login.png" alt="Logout"/></span>
                
                 <span class="text">Logout</span>

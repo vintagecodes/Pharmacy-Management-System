@@ -24,7 +24,7 @@ import com.drugs.service.PhotoService;
 
 @RestController
 @RequestMapping("/drugs")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class DrugsController {
 	
 	@Autowired
@@ -41,7 +41,7 @@ public class DrugsController {
 	
 	//Post the details related to drugs
 	@PostMapping("/")
-	public ResponseEntity<?> saveDrugsDetails(@RequestBody Drugs drugs) throws CustomException, Exception {
+	public Drugs saveDrugsDetails(@RequestBody Drugs drugs) throws CustomException, Exception {
 		return service.saveDrugsDetails(drugs);
 	}
 	
@@ -94,15 +94,15 @@ public class DrugsController {
 	
 	//For updating the drugs to its respective attribute
 	@PutMapping("/{id}")
-	public Drugs updateSupplierDetails(@RequestBody Drugs drugs, @PathVariable("id") String drugsId) throws CustomException, Exception {
+	public Drugs updateDrugsDetails(@RequestBody Drugs drugs, @PathVariable("id") String drugsId) throws CustomException, Exception {
 		return service.updateDrugsDetails(drugs, drugsId);
 	}
 	
-	@PutMapping("/name/{id}")
-	public Drugs updateSupplierDetail(@RequestBody Drugs drugs, @PathVariable("id") String drugsName) throws CustomException, Exception {
-		return service.updateDrugsDetail(drugs, drugsName);
-	}
-	
+//	@PutMapping("/name/{id}")
+//	public Drugs updateDrugsDetail(@RequestBody Drugs drugs, @PathVariable("id") String drugsName) throws CustomException, Exception {
+//		return service.updateDrugsDetail(drugs, drugsName);
+//	}
+//	
 	
 	//Deleting the drugs respective to the specified drugs id 
 	@DeleteMapping("/{id}")

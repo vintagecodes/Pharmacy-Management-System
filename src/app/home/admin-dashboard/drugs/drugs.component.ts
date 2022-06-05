@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DrugSService } from 'src/app/drug-s.service';
+import { DrugSService } from 'src/app/service/drug-s.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,18 +12,24 @@ import Swal from 'sweetalert2';
 export class DrugsComponent implements OnInit {
   public show:boolean = false;
   public buttonName:any = 'Drugs';
+  isLoggedIn = false;
+  private roles: string[] = [];
+  showUserBoard = false;
+  showAdminBoard = false;
 
   DrugsToUpdate = {
     drugsId:"",
     drugsName:"",
     drugsCost:"",
     stockQty:" ",
+    categories: " ",
     drugsDescription:" ",
     supplierName:" ",
   }
 
   displayStyle = "none";
   supplierList:any[] = [];
+  registerform: any;
   
   openPopup() {
     this.displayStyle = "block";
@@ -31,10 +38,13 @@ export class DrugsComponent implements OnInit {
     this.displayStyle = "none";
   }
 
+  @ViewChild(NgForm)
+  ngForm!: NgForm;
+
   
  
   DrugsDetails: any ;
-  constructor(private drugsService: DrugSService) {
+  constructor(private drugsService: DrugSService,private tokenStorageService: TokenStorageService) {
     this.getDrugslist();
    }
   register(registerform:NgForm){
@@ -90,6 +100,14 @@ export class DrugsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if(this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showUserBoard = this.roles.includes('ROLE_USER');
+    }
   }
 
   showDrugs(){

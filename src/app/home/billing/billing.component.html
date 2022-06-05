@@ -1,70 +1,101 @@
-
-
-
-
 <mat-toolbar>
   <div class="cont">
-    <span><h1>GET MEDS</h1></span>
+    <span><img src="/assets/img/logo.png" height="100" width="100" alt="" /></span>
     <p></p>
-   </div>
+  </div>
   <app-nav-bar class="app-nav"></app-nav-bar>
 
 </mat-toolbar>
 
 
 
+<div style="display: flex; flex-grow: grow; margin: 5px;">
 
+  <div class="wrapper">
+    <div class="form_container">
+      <div class="heading">
+        <h2>Billing Address</h2>
+      </div>
 
-<div class="register-form mt-3 mb-3" *ngIf="isLoggedIn">
-  <div class="container">
-        <div class="row">
-          <div class="col-md-6 d-none d-md-block bg-light">
-              <!-- <h1 class="text-center pt-3">Billing Details<br></h1> -->
-              <img
-              id="profile-img"
-              src="/assets/img/pharma_shop-removebg-preview.png"
-              class="-img-card"
-            />
+      <form name="form" #registerForm="ngForm" (ngSubmit)="registerForm.form.valid && register()" novalidate>
+        <div class="form_wrap fullname">
+          <div class="form_item" style="visibility: hidden;">
+            <label for="username"><i class="fas fa-user"></i></label>
+            <!-- <input type="text" id="username" name="username" class="form-control" ><br><br> -->
+            <input type="text" name="username" id="username" value="rerf" #username="" class="form-control"
+              value={{currentUser}}>
           </div>
-          <div class="col-md-6 bg-dark">
-             <h1 class="text-center">Billing Details<br></h1>
-              <form [formGroup]="checkoutForm" class="p-4 text-white" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label for="name"><i class="fas fa-user"></i> Name</label>
-                    <input type="text" class="form-control" formControlName="name" placeholder="Enter Name">
-                    <div *ngIf="checkoutForm.controls['name'].invalid && checkoutForm.controls['name'].touched" class="text-danger">
-                      
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                    <input type="email" class="form-control" formControlName="email" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                  <label for="pincode"><i class="fas fa-user"></i> Pincode</label>
-                  <input type="text" class="form-control" formControlName="pincode" placeholder="Enter PinCode">
-              </div>
-              <div class="form-group">
-                <label for="address"><i class="fas fa-user"></i>Address</label>
-                <input type="text" class="form-control" formControlName="address" placeholder="Enter Address">
-            </div>
+          <div class="form_item" style="margin-left: -330px;">
             <div class="form-group">
-              <label for="contactNo"><i class="fas fa-user"></i>Contact No</label>
-              <input type="text" class="form-control" formControlName="contactNo" placeholder="Enter Contact No">
+              <label for="drugsName"><i class="fas fa-user"></i></label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Enter Customer name"
+                #name="ngModel" required [(ngModel)]="adds.name" required>
+              <span class="text-danger" *ngIf="(name.touched || registerForm.submitted) && name.errors?.['required']">
+                Name is required
+              </span>
+            </div>
           </div>
-               <div class="form-group">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="form_item">
+            <label for="email"><i class="fas fa-envelope"></i> Email</label>
+            <input type="email" name="email" id="email" class="form-control" #email="ngModel" required
+              [(ngModel)]="adds.email" placeholder="Enter email">
+            <span class="text-danger" *ngIf="(email.touched || registerForm.submitted) && email.errors?.['required']">
+              Email is required
+            </span>
+          </div>
+
+
+
+        </div>
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="pincode"><i class="fa fa-map-pin"></i> PinCode</label>
+            <input type="text" name="pincode" id="pincode" class="form-control" #pincode="ngModel" required
+              maxlength="6" minlength="6" [(ngModel)]="adds.pincode" placeholder="Enter PinCode">
+            <div class="text-danger" *ngIf="pincode.errors && registerForm.submitted">
+              <div *ngIf="pincode.errors['required']">PinCode is required</div>
+              <div *ngIf="pincode.errors['minlength']"> Pincode should not be less than 6 charactersdigits</div>
+              <div *ngIf="pincode.errors['maxlength']"> Pincode must be 6 digits</div>
+              
+            </div>
+          </div>
+
+
+        </div>
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="address"><i class="fa fa-address-card"></i> Address</label>
+            <input type="text" name="address" id="address" class="form-control" #address="ngModel" required
+              [(ngModel)]="adds.address" placeholder="Enter LandMark" maxlength="100">
+              <div class="text-danger" *ngIf="address.errors && registerForm.submitted">
+                <div *ngIf="address.errors['required']">PinCode is required</div>
+                <div *ngIf="address.errors['maxlength']"> Pincode should be be 100 characters</div>
                 
-                <input type="submit" value="Register" class="btn btn-success">
-                </div>
-              </form>
-              <!-- <div *ngIf="formData">
-                <strong>Form Value</strong>: {{ formData.value | json }}
-              </div> -->
+              </div>
+            
+          </div>
+
+        </div>
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="contactNo"><i class="fa fa-phone" aria-hidden="true"></i></label>
+            <input type="number" name="contactNo" id="contactNo" #contactNo="ngModel" class="form-control"
+              placeholder="Enter the Contact Number" required [(ngModel)]="adds.contactNo" minlength="10">
+            <span class="text-danger"
+              *ngIf="(contactNo.touched || registerForm.submitted) && contactNo.errors?.['required']">
+              Contact Number is required
+            </span>
+            <span class="text-danger" *ngIf="contactNo.errors?.['minlength']"> Contact Number must be 10 digits</span>
           </div>
         </div>
+
+        <div class="btn btn-primary">
+          <input type="submit" value="Get Started">
+        </div>
+
+      </form>
     </div>
-</div>
-<div class="col-md-6" *ngIf="isLoggedIn">
-  <button type="submit" class="btn btn-warning mb-3 mt-3 float-right" (click)="orderSection()">Next</button>
+  </div>
 
 </div>

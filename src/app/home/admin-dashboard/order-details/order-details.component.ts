@@ -10,8 +10,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./order-details.component.scss']
 })
 export class OrderDetailsComponent implements OnInit {
-  orderList: any;
+  orderList:any = [];
   orderId: any;
+  p = 1;
+  count = 5;
+  searchText:any;
 
   constructor(private orderListService: OrderListService, private router: Router) { this.getOrderList() }
 

@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+
+
+/* .container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+  } */
+  
+  /* @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap"); */
+
+  
+         body{
+          background-color:#eee;
+          font-family: "Poppins", sans-serif;
+          font-weight: 300;
+         }
+  
+         .height{
+          height: 20vh;
+         }
+         
+  
+         .search{
+         position: relative;
+         box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+           
+         }
+  
+         .search input{
+  
+          height: 60px;
+          text-indent: 25px;
+          border: 2px solid #d6d4d4;
+  
+  
+         }
+  
+  
+         .search input:focus{
+  
+          box-shadow: none;
+          border: 2px solid blue;
+  
+  
+         }
+  
+         .search .fa-search{
+  
+          position: absolute;
+          top: 20px;
+          left: 16px;
+  
+         }
+  
+         .search button{
+  
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          height: 50px;
+          width: 110px;
+          background: blue;
+  
+         }
+  
+  
+  
+  
+
+      
+      
+      mat-toolbar{
+        margin-top:10px;
+         height: 60px;
+        }
+      
+        .cont h1{
+          color: black;
+          white-space: nowrap;
+          letter-spacing: 3px;
+          font-family: 'Saira Condensed', sans-serif;
+        }
+        
+      
+
+a,
+a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.section-products {
+    padding: 80px 0 54px;
+}
+
+.section-products .header {
+    margin-bottom: 50px;
+}
+
+.section-products .header h3 {
+    font-size: 1rem;
+    color: #fe302f;
+    font-weight: 500;
+}
+
+.section-products .header h2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #444444; 
+}
+
+.section-products .single-product {
+    margin-bottom: 26px;
+    height: 310px;
+}
+
+.section-products .single-product .part-1 {
+    margin: 15px;
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.section-products .single-product .part-1::before {
+		position: absolute;
+		content: "";
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		transition: all 0.3s;
+}
+
+.section-products .single-product:hover .part-1::before {
+		transform: scale(1.2,1.2) rotate(5deg);
+}
+
+.section-products #product-1 .part-1::before {
+    background: url("https://images.ctfassets.net/93cx52oq880q/l3IIUIuzq624KrL7huyu9/df3c7f56468b9112f5c282b46905136b/The_PostScript_thumbnail_Mirror_Illustration-01.jpg") no-repeat center;
+    background-size: cover;
+		transition: all 0.3s;
+}
+
+
+
+.section-products .single-product .part-1 .new {
+    left: 0;
+    background-color: #444444;
+}
+
+.section-products .single-product .part-1 ul {
+    position: absolute;
+    bottom: -41px;
+    left: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    transition: bottom 0.5s, opacity 0.5s;
+}
+
+.section-products .single-product:hover .part-1 ul {
+    bottom: 30px;
+    opacity: 1;
+}
+
+.section-products .single-product .part-1 ul li {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.section-products .single-product .part-1 ul li a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #ffffff;
+    color: #444444;
+    text-align: center;
+    box-shadow: 0 2px 20px rgb(50 50 50 / 10%);
+    transition: color 0.2s;
+}
+
+.section-products .single-product .part-1 ul li a:hover {
+    color: #fe302f;
+}
+
+.section-products .single-product .part-2 .product-title {
+    font-size: 1rem;
+}
+
+.section-products .single-product .part-2 h4 {
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.container{
+  position: relative;
+  overflow: hidden;
+  height: 550px;
+  
+}
+
+
+.row{
+  margin: 55px -10px;
+  position: absolute;
+  width: 200%;
+  
+ 
+}
+
+.contai{
+  justify-content: center;
+  margin: 30px 35%;
+  width: 50%;
+  overflow: hidden;
+}
+
+
+
+  
+  
+  .items{
+    display: inline-block;
+    width: 440px;
+    height: 330px;
+  }
+  .text{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+  }
+  .prev{
+    height: 65px;
+    background-color: transparent;
+    position: absolute;
+    left: 5px;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border: transparent;
+  }
+  .next{
+    position: absolute;
+    background-color: transparent;
+    right: -15px;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border: transparent;
+  }
+
+  .button-area{
+    border: 1px solid white;
+  }
+
+
+  
+  p {
+  font-family: "Lato", sans-serif;
+  text-align: justify;
+  }
+  
+  /* .cards{
+    width: 300px;
+    height: 180px;
+    border: 2px solid black;
+    background-color: lightblue;
+  } */
+

@@ -1,46 +1,5 @@
-<!-- <mat-toolbar>
 
-  <app-nav-bar></app-nav-bar>
-</mat-toolbar>
-
-
-
-<div class="bubble">
-
-    
-</div>
-
-<div id="background">
-   
-    <div class="container">
-        <img
-        id="profile-img"
-        src="/assets/img/pharma_shop-removebg-preview.png"
-        class="-img-card"
-      />
-
-    </div>
-    <div class="container">
-     <span><h1>GET MEDS</h1></span>
-     <p></p>
-    </div>
-    
-
-  
-</div>
-<div class="bubble2"></div>
-<div class="bubble3"></div>
-
-<h3>CATEGORIES</h3>
-
-<app-category></app-category>
-
-<footer>  <app-footer></app-footer></footer>
-
- -->
-
- 
-<mat-toolbar class="mat-elevation-z8">
+ <mat-toolbar class="mat-elevation-z8">
 
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened">
@@ -52,46 +11,32 @@
 
 
   </button>
-  <div class="containers">
-    <span><h1>GET MEDS</h1></span>
-    
-   </div>
   </mat-toolbar>
+
+  <div style="display: flex; flex-grow: grow; margin: 0px;">
   
-  <mat-sidenav-container>
+    <mat-sidenav-container>
       <mat-sidenav #sidenav="matSidenav">
-        <a routerLink="/profile" ><img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" /></a>
-
-
+     
+        <img class="avatar mat-elevation-z8" src="/assets/img/logo.png" height="300"/>
+  
+  
           <mat-divider></mat-divider>
-          <button mat-button class="menu-button">
-            <a  routerLink="/home">
-                <span class="icon"><img src="/assets/img/home.png" alt="Home"/></span>
+          <button mat-button class="menu-button" *ngIf="showUserBoard">
+            <a  routerLink="/myorders">
+                <span class="icon"><img src="/assets/img/order1.png" alt="Home" width="50" height="50"/></span>
                
-                <span class="text">Home</span>
+                <span class="text">My Orders</span>
             </a>
-          </button>
+          </button><br><br>
+          
           <button mat-button class="menu-button" *ngIf="showAdminBoard">
             <a  routerLink="/api/user-auth/admin">
             <span class="icon"> <img src="/assets/img/dashboard.png" alt="Dashboard"/></span>
            
             <span class="text">Dashboard</span>
         </a>
-          </button><br><br>
-          <button mat-button class="menu-button" *ngIf="showAdminBoard">
-            <a  routerLink="/home">
-                <span class="icon"> <img src="/assets/img/home.png" alt=/></span>
-               
-                <span class="text">Explore</span>
-            </a>
-        </button>
-        <button mat-button class="menu-button" *ngIf="showUserBoard">
-            <a  href="/api/user-auth/user">
-                <span class="icon"> <img src="/assets/img/dashboard.png" alt="User DashBoard"/></span>
-               
-                <span class="text">User</span>
-            </a>
-          </button><br><br>
+          </button><br>
           <button mat-button class="menu-button" *ngIf="showUserBoard">
             <a  routerLink="/cart" >
                 <span class="icon"> <img src="/assets/img/cart.png" alt="Cart"/></span>
@@ -99,24 +44,22 @@
                 <span class="text">Cart</span>
             </a>
           </button><br><br>
+  
+          <button mat-button class="menu-button" *ngIf="!isLoggedIn">
+            <a  routerLink="/login" >
+              <span class="icon"> <img src="/assets/img/login.png" alt="Cart"/></span>
+               
+                <span class="text">SIGN IN</span>
+            </a>
+          </button><br><br>
+          <button mat-button class="menu-button" *ngIf="!isLoggedIn">
+            <a  routerLink="/register" >
+              <span class="icon"> <img src="/assets/img/register.png" alt="Cart"/></span>
+               
+                <span class="text">SIGN UP</span>
+            </a>
+          </button><br>
           
-          <ul *ngIf="!isLoggedIn">
-            <li class="list">
-                <a routerLink="/login" >
-                    <span class="icon"><img src="/assets/img/login.png"/></span>
-                    
-                    <span class="text">Sign In</span>
-                </a>
-            </li><br><br>
-            <li class="list">
-                <a routerLink="/register">
-                    <span class="icon"> <img src="/assets/img/register.png" alt="Register"/></span>
-                   
-                    <span class="text">Register</span>
-                </a>
-            </li>
-            </ul><br><br>
-        
           <button mat-button class="menu-button" *ngIf="isLoggedIn">
             <a href   (click)="logout()">
                 <span class="icon" ><img src="/assets/img/login.png" alt="Logout"/></span>
@@ -125,22 +68,39 @@
             </a>
           </button>
       </mat-sidenav>
-      <mat-sidenav-content>
-          <div class="content">
-            <div class="container">
-                <img
-                id="profile-img"
-                src="/assets/img/store.jpg"
-                class="-img-card"
-              />
-    </div>    
-    <div class="container">
-        <span><h1>GET MEDS</h1></span><br>
-        <p>The Pharamcy to your home</p>
-       </div>
+  
+    </mat-sidenav-container>
 
-          </div>
-       
-      </mat-sidenav-content>
-  </mat-sidenav-container>
-  <app-footer></app-footer>
+    <div class="img">
+      <div class="shop">
+        <span  class="h1"><h1>GET MEDS</h1></span><br><br>
+        <button class="button btn" (click)="shop()">Shop Now</button>
+      </div>
+      </div>
+
+
+  </div>
+  
+  <h2 class="second-pg">
+    CATEGORIES
+  </h2>
+  <div class="middle" >
+    <!-- <div class="col-4" *ngFor="let a of arr1">
+      <p>Categories: {{a.categories}}</p>
+      </div> -->
+     <a  class="cat">
+       <div class="card" *ngFor="let a of arr1">
+        <div class="card-body" >
+          <h5 class="card-title">{{a.categories}}</h5>
+        </div>
+        <button class="but-on" (click)="cat(a)">click here!</button>
+      </div></a>
+      <div class="button-area">
+               
+        <button type="button" class="prev" appCatPrev>
+          <i class="fas fa-angle-left fa-2x"></i></button>
+        <button type="button" class="next" appCatNext><i class="fas fa-angle-right fa-2x"></i></button>
+      </div>
+  </div>
+  
+  <app-footer class="footer"></app-footer>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;SpringFoxConfig.java&apos; to &apos;supplier-microservice-1/src/main/java/com.supplier&apos;&#x0D;&#x0A;- Original project: &apos;Drugs-Microservice&apos;&#x0D;&#x0A;- Destination element: &apos;supplier-microservice-1/src/main/java/com.supplier&apos;&#x0D;&#x0A;- Original element: &apos;com.drugs.SpringFoxConfig.java&apos;" description="Copy compilation unit" destination="=supplier-microservice-1/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.supplier" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.drugs{SpringFoxConfig.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1653415119835" units="1" version="1.0"/>
+</session>

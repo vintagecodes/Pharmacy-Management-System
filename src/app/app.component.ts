@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  title = "Pharmacy Management System";
  
   constructor() { }
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DrugSService } from 'src/app/drug-s.service';
+import { DrugSService } from 'src/app/service/drug-s.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,6 +10,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./drugs-list.component.scss']
 })
 export class DrugsListComponent implements OnInit {
+
+  p = 1;
+  count = 5;
+  isLoggedIn = false;
+  private roles: string[] = [];
+  showUserBoard = false;
+  showAdminBoard = false;
+
 
   DrugsToUpdate = {
     drugsId:"",
@@ -21,9 +30,17 @@ export class DrugsListComponent implements OnInit {
 
   DrugsDetails: any ;
 
-  constructor(private drugsService: DrugSService) {  this.getDrugslist();}
+  constructor(private drugsService: DrugSService, private tokenStorageService: TokenStorageService) {  this.getDrugslist();}
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if(this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showUserBoard = this.roles.includes('ROLE_USER');
+    }
   }
 
   getDrugslist(){
@@ -84,6 +101,8 @@ export class DrugsListComponent implements OnInit {
         console.log(err);
       }
     );
+
+    window.location.reload();
   }
 
 

@@ -1,7 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { TokenStorageService } from 'src/app/token-storage.service';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
+
 
 @Component({
   selector: 'app-nav',
@@ -20,7 +21,7 @@ export class NavComponent implements OnInit {
   sidenav!: MatSidenav;
 
  
-  constructor( private tokenStorageService: TokenStorageService, private observer: BreakpointObserver) { }
+  constructor( private cd: ChangeDetectorRef,  private tokenStorageService: TokenStorageService, private observer: BreakpointObserver) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -59,7 +60,11 @@ export class NavComponent implements OnInit {
         this.sidenav.open();
       }
     });
+
+    this.cd.detectChanges();
   }
+
+  
 
   
 

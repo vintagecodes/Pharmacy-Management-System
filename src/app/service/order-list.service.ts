@@ -12,6 +12,8 @@ export class OrderListService {
 
   ORDER_UPDATE_URL = 'http://localhost:7000/user/';
 
+  PAYMENT_URL = 'http://localhost:8080/submitPaymentDetail/';
+
 
 
   getOrderList(){
@@ -25,4 +27,14 @@ export class OrderListService {
   getOrderDetailsByOrderId(orderId:string){
     return this.http.get(this.ORDER_UPDATE_URL+orderId);
   }
+
+  payment(orderId:string){
+    return this.http.get(this.PAYMENT_URL+orderId);
+  }
+
+  getOrderByUsername(userId:string){
+    return this.http.get(this.ORDER_URL+'/'+userId);
+  }
+
+
 }

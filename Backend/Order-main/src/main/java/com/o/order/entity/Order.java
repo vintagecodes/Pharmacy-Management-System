@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Component
 public class Order {
 	@Id
 	private String orderId;
@@ -22,7 +23,7 @@ public class Order {
 	private String userId;
 	private List<Cart> cart;
 	private double total;
-	private boolean orderStatus;
+	private String orderStatus;
 	private List<Address> address;
 
 }

@@ -1,0 +1,17 @@
+package com.drugs;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+
+import com.netflix.discovery.shared.Application;
+
+@SpringBootTest
+@ContextConfiguration(classes=Application.class)
+class DrugsMicroserviceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

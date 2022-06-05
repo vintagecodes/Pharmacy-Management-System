@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import {HttpClient } from '@angular/common/http';
-import { Cart } from 'src/app/cart';
-import { TokenStorageService } from 'src/app/token-storage.service';
-import { Order } from 'src/app/order';
+import { Cart } from 'src/app/models/cart';
+import { Order } from 'src/app/models/order';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,11 @@ export class CartService {
   abc: any = [];
   data: any=[]
 
-  CART_URL = 'http://localhost:5004/drugs/cart/'
+  CART_URL = 'http://localhost:7000/drugs/cart/'
 
   CART_GET_URL = 'http://localhost:7000/drugs/cart/username/'
 
-  ORDER_URL = 'http://localhost:8080/user/post/'
+  ORDER_URL = 'http://localhost:7000/user/post/'
 
   PAYMENT_URL = 'http://localhost:8080/submitPaymentDetail/'
 
@@ -27,8 +27,7 @@ export class CartService {
   ADDRESS_URL = 'http://localhost:7000/address/'
 
   constructor(
-    private _http: HttpClient,
-    private token: TokenStorageService
+    private _http: HttpClient
     ) { }
 
   postCart(cart: Cart){

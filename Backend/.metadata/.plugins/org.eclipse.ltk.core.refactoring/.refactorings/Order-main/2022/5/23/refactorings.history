@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;SpringFoxConfig.java&apos; to &apos;Bootsecurity/src/main/java/sec&apos;&#x0D;&#x0A;- Original project: &apos;Order-main&apos;&#x0D;&#x0A;- Destination element: &apos;Bootsecurity/src/main/java/sec&apos;&#x0D;&#x0A;- Original element: &apos;com.o.order.SpringFoxConfig.java&apos;" description="Copy compilation unit" destination="=Bootsecurity/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;sec" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.o.order{SpringFoxConfig.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1654021819955" units="1" version="1.0"/>
+</session>

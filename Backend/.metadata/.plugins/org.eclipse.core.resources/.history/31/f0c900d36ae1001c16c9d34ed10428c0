@@ -1,0 +1,14 @@
+package com.drugs.controller;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class DrugsControllerTest2 {
+
+	@Test
+	void testGetDetails() {
+		fail("Not yet implemented");
+	}
+
+}

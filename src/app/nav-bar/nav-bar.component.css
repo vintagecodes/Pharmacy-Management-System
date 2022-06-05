@@ -7,9 +7,17 @@
     min-height: 100vh;
 } */
 
+.pro{
+    margin-left: 100%;
+}
+
+.pro img{
+    margin-top: -5px;
+}
+
 
 .navigation-left{
-    margin-top:20px;
+    margin-top:45px;
     float: left;
     margin-left: 400px;
     display: flex;
@@ -74,6 +82,7 @@
 /* sgfdfsfsfsdf */
 
 .navigation{
+    margin-top: 25px;
     float: right;
     margin-right: 150px;
     width: 150px;

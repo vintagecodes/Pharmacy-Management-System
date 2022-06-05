@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CartService } from 'cartService/cart.service';
-import { Cart } from 'src/app/cart';
-import { DrugSService } from 'src/app/drug-s.service';
-import { Order } from 'src/app/order';
-import { TokenStorageService } from 'src/app/token-storage.service';
+import { Cart } from 'src/app/models/cart';
+import { Order } from 'src/app/models/order';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
   selector: 'app-cart',
@@ -40,7 +39,7 @@ export class CartComponent implements OnInit {
     stockQty: "",
     total:""
   }
-  address: any[] = [];
+  address:any = [];
 
 
 
@@ -82,7 +81,14 @@ export class CartComponent implements OnInit {
       this.cartList = data;
       console.log(this.cartList);
 
-    })
+    });
+
+    this.cartService.getAddressByUsername(this.currentUser).subscribe((add)=>{
+      console.log(add);
+      this.address = add;
+      console.log(this.address);
+    });
+    
 
     
 
@@ -169,6 +175,17 @@ export class CartComponent implements OnInit {
       this.cartList;
     })
     window.location.reload();
+  }
+
+
+  continue(){
+    this.route.navigate(['/order']);
+    window.location.reload();
+    
+  }
+
+  newBilling(){
+    this.route.navigateByUrl("/billing");
   }
 
 }

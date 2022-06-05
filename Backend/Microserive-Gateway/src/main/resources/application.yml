@@ -26,7 +26,7 @@ spring:
       - id: Order-Microservice
         uri: lb://Order-Microservice
         predicates:
-        - Path=/user/**, /address/**
+        - Path=/user/**, /address/**, /payment/**
       - id: Login-Service
         uri: lb://Login-Service
         predicates:

@@ -25,21 +25,19 @@ public class DrugsService {
 	private DrugsRepository drugsRepository;
 	
 	@Autowired
+	private SequenceGeneratorService sequenceGeneratorService;
+	
+	@Autowired
 	private RestTemplate restTemplate;
 	
 	private static final Logger LOGGER=LoggerFactory.getLogger(DrugsService.class);
 
-	public ResponseEntity<?> saveDrugsDetails(Drugs drugs) throws CustomException, Exception{
-		Drugs drugs1 = new Drugs();
-		if(drugsRepository.existsByDrugsId(drugs.getDrugsId())) {
-//				throw new CustomException("The drug Id is already registered");
-			return ResponseEntity.badRequest().body(new MessageResponse("Error: SupplierID is already taken!"));
-		}else {
+	public Drugs saveDrugsDetails(Drugs drugs) throws CustomException, Exception{
 			LOGGER.info("Sucessfully Registered new Drug");
-			drugs1 = drugsRepository.save(drugs);
-		}
+		drugs.setDrugsId(String.valueOf(sequenceGeneratorService.generateSequence(drugs.SEQUENCE_NAME)));
+		Drugs save = this.drugsRepository.save(drugs);
 		
-		return ResponseEntity.ok(drugs1);
+		return save;
 		
 	}
 
