@@ -2,37 +2,43 @@
 <div style="display: flex; flex-grow: grow; margin: 5px;" *ngIf="isLoggedIn">
 
     <app-nav></app-nav>
-    <div class="tab">
-        <div class="mt-10" data-bs-target="#drugs">
+    <div class="tab" >
+        <div class="mt-10" data-bs-target="#drugs" >
           <h1>Drugs List</h1>
-          <table class="table table-bordered">
+          <div *ngFor="let drug  of DrugsDetails | paginate: { itemsPerPage: count, currentPage: p }">
+          <table class="table table-bordered" *ngFor="let j of drug.productImages">
             <thead class="thead">
-              <tr>
+              <tr >
                 <th>Drugs Id</th>
                 <th>Drugs Name</th>
                 <th>Drugs Cost</th>
                 <th>Stoc kQty</th>
                 <th>Drugs Description</th>
                 <th>Supplier Name</th>
+                <th>Image</th>
                 <th>Edit</th>
                 <th>Delete</th>
     
               </tr>
             </thead>
             <tbody  class="tbody">
-              <tr *ngFor="let drug  of DrugsDetails | paginate: { itemsPerPage: count, currentPage: p }">
+              <tr>
                 <td>{{drug.drugsId}}</td>
                 <td>{{drug.drugsName}}</td>
                 <td>{{drug.drugsCost}}</td>
                 <td>{{drug.stockQty}}</td>
                 <td>{{drug.drugsDescription}}</td>
                 <td>{{drug.supplierName}}</td>
+                <td><img [src]="j.picByte | safeUrl" class="img-fluid thumbnail-image" ></td>
                 <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(drug)">Edit</button></td>
                 <td><button type="button" class="btn btn-danger" (click)="confirmDelete(drug)">Delete</button></td>
+
               </tr>
-    
+         
+              
             </tbody>
           </table>
+          </div>
           <div class="text-right">
             <pagination-controls (pageChange)="p = $event"></pagination-controls>
           </div>
@@ -105,7 +111,17 @@
                   Supplier Name is required
               </span>
               </div>
-    
+
+              <!-- <div class="form-group">
+                <label for="supplierName">Image :</label>
+                <input type="supplierName" #supplierName="ngModel" [(ngModel)]="DrugsToUpdate.productImages.picByte" name="supplierName" id="supplierName" class="form-control"
+                  placeholder="supplierName">
+                  <span class="text-danger"
+                  *ngIf="(supplierName.touched || updatedForm.submitted) && supplierName.errors?.['required']">
+                  Supplier Name is required
+              </span>
+              </div>
+     -->
               <div class="form-group">
                 <input type="submit" value="Update" class="btn btn-danger w-100">
               </div>

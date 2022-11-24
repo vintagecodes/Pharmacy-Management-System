@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CartService } from 'cartService/cart.service';
 import { Cart } from 'src/app/models/cart';
@@ -29,11 +30,17 @@ export class ShopComponent implements OnInit {
   searchText:any;
   abc:any;
   drugsList:any = {};
+  image: any;
+  objec:any = [];
+  si:any;
+  p = 1;
+  count = 8;
+  cont: any;
 
   constructor(private drugsService: DrugsService,
     private tokenStorageService: TokenStorageService, 
     private cartService: CartService,
-    private router: Router
+    private router: Router, private sanitizer:DomSanitizer
     ) { }
 
   ngOnInit(): void {
@@ -54,12 +61,35 @@ export class ShopComponent implements OnInit {
     this.drugsService.getDrugs().subscribe((result: any)=>{
       console.warn('drugs',result);
       this.content = result;
+      this.gettingImages(this.content);
       // console.log(this.content.drugsName);
     });
 
     
     // this.drugsService.getDrugsByCategory(categories).
   }
+
+  gettingImages(si: any){
+    let count = 0;
+    
+    for(let i = 0; i < si.length; i++){
+      for(let j = 0; j < si[i].productImages.length; j++){
+        // count = count + 1;
+        // console.log(count);
+        let objectURL = 'data:image/jpeg;base64,' + si[i].productImages[j].picByte;
+        // console.log(objectURL);
+        this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        this.objec.push(this.image);
+        
+
+      
+      }
+      // console.log(si[i].productImages[i]);
+    }
+  }
+
+
+
 
   genUniqueId(): string {
     const dateStr = Date
@@ -158,11 +188,9 @@ let user = new Cart(this.cartId, this.currentUser,item.drugsId,item.drugsName,it
 
   
   more(item: any){
-    console.log(item.drugsId);
-    let drugs = new Drugs(item.drugsName,item.drugsDescription, item.drugsCost, item.supplierName);
-    this.abc = drugs;
-    this.drugsList = this.abc;
-    console.log(this.drugsList.drugsCost);
+    this.cont = item;
+    console.log(this.cont);
+   
     // this.drugsList.pop();
     
   }

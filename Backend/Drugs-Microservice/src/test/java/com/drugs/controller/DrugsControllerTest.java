@@ -42,8 +42,8 @@ class DrugsControllerTest{
     @Test
 //    @DisplayName("GET /Drugs success")
     public void testGetDetails() throws Exception {
-    	Drugs drugs = new Drugs("12","abcs", 15.0, 5, "Bia", "healyt","JK");
-    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK");
+    	Drugs drugs = new Drugs("12","abcs", 15.0, 5, "Bia", "healyt","JK", null);
+    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK", null);
     	doReturn(Lists.newArrayList(drugs, drugs1)).when(service).getAllDetails();
     	mockMvc.perform(
     			get("/drugs/list")).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -52,7 +52,7 @@ class DrugsControllerTest{
     
     @Test
     public void testSaveDrugsDetails() throws Exception {
-    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK");
+    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK", null);
     	 doReturn(drugs1).when(service).saveDrugsDetails(any());
     	 
     	 mockMvc.perform(post("/drugs/") .contentType(MediaType.APPLICATION_JSON)
@@ -64,7 +64,7 @@ class DrugsControllerTest{
     @Test
     public void testGetDrugsById() throws Exception{
     	
-    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK");
+    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK", null);
     	doReturn(Optional.of(drugs1)).when(service).getDrugsByID("13");
     	
     	mockMvc.perform(get("/drugs/{id}","13")).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -74,8 +74,8 @@ class DrugsControllerTest{
     
     @Test
     public void testUpdateDrugsDetails() throws Exception {
-    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK");
-    	Drugs updated = new Drugs("13","abcs2", 16.0, 5, "Bias", "healyts","JK");
+    	Drugs drugs1 = new Drugs("13","abcs2", 15.0, 5, "Bias", "healyts","JK", null);
+    	Drugs updated = new Drugs("13","abcs2", 16.0, 5, "Bias", "healyts","JK", null);
     	doReturn(Optional.of(drugs1)).when(service).getDrugsByID("13");
     	doReturn(updated).when(service).updateDrugsDetails(updated, "13");
     	

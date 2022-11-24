@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z8">
+<!-- <mat-toolbar class="mat-elevation-z8">
 
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened">
@@ -10,15 +10,15 @@
 
 
   </button>
-  </mat-toolbar>
+  </mat-toolbar> -->
   
   <mat-sidenav-container>
       <mat-sidenav #sidenav="matSidenav">
         <a routerLink="/profile" ><img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" /></a>
 
-        <h4 *ngIf="this.roles[0] === 'ROLE_ADMIN'; else user">Admin dashboard</h4>
+        <h4 *ngIf="this.roles[0] === 'ROLE_ADMIN'; else user">Hi, {{this.currentUser}}</h4>
         <ng-template #user>
-          <h4 >User dashboard</h4>
+          <h4 >Hi, {{this.currentUser}}</h4>
         </ng-template>
        
           <mat-divider></mat-divider>
@@ -38,6 +38,13 @@
                 <span class="text">Orders</span>
             </a>
           </button><br>
+          <button mat-button class="menu-button">
+            <a  routerLink="/cart" >
+                <span class="icon"> <img src="/assets/img/cart.png" alt="Cart"/></span>
+               
+                <span class="text">Cart</span>
+            </a>
+          </button><br><br>
           <button mat-button class="menu-button" *ngIf="showAdminBoard">
             <a  routerLink="/supplier">
                 <span class="icon"><img src="/assets/img/list.png" width="50"/></span>

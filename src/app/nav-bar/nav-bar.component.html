@@ -1,75 +1,65 @@
+<!-- <mat-toolbar color="primary">
+    GET MEDS
 
+</mat-toolbar> -->
 
-
-
-
-<div class="navigation-left">
-    <ul>
-        <li class="list">
-            <a  routerLink="/">
-                <span class="icon"> <img src="/assets/img/icons8-home-64.png"/></span>
-               
-                <span class="text">Home</span>
-            </a>
-        </li>
-        <li class="list" *ngIf="showAdminBoard && !isLoggedIn">
-            <a  routerLink="/admin">
-                <span class="icon"> <img src="/assets/img/icons8-home-64.png"/></span>
-               
-                <span class="text">Dashboard</span>
-            </a>
-        </li>
-    </ul>
-
-</div>
-
-<div class="navigation">
-    
-    <ul>
-        <li class="list">
-            <a  routerLink="/cart" >
-                <span class="icon"> <img src="/assets/img/cart1.png"/></span>
-               
-                <span class="text">Cart</span>
-            </a>
-        </li>
-        
-        <li class="list">
-            <a routerLink="/shop" >
-                <span class="icon"> <img src="/assets/img/icons8-shop-100.png"/></span>
-               
-                <span class="text">Shop</span>
-            </a>
-        </li>&nbsp;&nbsp;&nbsp;&nbsp;
-        <ul *ngIf="!isLoggedIn">
-        <li class="list">
-            <a routerLink="/login" >
-                <span class="icon"><img src="/assets/img/icons8-login-64.png"/></span>
-                
-                <span class="text">Sign In</span>
-            </a>
-        </li>
-        <li class="list">
-            <a routerLink="/register">
-                <span class="icon"> <img src="/assets/img/icons8-sign-up-64.png"/></span>
-               
-                <span class="text">Register</span>
-            </a>
-        </li>
-        </ul>
-        <li class="list"  *ngIf="isLoggedIn">
-            <a href   (click)="logout()">
-                <span class="icon" ><img src="/assets/img/icons8-sign-up-64.png"/></span>
-               
-                <span class="text">Logout</span>
-            </a>
-        </li>
-
-        <li class="pro" *ngIf="isLoggedIn">
-           <img src="/assets/img/avatar.png" width="50" height="50"/> {{username}}
-        </li>
-    </ul>
-    </div>
-
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav">
    
+      <img class="avatar mat-elevation-z8" src="/assets/img/logo.png" height="300"/>
 
+      <h4 *ngIf="this.roles[0] === 'ROLE_ADMIN'; else user">Admin dashboard</h4>
+      <ng-template #user>
+        <h4 >User dashboard</h4>
+      </ng-template>
+
+
+        <mat-divider></mat-divider>
+        <button mat-button class="menu-button" *ngIf="showUserBoard">
+          <a  routerLink="/myorders">
+              <span class="icon"><img src="/assets/img/order1.png" alt="Home" width="50" height="50"/></span>
+             
+              <span class="text">My Orders</span>
+          </a>
+        </button><br><br>
+        
+        <button mat-button class="menu-button" *ngIf="showAdminBoard">
+          <a  routerLink="/api/user-auth/admin">
+          <span class="icon"> <img src="/assets/img/dashboard.png" alt="Dashboard"/></span>
+         
+          <span class="text">Dashboard</span>
+      </a>
+        </button><br>
+        <button mat-button class="menu-button" *ngIf="showUserBoard">
+          <a  routerLink="/cart" >
+              <span class="icon"> <img src="/assets/img/cart.png" alt="Cart"/></span>
+             
+              <span class="text">Cart</span>
+          </a>
+        </button><br><br>
+
+        <button mat-button class="menu-button" *ngIf="!isLoggedIn">
+          <a  routerLink="/login" >
+            <span class="icon"> <img src="/assets/img/login.png" alt="Cart"/></span>
+             
+              <span class="text">SIGN IN</span>
+          </a>
+        </button><br><br>
+        <button mat-button class="menu-button" *ngIf="!isLoggedIn">
+          <a  routerLink="/register" >
+            <span class="icon"> <img src="/assets/img/register.png" alt="Cart"/></span>
+             
+              <span class="text">SIGN UP</span>
+          </a>
+        </button><br>
+        
+        <button mat-button class="menu-button" *ngIf="isLoggedIn">
+          <a href   (click)="logout()">
+              <span class="icon" ><img src="/assets/img/login.png" alt="Logout"/></span>
+             
+              <span class="text">Logout</span>
+          </a>
+        </button>
+    </mat-sidenav>
+
+  </mat-sidenav-container>

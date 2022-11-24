@@ -146,15 +146,15 @@ let user = new Cart(this.cartId, this.currentUser,item.drugsId,item.drugsName,it
   })
   }
 
-  more(item: any){
-    console.log(item.drugsId);
-    let drugs = new Drugs(item.drugsName,item.drugsDescription, item.drugsCost, item.supplierName);
-    this.abc = drugs;
-    this.drugsList = this.abc;
-    console.log(this.drugsList.drugsCost);
-    // this.drugsList.pop();
+  // more(item: any){
+  //   console.log(item.drugsId);
+  //   let drugs = new Drugs(item.drugsName,item.drugsDescription, item.drugsCost, item.supplierName);
+  //   this.abc = drugs;
+  //   this.drugsList = this.abc;
+  //   console.log(this.drugsList.drugsCost);
+  //   // this.drugsList.pop();
     
-  }
+  // }
 
 
 }

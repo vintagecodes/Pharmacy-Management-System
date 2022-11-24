@@ -1,9 +1,13 @@
 package com.drugs.controller;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.drugs.exception.CustomException;
 import com.drugs.models.Drugs;
@@ -32,7 +38,7 @@ public class DrugsController {
 	
 	@Autowired
 	private PhotoService photoService;
-	
+	 
 	@GetMapping("/getPhotos/")
 	public List<Photo> getAllPhotos(){
 		return photoService.getListOfPhotos();
@@ -40,10 +46,18 @@ public class DrugsController {
 	
 	
 	//Post the details related to drugs
-	@PostMapping("/")
-	public Drugs saveDrugsDetails(@RequestBody Drugs drugs) throws CustomException, Exception {
-		return service.saveDrugsDetails(drugs);
+	@PostMapping(value = {"/"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	public Drugs saveDrugsDetails(@RequestPart("drugs") Drugs drugs, @RequestPart("imageFile") MultipartFile[] file) throws CustomException, Exception {
+//		return service.saveDrugsDetails(drugs);
+		try {
+			return service.saveDrugsDetails(drugs,file);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
+	
+
 	
 	//Get all the list of drugs available 
 	@GetMapping("/list")

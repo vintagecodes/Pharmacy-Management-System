@@ -18,12 +18,7 @@ public class PhotoService {
 	@Autowired
     private PhotoRepository photoRepo;
 
-    public String addPhoto(String title, MultipartFile file) throws IOException { 
-        Photo photo = new Photo(title); 
-        photo.setImage(
-          new Binary(BsonBinarySubType.BINARY, file.getBytes())); 
-        photo = photoRepo.insert(photo); return photo.getId(); 
-    }
+
 
     public Photo getPhoto(String id) { 
         return photoRepo.findById(id).get(); 

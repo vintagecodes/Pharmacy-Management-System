@@ -1,17 +1,11 @@
-<mat-toolbar *ngIf="isLoggedIn">
-  <div class="cont">
-    <span><img src="/assets/img/logo.png" height="100" width="100" alt="" /></span>
-    <p></p>
-   </div>
-  <app-nav-bar class="app-nav"></app-nav-bar>
 
-</mat-toolbar>
-
-<div class="card text-center" *ngIf="isLoggedIn">
+<div style="display: flex; flex-grow: grow; margin: 1px;">
+  <app-nav *ngIf="isLoggedIn"></app-nav>
+  <div class="card text-center" *ngIf="isLoggedIn">
     <div class="card-header">
       Your Cart Items
       <button type="button" class="btn btn-sm btn-warning float-right">
-          Total items <span class="badge badge-light">{{cartList.length}}</span>        
+          Total items <span class="badge badge-light">{{this.items}}</span>        
       </button>
       <button type="button" class="btn btn-sm btn-danger mr-2 float-right" (click)="confirmDelete()">
          Empty Cart       
@@ -21,9 +15,11 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">UserName</th>
-            <th scope="col">Cart Id</th>
-            <th scope="col">Product Id</th>  
+            <div hidden>
+              <th scope="col" >UserName</th>
+              <th scope="col">Cart Id</th>
+              <th scope="col">Product Id</th>  
+            </div>
             <th scope="col">Product Name</th>
             <th scope="col">Product Description</th>
             <th scope="col">Price</th>
@@ -38,16 +34,17 @@
           
           </tr>
           <tr *ngFor="let i of cartList">
+            <div hidden>
             <td>{{i.username}}</td>
             <td>{{i.cartId}}</td>
             <td>{{i.drugsId}}</td>
-            <td class="text-left" >{{i.drugsName}}</td>
+            </div>
+            <td>{{i.drugsName}}</td>
             <td>{{i.drugsDescription}}</td>
             <td>{{i.drugsCost}}</td>
-            <td class="w3">
-              <div class="input-group input-group-sm mb-3">
-                <input type="text" class="form-control text-center"  value="{{i.drugsQty}}" >
-              </div>
+            <td>
+              
+             {{i.drugsQty}}
             </td>
             <td style="visibility: hidden">{{i.stockQty}}</td>
             <td>{{i.total}}</td>
@@ -64,26 +61,29 @@
         <img src="/assets/img/empty.jpg"/>
       </div>
        
-        <a  (click)="addToOrder(cartList)" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#amount" *ngIf="isLoggedIn && cartList.length > 0">Checkout</a>
+        <button type="button" (click)="addToOrder(cartList)" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#amount"  *ngIf="isLoggedIn && cartList.length > 0">Checkout</button>
     </div>
     
   </div>
 
+</div>
+  
+
+
+
   
 <!-- Modal for Checkout  -->
-<div class="modal fade" id="amount" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="amount" tabindex="-1" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Cart details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="refresh()"></button>
       </div>
       <div class="modal-body">
 
         <div class="card mt-5" style="padding: 20px;">
-          <h3>Your Total Amount is {{this.amount}}</h3>
+          <h3>Your Total Amount is {{this.cartAmount}}</h3>
           </div>
       </div><br>
       
@@ -132,6 +132,7 @@
           <div class="card mt-5" style="padding: 20px;">
             <form #updatedForm="ngForm" (ngSubmit)="updateCart(updatedForm)">
               <div class="form-group">
+                <div hidden>
                 <div class="form-group">
                   <label for="username">User Name :</label>
                   <input type="username" #username [(ngModel)]="CartToUpdate.username" name="username" id="username" class="form-control"
@@ -162,17 +163,18 @@
                 <input type="drugsCost" #drugsCost [(ngModel)]="CartToUpdate.drugsCost" name="drugsCost" id="drugsCost" class="form-control"
                   placeholder="drugsCost" readonly>
               </div>
+              </div>
               <div class="form-group">
                 <label for="drugsQty">drug Qty :</label>
                 <input type="drugsQty" #drugsQty [(ngModel)]="CartToUpdate.drugsQty" name="drugsQty" id="drugsQty" class="form-control"
                   placeholder="drugsQty">
               </div>
-              <div class="form-group" style="visibility: hidden">
+              <div class="form-group" hidden>
                 <label for="stockQty">Stock Qty :</label>
                 <input type="stockQty" #stockQty [(ngModel)]="CartToUpdate.stockQty" name="stockQty" id="stockQty" class="form-control"
                   placeholder="drugsQty">
               </div>
-              <div class="form-group">
+              <div class="form-group" hidden>
                 <label for="total">Total :</label>
                 <input type="total" #total [(ngModel)]="CartToUpdate.total" name="total" id="total" class="form-control"
                   placeholder="total" readonly>

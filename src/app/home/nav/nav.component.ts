@@ -12,6 +12,7 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 export class NavComponent implements OnInit {
 
   isLoggedIn = false;
+  currentUser: any;
   public roles: string[] = [];
   showUserBoard = false;
   showAdminBoard = false;
@@ -34,6 +35,7 @@ export class NavComponent implements OnInit {
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showUserBoard = this.roles.includes('ROLE_USER');
     }
+    this.currentUser = this.tokenStorageService.getUser().username;
   }
 
   addToCart(item: any){

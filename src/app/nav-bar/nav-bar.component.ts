@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TokenStorageService } from '../service/token-storage.service';
+import { MatSidenav } from '@angular/material/sidenav';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,11 +10,13 @@ import { TokenStorageService } from '../service/token-storage.service';
 })
 export class NavBarComponent implements OnInit {
   isLoggedIn = false;
-  private roles: string[] = [];
+  public roles: string[] = [];
   showUserBoard = false;
   showAdminBoard = false;
   username?: string;
-
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav;
+  sidenav1!: MatSidenav;
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {

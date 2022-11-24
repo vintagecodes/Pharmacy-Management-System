@@ -32,22 +32,15 @@ public class PhotoController {
 		return "photos";
 	}
 	
-	@PostMapping("/")
-	public String addPhoto(@RequestParam("title") String title, 
-	  @RequestParam("image") MultipartFile image, Model model) 
-	  throws IOException {
-	    String id = photoService.addPhoto(title, image);
-	    return "redirect:/photos/" + id;
-	}
-	
-	@GetMapping("/{id}")
-	public String getPhoto(@PathVariable String id, Model model) {
-	    Photo photo = photoService.getPhoto(id);
-	    model.addAttribute("title", photo.getTitle());
-	    model.addAttribute("image", 
-	      Base64.getEncoder().encodeToString(photo.getImage().getData()));
-	    return "photoView";
-	}
+
+//	@GetMapping("/{id}")
+//	public String getPhoto(@PathVariable String id, Model model) {
+//	    Photo photo = photoService.getPhoto(id);
+//	    model.addAttribute("title", photo.getTitle());
+//	    model.addAttribute("image", 
+//	      Base64.getEncoder().encodeToString(photo.getImage().getData()));
+//	    return "photoView";
+//	}
 	
 	@GetMapping("/img/")
 	public List<Photo> getListOfPhotos(){

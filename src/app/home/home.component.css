@@ -3,23 +3,34 @@
 /* @import "~material-icons/iconfont/material-icons.css"; */
 
 
-
-.body{
-  background-color: rgb(255, 255, 255)
-
-}
-
-
 mat-toolbar{
-  height: 60px;
-  background-color:  lightseagreen;
+  height: 80px;
+  width: 100%;
+  background-color:#fff;
+  overflow: hidden;
+  
 }
 
        .height{
         height: 20vh;
        }
        
+       .second-pg{
+        margin: 50px 250px;
+        letter-spacing: 2rem;
+      }
 
+      .cont img{
+        border-radius: 50%;
+      }
+      
+      .example-spacer {
+        flex: 1 1 auto;
+      }
+
+      .home{
+        color: black;
+      }
        .search{
        position: relative;
        box-shadow: 0 0 40px rgba(51, 51, 51, .1);
@@ -54,134 +65,92 @@ mat-toolbar{
 
        }
 
+       .middle{
+        position: relative;
+        height: 220px;
+
+      }
 
 
+      .link{ 
+        text-decoration: none;
+           }
+      
+      .text{
+        position: relative;
+          color: black;
+          font-weight: 700;
+          font-size: 1.1em;
+          
+         
+      }
 
+      .cat{
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 80px;
+      }
+      
 
-  /* .card__description {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 0;
-  }
+      .middle .card{
+        background-color: rgba(203,230,229,1);
+        text-align: center;
+        width: 150px;
+        height: 200px;
+       
+      
+      }
 
-    .card__descriptionIcon {
-      margin-top: 10px;
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .card__descriptionText {
-      margin: 15px 0px 0px 0px;
-      color: #57727C;
-      font-size: 12px;
-      text-align: center;
-    }
-
-  .card__price {
-    margin-top: 30px;
-    text-align: center;
-    color: #57727C;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 5px 15px;
-    border-top: 1px solid #D7DBDD;
-    background-color: #EEF3F5;
-  }
-
-/* 
-    .btn{
-      margin-top:-px;
-    } */
-
-    /* .card__descriptions{
-      visibility:hidden;
-    } */
-
-    .cont h1{
-      color: black;
-      white-space: nowrap;
-      letter-spacing: 3px;
-      font-family: 'Saira Condensed', sans-serif;
-    }
-    
-
-    .product{
-      margin: 35px 0;
-      padding: 20px 0px;
-    }
-    
-    .slider-wrap{
-      position: relative;
-      overflow: hidden;
-      height: 340px;
-      background-color: white;
-    
-    }
-    
-    .slider-main{
-      margin: 50px 0;
-      /* margin-left: 5px; */
-      position: absolute;
-      width: 200%;
-    }
-    
-    .items{
-      display: inline-block;
-      width: 355px;
-      height: 200px;
-      position: relative;
-      margin: 0 12px;
-    }
-    .text{
-      position: absolute;
+      .user{
+        bottom: 0px;
+        font-size: 10px;
+      }
+      
+      .card-title{
+        text-align: center;
+        margin: 20%;
+      }
+      
+      .middle a{
+        text-decoration: none;
+        color: black;
+      }
+      
+      .but-on{
+        font-family: 'Courier New', Courier, monospace;
+        color: black;
+        border: transparent;
+        height: 45px;
+      }
+      
+      .button-area{
+        border: 1px solid white;
+      }
+      
+      .prev{
+        background-color: transparent;
+        position: absolute;
+        margin-left: 5px;
       top: 40%;
-      left: 50%;
       transform: translate(-50%, -50%);
-    
-    }
-    .prev{
-      position: absolute;
-      left: 33px;
-      top: 30%;
+        border: 1px solid transparent;
+      }
+      .next{
+        background-color: transparent;
+        position: absolute;
+      right: -23px;
+      top: 40%;
       transform: translate(-50%, -50%);
-    }
-    .next{
-      position: absolute;
-      right: 0;
-      top: 30%;
-      transform: translate(-50%, -50%);
-    }
-
-    .button-area{
-      border: 1px solid white;
-    }
+        border: 1px solid transparent;
+      }
 
 
-    
-    p {
-    font-family: "Lato", sans-serif;
-    text-align: justify;
-    }
-    
-    .cards{
-      width: 300px;
-      height: 180px;
-      border: 2px solid black;
-      background-color: lightblue;
-    }
+      .sub-container{
+        margin: 55px 0 0 3px;
+      }
 
-
-    mat-card-subtitle {
-    font-size: 18px;
-    margin-left: 65px;
-    }
-    
-    mat-card-title {
-    color: Black;
-    font-size: 25px;
-    justify-content: center;
-    display: flex;
-    }
-    
+      .menu-button .icon img{
+        font-size: 15px;
+        height: 30px;
+      }

@@ -1,7 +1,10 @@
 package com.drugs.service;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.drugs.exception.CustomException;
 import com.drugs.models.Cart;
 import com.drugs.models.Drugs;
 import com.drugs.models.Inventory;
 import com.drugs.models.MessageResponse;
+import com.drugs.models.Photo;
 import com.drugs.models.Supplier;
 import com.drugs.repository.DrugsRepository;
 
@@ -32,13 +37,29 @@ public class DrugsService {
 	
 	private static final Logger LOGGER=LoggerFactory.getLogger(DrugsService.class);
 
-	public Drugs saveDrugsDetails(Drugs drugs) throws CustomException, Exception{
+	public Drugs saveDrugsDetails(Drugs drugs, MultipartFile[] file) throws CustomException, Exception{
+		 Set<Photo> images = uploadImage(file);
+			drugs.setProductImages(images);
 			LOGGER.info("Sucessfully Registered new Drug");
 		drugs.setDrugsId(String.valueOf(sequenceGeneratorService.generateSequence(drugs.SEQUENCE_NAME)));
 		Drugs save = this.drugsRepository.save(drugs);
 		
 		return save;
 		
+	}
+	
+	public Set<Photo> uploadImage(MultipartFile[] multipartFiles) throws IOException{
+		Set<Photo> imageModels = new HashSet<>();
+		
+		for(MultipartFile file: multipartFiles) {
+			Photo imageModels1 = new Photo(
+					file.getOriginalFilename(),
+					file.getContentType(),
+					file.getBytes()
+					);
+			imageModels.add(imageModels1);
+		}
+		return imageModels;
 	}
 
 	public List<Drugs> getAllDetails() {
@@ -128,12 +149,6 @@ public class DrugsService {
 		return storingVar;
 	}
 	
-	public Drugs updateDrugsDetail(Drugs drugs, String drugsName) throws CustomException, Exception{
-		Drugs storingVar = new Drugs();
-			storingVar = drugsRepository.save(drugs);
-		
-		return storingVar;
-	}
 
 	public String deleteDrugs(String drugsId) {
 		drugsRepository.deleteById(drugsId);

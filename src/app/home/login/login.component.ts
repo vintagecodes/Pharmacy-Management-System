@@ -19,13 +19,21 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  showUserBoard = false;
+  showAdminBoard = false;
+  username?: string;
+  currentUser: any;
 
   constructor(private route:Router,private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
+      const user = this.tokenStorage.getUser();
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
+      this.username = user.username;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showUserBoard = this.roles.includes('ROLE_USER');
     }
   }
 
@@ -45,7 +53,7 @@ export class LoginComponent implements OnInit {
           timer: 2000,
       })
       .then(() => {
-          {this.route.navigate(['/hi'])}
+          {this.route.navigate(['/home'])}
       })
       },
       err => {
@@ -59,5 +67,10 @@ export class LoginComponent implements OnInit {
       }
     );
 
+  }
+
+  logout(): void {
+    this.tokenStorage.signOut();
+    window.location.reload();
   }
 }

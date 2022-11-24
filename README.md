@@ -1,11 +1,27 @@
------- On Development Phase-----------
+# Frontend
 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
+## Development server
 
-##Some views of my PMS
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-![image](https://user-images.githubusercontent.com/64604879/198009933-c4658ec6-fd1e-4fb4-b291-c769b2e04f3c.png)
+## Code scaffolding
 
-![image](https://user-images.githubusercontent.com/64604879/198009373-da1140ce-5e0e-48b8-ab0f-4eea114b8913.png)
-![image](https://user-images.githubusercontent.com/64604879/198009396-d18c4fe8-c165-4d52-adbc-f87a8552966c.png)
-![image](https://user-images.githubusercontent.com/64604879/198009466-8cdb7427-b629-4fc7-880e-ab595c9fb85f.png)
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

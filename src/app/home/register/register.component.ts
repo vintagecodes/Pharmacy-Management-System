@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -17,10 +18,26 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  isLoggedIn = false;
+  isLoginFailed = false;
+  roles: string[] = [];
+  showUserBoard = false;
+  showAdminBoard = false;
+  username?: string;
+  currentUser: any;
 
-  constructor(private auth: AuthService, private router: Router) { }
+
+  constructor(private auth: AuthService, private router: Router,private route:Router,private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      const user = this.tokenStorage.getUser();
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+      this.username = user.username;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showUserBoard = this.roles.includes('ROLE_USER');
+    }
   }
 
   onSubmit(): void {
@@ -49,6 +66,11 @@ export class RegisterComponent implements OnInit {
       }
     );
     
+  }
+
+  logout(): void {
+    this.tokenStorage.signOut();
+    window.location.reload();
   }
 
 }

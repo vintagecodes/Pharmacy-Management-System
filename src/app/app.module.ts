@@ -49,6 +49,9 @@ import { PrevDirective } from './directives/prev.directive';
 import { CatNextDirective } from './directives/cat-next.directive';
 import { CatPrevDirective } from './directives/cat-prev.directive';
 import { CategoryComponent } from './pharmacy/shop/category/category.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { SafeUrlPipe } from './pharmacy/shop/safe-url.pipe';
+
 
 
 
@@ -82,7 +85,9 @@ import { CategoryComponent } from './pharmacy/shop/category/category.component';
     DrugsListComponent,
     CatNextDirective,
     CatPrevDirective,
-    CategoryComponent
+    CategoryComponent,
+    SafeUrlPipe,
+    
     
   ],
   imports: [
@@ -106,7 +111,8 @@ import { CategoryComponent } from './pharmacy/shop/category/category.component';
     MatSelectModule,
     MatPaginatorModule,
     MatExpansionModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatGridListModule
   ],
   exports:[
     CommonModule, NgxPaginationModule

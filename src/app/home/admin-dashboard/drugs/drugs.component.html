@@ -14,7 +14,7 @@
           <div class="form_item">
             <label for="drugsName">Drugs Name :</label>
             <input type="text" name="drugsName" id="drugsName" class="form-control"
-              placeholder="Enter Drugs Name" pattern="[A-Za-z\s]*" required ngModel #drugsName="ngModel">
+              placeholder="Enter Drugs Name"  #drugsName="ngModel" required [(ngModel)]="products.drugsName" >
               <!-- <span class="help-bpx" *ngIf="drugsName.touched && !drugsName.valid">Please Enter the Drugs Name</span> -->
               <div id="drugsNameErrors">
                 <span class="text-danger"
@@ -31,7 +31,7 @@
           <div class="form_item">
             <label for="drugsCost">Drugs Cost :</label>
             <input type="drugsCost"  name="drugsCost" id="drugsCost" class="form-control"
-              placeholder="Enter Drugs Cost" required ngModel #drugsCost="ngModel">
+              placeholder="Enter Drugs Cost" #drugsCost="ngModel" required [(ngModel)]="products.drugsCost">
               <!-- <span class="help-bpx" *ngIf="drugsCost.touched && !drugsCost.valid">Please Enter the Drugs Cost</span> -->
               <div id="drugsCostErrors">
                 <span class="text-danger"
@@ -48,9 +48,9 @@
         </div>
         <div class="form_wrap">
           <div class="form_item">
-            <label for="stockQty">Stcok Qty :</label>
-            <input type="stockQty" name="stockQty" id="stockQty" class="form-control"
-              placeholder="Enter the Stock Quantity" required ngModel #stockQty="ngModel">
+            <label for="stockQty">Stock Qty :</label>
+            <input type="stockQty" name="drugsQty" id="drugsQty" class="form-control"
+              placeholder="Enter the Stock Quantity" #stockQty="ngModel" required [(ngModel)]="products.stockQty">
                 <!-- <span class="help-bpx" *ngIf="stockQty.touched && !stockQty.valid">Please Enter the Stock Quantity</span> -->
                 <span class="text-danger"
                                 *ngIf="(stockQty.touched || registerForm.submitted) && stockQty.errors?.['required']">
@@ -63,7 +63,7 @@
           <div class="form_item">
             <label for="categories">Category :</label>
             <input type="categories" name="categories" id="categories" class="form-control"
-              placeholder="Enter Enter the Category" required ngModel #categories="ngModel">
+              placeholder="Enter Enter the Category" #categories="ngModel" required [(ngModel)]="products.categories">
               <span class="text-danger"
                                 *ngIf="(categories.touched || registerForm.submitted) && categories.errors?.['required']">
                                 Category is required
@@ -75,7 +75,7 @@
           <div class="form_item">
             <label for="drugsDescription">Drugs Description :</label>
             <input type="drugsDescription"  name="drugsDescription" id="drugsDescription" class="form-control"
-              placeholder="Enter the Description" required ngModel #drugsDescription="ngModel">
+              placeholder="Enter the Description" #drugsDescription="ngModel" required [(ngModel)]="products.drugsDescription">
               <span class="text-danger"
               *ngIf="(drugsDescription.touched || registerForm.submitted) && drugsDescription.errors?.['required']">
               Drugs Description is required
@@ -83,14 +83,35 @@
               <!-- <span class="help-bpx" *ngIf="drugsDescription.touched && !drugsDescription.valid">Please Enter Description</span> -->
           </div>
         </div>
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="dateOfExpiration">Expiry Date :</label>
+            <input type="date" name="dateOfExpiration" id="dateOfExpiration" class="form-control"
+               #dateOfExpiration="ngModel" required [(ngModel)]="products.dateOfExpiration">
+                <!-- <span class="help-bpx" *ngIf="stockQty.touched && !stockQty.valid">Please Enter the Stock Quantity</span> -->
+                <span class="text-danger"
+                                *ngIf="(dateOfExpiration.touched || registerForm.submitted) && dateOfExpiration.errors?.['required']">
+                                Date is required
+                            </span>
+          
+              </div>
+        </div>
         <br>
         <div class="form_wrap">
           <div class="form_item">
             <label for="supplierName">Supplier Name :</label>
             <input type="supplierName"name="supplierName" id="supplierName" class="form-control"
-              placeholder="Enter the Supplier Name" required ngModel #supplierName="ngModel" list="supplier">
-              <datalist id="supplier" *ngFor="let i of supplierList">
-                <option value="{{i.supplierName}}"></option>
+              placeholder="Select from the dropdown" #supplierName="ngModel" required [(ngModel)]="products.supplierName" list="supplier" autocomplete="off">
+              <datalist id="supplier" >
+                <option *ngFor="let i of supplierList"  [value]="i.supplierName">
+                  <div *ngIf="supplierList.length > 0">
+                   {{i.supplierName}}
+                  </div>
+                </option>
+                <option *ngIf="supplierList.length <= 0" [value]="supplier">
+                  {{supplier}}
+                </option>
+                <!-- <option *ngFor="let i of supplierList" [value]="i.supplierName">{{i.supplierName}}</option> -->
               </datalist>
               <span class="text-danger"
               *ngIf="(supplierName.touched || registerForm.submitted) && supplierName.errors?.['required']">
@@ -100,9 +121,21 @@
               <!-- <span class="help-bpx" *ngIf="supplierName.touched && !supplierName.valid">Please Enter Supplier Name</span> -->
           </div>
         </div>
+
+
+        <div class="form_wrap">
+          <div class="form_item">
+            <label for="supplierName">Upload Photo :</label>
+           <input type="file" class="form-control" name="productImages"  multiple value="select" #selectFile
+           (change)="onFileSelected($event)"
+           />
+              
+              <!-- <span class="help-bpx" *ngIf="supplierName.touched && !supplierName.valid">Please Enter Supplier Name</span> -->
+          </div>
+        </div>
   
         <div class="btn">
-          <input id="submitButton" type="submit" value="Get Started">
+          <input id="submitButton" type="submit" value="Submit">
        </div>
    
      </form>

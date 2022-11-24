@@ -1,31 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+body {
+    background: #ecf0f3
+}
+
+/* .app-nav{
+    background-color: #d5f8e7;
+} */
+
+mat-toolbar{
+    height: 60px;
+    background-color: #d5f8e7;
+  }
+
+  .link{ 
+    text-decoration: none;
+       }
+
+       .text{
+        position: relative;
+          color: black;
+          font-weight: 700;
+          font-size: 1.1em;
+          
+         
+      }
 
 
 .wrapper {
+    max-width: 350px;
+    min-height: 500px;
+    margin: 80px auto;
+    padding: 40px 30px 30px 30px;
+    background-color: #ecf0f3;
     border-radius: 15px;
-    margin-top: 0px;
-    margin-left: 500px;
-    padding: 25px;
-    height: 450px;
-    width: 800px;
-   background-image: url('/assets/img/svg1.svg');
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff
 }
 
-.login{
-    background-image: url('/assets/img/doc.jpg');
-    background-repeat: no-repeat;
-    margin-top: 75px;
-    height: 500px;
-    margin-left: 150px;
+.middle a{
+    text-decoration: none;
+    color: black;
+  }
 
-}
+  
+  .middle{
+    position: relative;
+    height: 220px;
+
+  }
 
 
-.app-nav{
-    height: 20px;
-    margin-top: -115px;
+  .link{ 
+    text-decoration: none;
+       }
+  
+  .text{
+    position: relative;
+      color: black;
+      font-weight: 700;
+      font-size: 1.1em;
+      
+     
+  }
+  
+
+.example-spacer {
+    flex: 1 1 auto;
   }
 
 
@@ -51,7 +98,7 @@
 }
 
 .wrapper .form-field input {
-    width: 300px;
+    width: 100%;
     display: block;
     border: none;
     outline: none;
@@ -61,30 +108,22 @@
     padding: 10px 15px 10px 10px
 }
 
-.cont h1{
-    color: black;
-    white-space: nowrap;
-    letter-spacing: 3px;
-    font-family: 'Saira Condensed', sans-serif;
-  }
-
-
 .wrapper .form-field {
+    padding-left: 10px;
     margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -18px 8px #fff;
-    width: 350px;
-    margin: 15px 165px;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff
 }
 
+.wrapper .form-field .fas {
+    color: #555
+}
 
 .wrapper .btn {
     box-shadow: none;
-    width: 150px;
-    margin-left: 38%;
+    width: 100%;
     height: 40px;
-    background-color: #03A9F4;
-    color: #fff;
+    background-color: #d5f8e7;
     border-radius: 25px;
     box-shadow: 3px 3px 3px #b1b1b1, -3px -3px 3px #fff;
     letter-spacing: 1.3px
@@ -103,26 +142,10 @@
 .wrapper a:hover {
     color: #039BE5
 }
-.pss{
-    margin-top: 35px;
-    width: 40px;
-    height: 20px;
-}
+
 @media(max-width: 380px) {
     .wrapper {
         margin: 30px 20px;
         padding: 40px 15px 15px 15px
     }
 }
-
-.cont h1{
-    color: black;
-    white-space: nowrap;
-    letter-spacing: 35px;
-    font-family: 'Saira Condensed', sans-serif;
-  }
-
-  mat-toolbar{
-    height: 60px;
-    background-color: #d5f8e7;
-  }

@@ -1,18 +1,58 @@
-<!-- <ul>
-    <li *ngFor="let item of content">
-        {{item.drugsName}}
-    </li>
-</ul> -->
 <mat-toolbar>
   <div class="cont">
-    <span><img src="/assets/img/logo.png" height="100" width="100" alt="" /></span>
-    <p></p>
+    <span><img src="/assets/img/logo.png" height="120" width="120" alt="" /></span>
+    <span class="user">Hi,{{this.currentUser | uppercase}}!</span>
    </div>
-  <app-nav-bar class="app-nav"></app-nav-bar>
+   <span class="example-spacer"></span>
+   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+   
+
+  </button>
+ <button mat-button class="menu-button" *ngIf="isLoggedIn">
+  <a  routerLink="/cart" class="link">
+      <span class="icon"> <img src="/assets/img/cart.png" alt="Cart"/></span>
+     
+      <span class="text">Cart</span>
+  </a>
+</button>
+<button mat-button class="menu-button" *ngIf="showUserBoard">
+  <a  routerLink="/myorders" class="link">
+      <span class="icon"><img src="/assets/img/order1.png" alt="Home" width="30" height="20"/></span>
+     
+      <span class="text">My Orders</span>
+  </a>
+</button>
+<button mat-button class="menu-button" *ngIf="showAdminBoard">
+  <a  routerLink="/api/user-auth/admin" class="link">
+  <span class="icon"> <img src="/assets/img/dashboard.png" alt="Dashboard"/></span>
+ 
+  <span class="text">Dashboard</span>
+</a>
+</button>
+ <button mat-button class="menu-button" *ngIf="!isLoggedIn">
+  <a  routerLink="/login" class="link">
+      <span class="text">SIGN IN</span>
+  </a>
+</button>
+<button mat-button class="menu-button" *ngIf="!isLoggedIn">
+  <a  routerLink="/register" class="link">
+      <span class="text">SIGN UP</span>
+  </a>
+</button>
+<button mat-button class="menu-button" *ngIf="isLoggedIn">
+  <a href   (click)="logout()" class="link">
+      <span class="text">Logout</span>
+  </a>
+</button>
 
 </mat-toolbar>
 
+
+
+
 <div class="body">
+  <app-image-slider></app-image-slider>
 <div class="container">
 
   <div class="row height d-flex justify-content-center align-items-center">
@@ -31,104 +71,49 @@
     </div>
     
   </div>
-</div>
 
-<!-- <section class="product">
-  <div class="container-fluid">
-      <div class="slider-wrap">
-          <div class="slider-main">
-              <div class="items" *ngFor="let item of content | filter:searchText">
-                <div class="text">
-                  
-                  <mat-card class="cards">
-                    <mat-card-header style="display:flex; flex-direction: column;">
-                        <mat-card-title> {{item.drugsName}}</mat-card-title>
-                        <img src = "/assets/img/capsules.png" width="100px;">
-                    </mat-card-header>
-                    <mat-card-actions>
-                          <button mat-button style=
-                          "background-color: #004c98; 
-                          color:white" (click)="outsider()" *ngIf="!isLoggedIn">
-                      ADD TO CART 
-                  </button>
-                        <button mat-button style=
-                                "background-color: #004c98; 
-                                 color:white" (click)="addToCart(item)" *ngIf="isLoggedIn">
-                            ADD TO CART 
-                        </button>&nbsp;&nbsp;&nbsp;
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="more(item)">More</button>
-                    </mat-card-actions>
-                    </mat-card>
-                </div>
-                
-              </div>
-              
-              
-          </div>
-          <div class="button-area">
-           
-            <button type="button" class="prev" appPrev>
-              <i class="fas fa-angle-left"></i></button>
-            <button type="button" class="next" appNext><i class="fas fa-angle-right"></i></button>
-          </div>
-      </div>
+  
+
+  <h1 style="font-weight: bold; font-size: 35px;">What are you looking for?</h1>
+
+  <h2 class="second-pg">
+    CATEGORIES
+  </h2>
+
+
+
+  <div class="middle" >
+  <a  class="cat">
+    <div class="card" *ngFor="let a of arr1 | filter: searchText">
+     <div class="card-body" >
+       <h5 class="card-title">{{a.categories}}</h5>
+     </div>
+     <button class="but-on" (click)="cat(a)">click here!</button>
+   </div></a>
+   <div class="button-area">
+               
+    <button type="button" class="prev" appCatPrev>
+      <i class="fas fa-angle-left fa-2x"></i></button>
+    <button type="button" class="next" appCatNext><i class="fas fa-angle-right fa-2x"></i></button>
   </div>
-</section> -->
+   </div>
 
-</div>
+   <div class="sub-container">
 
+    <h1 style="font-weight: bold; font-size: 35px;">Shop Your Medicines</h1>
+    <br><br>
 
-<div class="modal fade" id="exampleModal" tabindex="2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Drugs Details: </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" *ngIf="drugsList">
-        <!-- <h3>{{drugs}}: -</h3> -->
-        <h3>Drugs Cost: </h3><small>{{drugsList.drugsCost | currency:'INR':'symbol-narrow'}}</small>
-        <h3>Drugs Description: </h3><small>{{drugsList.drugsDescription}}</small>
-        <h3>Drugs Name: </h3><small>{{drugsList.drugsName}}</small>
-        <h2>Supplier: - {{drugsList.supplierName}}</h2>
-
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-<!-- <div class="containers">
-
-<div class="card" *ngFor="let item of content | filter:searchText">
-    <div class="card__description">
-      <div class="card__descriptions">
-        <p>{{currentUser}}</p>
-      </div>
-      <div class="card__descriptionIcon"><i class="fas fa-capsules"></i></div>
-      <h4>{{item.drugsName}}</h4>
-      <div class="card__descriptionText">{{item.drugsDescription}}</div>
-    </div>
-    <div class="card__price">{{item.drugsCost}}</div>
+    <app-shop></app-shop>
     
-    <div class="btn" >
-      <button style="font-size:25px" *ngIf="isLoggedIn" (click)="addToCart(item)"><i class="fa fa-shopping-cart"></i></button>
-    </div>
-  </div>
-  </div> -->
+   </div>
+
+  
+
+</div>
 
 
-  <!-- (click)="addToCart(item.drugsId)" -->
-  <br/>
-  <br/>
-  <ng-template #loggedOut>
-    Please login.
-  </ng-template>
 
-  <!-- <app-cart *ngIf="showUserBoard && addToCarts" [pqr]="result"></app-cart> -->
-<!-- *ngIf="currentUser; else loggedOut -->
+
+
+</div>
+

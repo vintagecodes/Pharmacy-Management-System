@@ -1,5 +1,5 @@
 
- <mat-toolbar class="mat-elevation-z8">
+ <!-- <mat-toolbar class="mat-elevation-z8">
 
   <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened">
@@ -11,7 +11,7 @@
 
 
   </button>
-  </mat-toolbar>
+  </mat-toolbar> -->
 
   <div style="display: flex; flex-grow: grow; margin: 0px;">
   
@@ -36,8 +36,8 @@
            
             <span class="text">Dashboard</span>
         </a>
-          </button><br>
-          <button mat-button class="menu-button" *ngIf="showUserBoard">
+          </button><br><br><br>
+          <button mat-button class="menu-button" *ngIf="isLoggedIn">
             <a  routerLink="/cart" >
                 <span class="icon"> <img src="/assets/img/cart.png" alt="Cart"/></span>
                
@@ -73,7 +73,8 @@
 
     <div class="img">
       <div class="shop">
-        <span  class="h1"><h1>GET MEDS</h1></span><br><br>
+        <span  class="h1">
+          <h1>GET MEDS</h1></span>
         <button class="button btn" (click)="shop()">Shop Now</button>
       </div>
       </div>
@@ -102,5 +103,3 @@
         <button type="button" class="next" appCatNext><i class="fas fa-angle-right fa-2x"></i></button>
       </div>
   </div>
-  
-  <app-footer class="footer"></app-footer>

@@ -12,7 +12,7 @@ export class DrugSService {
   SUPPLIER_API = "http://localhost:7000";
  
 
-  public registerDrugs(DrugsDetails: any ) {
+  public registerDrugs(DrugsDetails: FormData ) {
     return this.http.post(this.API + '/drugs/',DrugsDetails);
   }
 

@@ -12,33 +12,19 @@ mat-toolbar {
 }
 
 mat-sidenav {
-  margin: -15px 12px;
+  position: fixed;
+  margin: -8px 15px;
   width: 180px;
   
-  background:  lightseagreen;
-  border-radius: 30px;
-  padding: 16px;
+  background:  rgb(214, 214, 214);
+  border-radius: 10px;
+  padding: 10px;
   display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 
-.content {
-  height: calc(100vh - 98px);
-  border-radius: 10px;
-  margin: 16px;
-  margin-left: 592px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 2rem;
-  display: flex;
-}
-
 mat-sidenav-container {
-  height: calc(110vh - 55px);
+  height: calc(120vh - 150px);
  
 }
 

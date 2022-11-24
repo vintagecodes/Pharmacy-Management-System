@@ -6,6 +6,7 @@ import { Order } from 'src/app/models/order';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-cart',
@@ -35,11 +36,13 @@ export class CartComponent implements OnInit {
     drugsName:"",
     drugsDescription:"",
     drugsCost:"",
-    drugsQty:"",
+    drugsQty:0,
     stockQty: "",
     total:""
   }
   address:any = [];
+  cartAmount!: number;
+  items = 0;
 
 
 
@@ -70,6 +73,8 @@ export class CartComponent implements OnInit {
     }
 
 
+
+
     // this.cartList = this.cartService.getLocalStorage();
 
     // console.log(this.cartList);
@@ -80,6 +85,7 @@ export class CartComponent implements OnInit {
       console.log(data);
       this.cartList = data;
       console.log(this.cartList);
+      this.totalItems(this.cartList);
 
     });
 
@@ -89,6 +95,7 @@ export class CartComponent implements OnInit {
       console.log(this.address);
     });
     
+   
 
     
 
@@ -115,6 +122,13 @@ export class CartComponent implements OnInit {
     return this.amount;
   }
 
+  totalItems(item: any){
+    for(let i = 0; i < item.length; i++){
+      this.items = this.items + item[i].drugsQty;
+      console.log(this.items);
+    }
+  }
+
 
   addToOrder(cartList: Cart[]){
     this.orderId = this.genUniqueId();
@@ -122,7 +136,8 @@ export class CartComponent implements OnInit {
 
     
     // this.amount = this.cartList.drugsCost;
-    this.amount = this.total(cartList);
+    this.cartAmount = this.total(cartList);
+    console.log(this.cartAmount);
     this.orderStatus = false;
 
 
@@ -186,6 +201,10 @@ export class CartComponent implements OnInit {
 
   newBilling(){
     this.route.navigateByUrl("/billing");
+  }
+
+  refresh(){
+    window.location.reload();
   }
 
 }

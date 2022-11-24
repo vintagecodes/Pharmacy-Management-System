@@ -1,12 +1,4 @@
 
-<mat-toolbar>
-  <div class="cont">
-    <span><img src="/assets/img/logo.png" height="100" width="100" alt="" /></span>
-    <p></p>
-   </div>
-  <app-nav-bar class="app-nav"></app-nav-bar>
-
-</mat-toolbar>
 
 
 <div style="display: flex; flex-grow: grow; margin-top: 0px;">
@@ -94,6 +86,9 @@
       <div class="form-field d-flex align-items-center">
         <button class="btn mt-3">Sign Up</button>
       </div>
+   <p style="text-align: center;">OR &nbsp;<a class="link" routerLink="/login">
+        <span class="text">Sign in</span></a></p>
+      
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
         Signup failed!<br />{{ errorMessage }}
       </div>

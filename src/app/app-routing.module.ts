@@ -42,7 +42,7 @@ const routes: Routes = [
   {path: 'order-details', component: OrderDetailsComponent},
   {path: 'order-details/:orderId', component: DrugsPerOrderComponent},
   {path: 'category/:categories', component: CategoryComponent},
-  { path: '', redirectTo: 'hi', pathMatch: 'full' }
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

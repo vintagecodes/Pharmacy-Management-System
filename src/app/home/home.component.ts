@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
   drugsList:any = {};
   value: any;
   drugs!: [];
+  arr1: any;
 
   constructor(
     private tokenStorageService: TokenStorageService,
@@ -75,8 +76,15 @@ export class HomeComponent implements OnInit {
       console.warn('drugs',result);
       this.content = result;
       // console.log(this.content.drugsName);
+      this.arr1 = this.getUniqueListBy(this.content,'categories');
+      console.log(this.arr1);
     });
   }
+
+  
+  getUniqueListBy(arr:any, key:any) {
+    return [...new Map(arr.map((item:any) => [item[key], item])).values()]
+}
 
   genUniqueId(): string {
     const dateStr = Date
@@ -140,15 +148,15 @@ export class HomeComponent implements OnInit {
       
     }
 
-    more(item: any){
-      console.log(item.drugsId);
-      let drugs = new Drugs(item.drugsName,item.drugsDescription, item.drugsCost, item.supplierName);
-      this.abc = drugs;
-      this.drugsList = this.abc;
-      console.log(this.drugsList.drugsCost);
-      // this.drugsList.pop();
+    // more(item: any){
+    //   console.log(item.drugsId);
+    //   let drugs = new Drugs(item.drugsName,item.drugsDescription, item.drugsCost, item.supplierName);
+    //   this.abc = drugs;
+    //   this.drugsList = this.abc;
+    //   console.log(this.drugsList.drugsCost);
+    //   // this.drugsList.pop();
       
-    }
+    // }
 
 
 
@@ -169,6 +177,12 @@ export class HomeComponent implements OnInit {
     {this.router.navigateByUrl('/login');}
   })
     
+  }
+
+  cat(a:any){
+    this.router.navigate(['/category',a.categories]);
+    console.log(a.categories);
+
   }
 
 }

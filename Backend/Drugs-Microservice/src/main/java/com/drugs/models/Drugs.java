@@ -1,5 +1,8 @@
 package com.drugs.models;
 
+import java.util.Date;
+import java.util.Set;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -28,7 +31,9 @@ public class Drugs {
 	private String categories;
 	private String drugsDescription;
 	private String supplierName;
+	private String dateOfExpiration;
 
+	private Set<Photo> productImages;
 	
 	
 	
