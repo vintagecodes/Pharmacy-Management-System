@@ -31,4 +31,12 @@ export class AuthService {
     }, httpOptions);
   }
 
+  getAllUsers(): Observable<any> {
+    return this.http.get(API + 'users');
+  }
+
+  getDeleteUsers(username:string){
+    return this.http.delete(API + 'delete/'+ username);
+  }
+
 }

@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
       })
       .then(() => {
           {this.route.navigate(['/home'])}
+          window.location.reload();
       })
       },
       err => {

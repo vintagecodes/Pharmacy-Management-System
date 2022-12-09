@@ -1,7 +1,12 @@
 
- <div style="display: flex; flex-grow: grow; margin: 5px;">
+ <div style="display: flex; flex-grow: grow; margin: 0px 25px;">
     <app-nav class="nav-app" *ngIf="isLoggedIn"></app-nav>
-    <img src="/assets/img/admin1.png" height="400" width="400"/>
+    
+    <div id="main">
+      <div echarts [options]="option" class="chart">
+
+      </div>
+    </div>
 
 </div>
  

@@ -1,0 +1,43 @@
+<div style="display: flex; flex-grow: grow; margin: 5px;">
+    <app-nav class="nav-app" *ngIf="isLoggedIn"></app-nav>
+    
+    <div class="container p-4">
+    
+        <table class="table table-striped mt-5 w-80">
+            <thead>
+                <h1>USERS LIST 
+                <form name="form">
+                  <div class="search">
+                      <input type="text" class="form-control"[(ngModel)]="searchText" name="users"  placeholder="Search by username/..." #users="ngModel">
+                  </div>
+            
+                </form></h1>
+               
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Roles</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let user of userData | filter:searchText | paginate: { itemsPerPage: count, currentPage: p }; let i=index ">
+              <tr >
+                <td>{{i+1}}</td>
+                <th scope="row">{{user.username}}</th>
+                <td>{{user.email}}</td>
+                <th scope="row">{{user.roles[0].name}}</th>
+                <td><button type="button" class="btn btn-danger" (click)="confirmDelete(user)">Delete</button></td>
+
+                <!-- <td>{{order.orderStatus}}</td> -->           
+              </tr>
+            </tbody>
+          </table>
+          <div class="text-right">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+    
+    </div>
+    
+
+</div>

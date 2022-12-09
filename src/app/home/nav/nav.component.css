@@ -13,18 +13,23 @@ mat-toolbar {
 
 mat-sidenav {
   position: fixed;
-  margin: -8px 15px;
+  margin: -8px -5px;
   width: 180px;
   
-  background:  rgb(214, 214, 214);
+  /* background:  rgb(214, 214, 214); */
+  background-color: #2c3968;
   border-radius: 10px;
   padding: 10px;
   display: flex;
-  overflow: hidden;
+  /* position: static; */
+  
+  
 }
 
 mat-sidenav-container {
-  height: calc(120vh - 150px);
+  
+  height: calc(125vh - 150px);
+  overflow: hidden;
  
 }
 
@@ -43,25 +48,8 @@ mat-divider {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-.containers h1{
-  color: black;
-  white-space: nowrap;
-  letter-spacing: 3px;
-  font-family: 'Saira Condensed', sans-serif;
-}
-
-
-
-
-.container h1 {
-  white-space: nowrap;
-  letter-spacing: 35px;
-  font-family: 'Saira Condensed', sans-serif;
-}
-
 h4{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 25px;
+  color: white;
 }
 
 .container p{
@@ -74,7 +62,7 @@ h4{
 .container img{
   margin-left: -550px;
   justify-content: center;
-  width: 800px;
+  width: 700px;
   height: 500px;
 }
 
@@ -92,13 +80,14 @@ a {
 .menu-button{
   background-color: transparent;
   margin: 0 10px;
+  max-width: 350px;
 }
 
 .menu-button a .icon{
   margin-left: -40px;
   position: relative;
   display: block;
-  font-size: 1.5em;
+  font-size: 1em;
   text-align: center;
 }
 
@@ -107,12 +96,18 @@ a {
 .menu-button a .text{
   margin-left: 95px;
   position: absolute;
-    color: black;
-    font-weight: 700;
-    font-size: 0.75em;
+    color: white;
+    font-size: 1em;
     letter-spacing: 0.05em;
 }
 
+.menu-button:hover{
+  background-color: skyblue;
+}
+
+.icon img{
+  width: 60%;
+}
 
 
 ul{
@@ -139,8 +134,7 @@ ul li a .icon{
 
 ul li a .text{
   position: absolute;
-  color: black;
-  font-weight: 700;
-  font-size: 0.75em;
+  color: white;
+  font-size: 1em;
   letter-spacing: 0.05em;
 }

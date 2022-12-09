@@ -4,9 +4,10 @@
 
 
 mat-toolbar{
+  
   height: 80px;
   width: 100%;
-  background-color:#fff;
+  background-color: #E8E8E8;
   overflow: hidden;
   
 }
@@ -153,4 +154,9 @@ mat-toolbar{
       .menu-button .icon img{
         font-size: 15px;
         height: 30px;
+      }
+
+      .modal-dialog{
+        width: 1050px;
+        margin: auto;
       }

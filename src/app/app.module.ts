@@ -51,6 +51,9 @@ import { CatPrevDirective } from './directives/cat-prev.directive';
 import { CategoryComponent } from './pharmacy/shop/category/category.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { SafeUrlPipe } from './pharmacy/shop/safe-url.pipe';
+import { HeaderComponent } from './header/header.component';
+import {NgxEchartsModule} from 'ngx-echarts';
+import { UserComponent } from './home/admin-dashboard/user/user.component';
 
 
 
@@ -87,6 +90,8 @@ import { SafeUrlPipe } from './pharmacy/shop/safe-url.pipe';
     CatPrevDirective,
     CategoryComponent,
     SafeUrlPipe,
+    HeaderComponent,
+    UserComponent,
     
     
   ],
@@ -112,7 +117,10 @@ import { SafeUrlPipe } from './pharmacy/shop/safe-url.pipe';
     MatPaginatorModule,
     MatExpansionModule,
     NgxPaginationModule,
-    MatGridListModule
+    MatGridListModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   exports:[
     CommonModule, NgxPaginationModule

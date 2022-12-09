@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300&display=swap');
+/* @import "~material-icons/iconfont/material-icons.css"; */
+
+
+mat-toolbar{
+  
+  height: 80px;
+  width: 100%;
+  background-color: #E1EBEE;
+  overflow: hidden;
+  
+}
+
+button {
+    background-color: transparent;
+}
+
+.icon img{
+  height: 20px;
+}
+
+       .height{
+        height: 20vh;
+       }
+       
+       .second-pg{
+        margin: 50px 250px;
+        letter-spacing: 2rem;
+      }
+
+      .cont img{
+        border-radius: 50%;
+      }
+      
+      .example-spacer {
+        flex: 1 1 auto;
+      }
+
+      .home{
+        color: black;
+      }
+
+      .user{
+        font-size: 10px;
+      }
+
+
+
+      .link{ 
+        text-decoration: none;
+           }
+      
+      .text{
+        position: relative;
+          color: black;
+          font-weight: 700;
+          font-size: 1.1em;
+          
+         
+      }
+
+

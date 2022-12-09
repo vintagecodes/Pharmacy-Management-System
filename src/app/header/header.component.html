@@ -1,0 +1,48 @@
+<mat-toolbar>
+    <div class="cont">
+      <span><img src="/assets/img/logo1.png" height="120" width="120" alt="" /></span>
+      <span class="user">Hi,{{this.currentUser | uppercase}}!</span>
+     </div>
+     <span class="example-spacer"></span>
+     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+     
+  
+    </button>
+   <button mat-button class="menu-button" *ngIf="isLoggedIn">
+    <a  routerLink="/cart" class="link">
+        <span class="icon"> <img src="/assets/img/cart.png" alt="Cart"/></span>
+       
+        <span class="text">Cart</span>
+    </a>
+  </button>
+  <button mat-button class="menu-button" *ngIf="showUserBoard">
+    <a  routerLink="/myorders" class="link">
+        <span class="icon"><img src="/assets/img/order1.png" alt="Home" width="30" height="20"/></span>
+       
+        <span class="text">My Orders</span>
+    </a>
+  </button>
+  <button mat-button class="menu-button" *ngIf="showAdminBoard">
+    <a  routerLink="/api/user-auth/admin" class="link">
+    <span class="icon"> <img src="/assets/img/dashboard.png" alt="Dashboard"/></span>
+   
+    <span class="text">Dashboard</span>
+  </a>
+  </button>
+   <button mat-button class="menu-button" *ngIf="!isLoggedIn">
+    <a><button style="border-width : 0;" data-bs-toggle="modal" data-bs-target="#exampleModals" class="link">
+        <span class="text">SIGN IN</span>
+    </button></a>
+  </button>
+  <button mat-button class="menu-button" *ngIf="!isLoggedIn">
+    <a  routerLink="/register" class="link">
+        <span class="text">SIGN UP</span>
+    </a>
+  </button>
+  <button mat-button class="menu-button" *ngIf="isLoggedIn">
+    <a href (click)="logout()" class="link">
+        <span class="text">Logout</span>
+    </a>
+  </button>
+  </mat-toolbar>

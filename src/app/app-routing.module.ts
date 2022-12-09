@@ -20,6 +20,7 @@ import { SupplierComponent } from './home/admin-dashboard/supplier/supplier.comp
 import { DrugsComponent } from './home/admin-dashboard/drugs/drugs.component';
 import { DrugsListComponent } from './home/admin-dashboard/drugs/drugs-list/drugs-list.component';
 import { CategoryComponent } from './pharmacy/shop/category/category.component';
+import { UserComponent } from './home/admin-dashboard/user/user.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'supplier', component: SupplierComponent},
   {path: 'supplier-list', component: SupplierListComponent},
   {path: 'drugs', component: DrugsComponent},
+  {path: 'users', component: UserComponent},
   {path: 'drugs/drugs-list', component: DrugsListComponent},
   {path: 'order-details', component: OrderDetailsComponent},
   {path: 'order-details/:orderId', component: DrugsPerOrderComponent},

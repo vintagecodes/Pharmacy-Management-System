@@ -127,5 +127,15 @@ public class AuthService {
 		emailSenderService.sendEmail(user.getEmail(), "This is Test Subject", html);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
+	
+	
+	public List<User> getAllUsers(){
+		return userRepository.findAll();
+	}
+	
+	public String deleteUsers(String username) {
+		userRepository.deleteByUsername(username);
+		return "Deleted SuccessFull";
+	}
 
 }

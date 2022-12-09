@@ -7,6 +7,11 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { DrugSService } from 'src/app/service/drug-s.service';
 import { UserServiceService } from 'src/app/service/user-service.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { AuthService } from 'src/app/service/auth.service';
+import { EChartsOption } from 'echarts';
+import { Drugs } from 'src/app/models/drugs';
+import { Product } from 'src/app/models/product';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -29,6 +34,15 @@ export class AdminDashboardComponent implements OnInit {
   showUserBoard = false;
   showAdminBoard = false;
   username?: string;
+  p = 1;
+  count = 5;
+
+  chart:any = [];
+
+  datas: Product = {
+    value: 0,
+    name: ''
+  };
 
   DrugsToUpdate = {
     drugsId:"",
@@ -39,9 +53,22 @@ export class AdminDashboardComponent implements OnInit {
     supplierName:" ",
   }
 
+  products: Drugs = {
+    drugsName: "",
+    drugsDescription: "",
+    drugsCost: 0,
+    stockQty: 0,
+    categories: "",
+    supplierName: "",
+    dateOfExpiration: "",
+    productImages: [],
+    
+  }
+
   displayStyle = "none";
   content: any;
   currentUser: any;
+  userData: any;
   
   openPopup() {
     this.displayStyle = "block";
@@ -52,8 +79,8 @@ export class AdminDashboardComponent implements OnInit {
 
   
  
-  DrugsDetails: any ;
-  constructor(private drugsService: DrugSService, private user: UserServiceService, private token: TokenStorageService, private router: Router, private observer: BreakpointObserver) {
+  DrugsDetails: any;
+  constructor(private drugsService: DrugSService,private authService: AuthService, private user: UserServiceService, private token: TokenStorageService, private router: Router, private observer: BreakpointObserver) {
     this.getDrugslist();
    }
   register(registerform:NgForm){
@@ -75,12 +102,33 @@ export class AdminDashboardComponent implements OnInit {
       (resp) => {
         console.log(resp);
         this.DrugsDetails=resp;
+        console.log(this.DrugsDetails);
+        this.getValues(this.DrugsDetails);
       },
       (err) => {
         console.log(err);
       }
     );
   }
+
+  getValues(r:any){
+
+    let len = Object.keys(this.DrugsDetails).length;
+    console.log(len);
+    for(let i=0; i<len; i++){
+      let properties = {
+        "value":r[i].stockQty,
+        "name": r[i].drugsName
+      }
+      
+      this.chart.push(properties);
+      
+    }
+    console.log(this.chart);
+    
+  }
+
+
 
   deleteDrugs(drug: { drugsId:any}){
     alert("DO you want to delete");
@@ -113,15 +161,8 @@ export class AdminDashboardComponent implements OnInit {
     }
 
     this.currentUser = this.token.getUser();
-    // console.log(this.currentUser);
-
-    // this.user.getAdminDashBoard().subscribe((user) => {
-    //   this.content = user;
-    // },
-    // err=>{
-    //   this.content = JSON.stringify(err.message);
-    // }
-    // )
+   
+    console.log(this.chart)
 
 
   }
@@ -167,6 +208,40 @@ export class AdminDashboardComponent implements OnInit {
 // showOrderDetails(){
 //   this.router.navigateByUrl("/order-details")
 // }
+
+option: EChartsOption = {
+ 
+  title: {
+    text: 'Stocks of Medicines',
+    subtext: 'Internal Data',
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left'
+  },
+  series: [
+    {
+      
+      name: 'Access From',
+      type: 'pie',
+      radius: '50%',
+      data: this.chart,
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+
+
 
 
 }

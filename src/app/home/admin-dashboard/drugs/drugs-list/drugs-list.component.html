@@ -3,7 +3,7 @@
 
     <app-nav></app-nav>
     <div class="tab" >
-        <div class="mt-10" data-bs-target="#drugs" >
+        <div class="mt-10" >
           <h1>Drugs List</h1>
           <div *ngFor="let drug  of DrugsDetails | paginate: { itemsPerPage: count, currentPage: p }">
           <table class="table table-bordered" *ngFor="let j of drug.productImages">

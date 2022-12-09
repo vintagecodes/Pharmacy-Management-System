@@ -9,14 +9,14 @@
 	position: absolute;
 	margin-top: 150px;
 	/* margin-bottom: -50px; */
-	margin-left: 198px;
+	margin-left: 0px;
 	border: 1px solid black blurred;
 	box-sizing: border-box;
-	width: 86%;
+	width: 100%;
 	font: bold 16px sans-serif;
 	padding: 50px 60px 40px;
 	overflow: hidden;
-	background-color: lightslategray;
+	background-color: #002244;
 }
 
 
@@ -103,7 +103,7 @@
 	display: inline-block;
 	vertical-align: top;
 	margin: 15px 42px 0 0;
-	color:  black;
+	color:  white;
 }
 
 /* The contact form */
@@ -117,7 +117,7 @@
 	display: block;
 	border-radius: 3px;
 	box-sizing: border-box;
-	background-color:  #1f2022;
+	background-color:  #E8E8E8;
 	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
 	border: none;
 	resize: none;
