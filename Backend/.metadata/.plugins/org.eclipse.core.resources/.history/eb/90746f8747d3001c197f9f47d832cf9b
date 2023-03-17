@@ -1,5 +1,0 @@
-package com.o.order.repository;
-
-public interface AddressRepository {
-
-}
