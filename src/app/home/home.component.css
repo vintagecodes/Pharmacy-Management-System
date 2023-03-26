@@ -42,14 +42,18 @@ mat-toolbar{
         height: 60px;
         text-indent: 25px;
         border: 2px solid #d6d4d4;
-
-
        }
 
-       .app-nav{
-         margin-top:1px;
-       }
+       .cards-wrapper {
+        display: flex;
+        justify-content: center;
+      }
 
+      .card{
+        background-color: rgb(243, 230, 226);
+      }
+
+      
        .search input:focus{
 
         box-shadow: none;
@@ -66,12 +70,7 @@ mat-toolbar{
 
        }
 
-       .middle{
-        position: relative;
-        height: 220px;
-
-      }
-
+       
 
       .link{ 
         text-decoration: none;
@@ -94,29 +93,20 @@ mat-toolbar{
       }
       
 
-      .middle .card{
-        background-color: rgba(203,230,229,1);
-        text-align: center;
-        width: 150px;
-        height: 200px;
-       
       
-      }
 
       .user{
         bottom: 0px;
         font-size: 10px;
       }
+
+      .btn-primary {
+        color: #4f5f6f;
+        background-color: #7cc;
+        border-color: #5bc2c2
+    }
       
-      .card-title{
-        text-align: center;
-        margin: 20%;
-      }
-      
-      .middle a{
-        text-decoration: none;
-        color: black;
-      }
+     
       
       .but-on{
         font-family: 'Courier New', Courier, monospace;
@@ -129,7 +119,7 @@ mat-toolbar{
         border: 1px solid white;
       }
       
-      .prev{
+      /* .prev{
         background-color: transparent;
         position: absolute;
         margin-left: 5px;
@@ -144,7 +134,7 @@ mat-toolbar{
       top: 40%;
       transform: translate(-50%, -50%);
         border: 1px solid transparent;
-      }
+      } */
 
 
       .sub-container{

@@ -1,6 +1,7 @@
 
  <div style="display: flex; flex-grow: grow; margin: 0px 25px;">
-    <app-nav class="nav-app" *ngIf="isLoggedIn"></app-nav>
+    <app-nav class="nav-app" *ngIf="isLoggedIn">
+    </app-nav>
     
     <div id="main">
       <div echarts [options]="option" class="chart">

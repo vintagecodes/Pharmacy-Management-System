@@ -9,10 +9,11 @@ export class CatNextDirective {
 
   @HostListener('click')
   nextFunction(){
-    let ele = this.elementRef.nativeElement.parentElement.parentElement.children[0];
+    let ele = this.elementRef.nativeElement.parentElement.children[0];
     console.log(ele);
     let item = ele.getElementsByClassName("card");
-    console.log(ele.append(item[0]));
+    console.log(item);
+    return ele.append(item[0]);
   }
 
 }

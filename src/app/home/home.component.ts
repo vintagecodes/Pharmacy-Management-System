@@ -104,8 +104,8 @@ export class HomeComponent implements OnInit {
       const qty = 1;
   // this.addToCarts = true;
   console.log(item);    
-    let user = new Cart(this.cartId, this.currentUser,item.drugsId,item.drugsName,item.drugsCost, qty, item.stockQty,item.drugsDescription,item.total);
-    this.cartService.getCartDetails(this.currentUser).subscribe((data: any) => {
+  let user = new Cart(this.cartId, this.currentUser,item.drugsId,item.drugsName,item.drugsCost, qty, item.stockQty,item.drugsDescription,item.categories,item.supplierName,item.dateOfExpiration,item.productImages,item.total);
+  this.cartService.getCartDetails(this.currentUser).subscribe((data: any) => {
     console.log(data);
     this.cartLists = data;
     // console.log(this.cartLists.length);

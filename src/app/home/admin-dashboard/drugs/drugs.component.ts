@@ -31,7 +31,7 @@ export class DrugsComponent implements OnInit {
     supplierName: "",
     dateOfExpiration: "",
     productImages: [],
-    
+    drugsId: ''
   }
 
   DrugsToUpdate = {

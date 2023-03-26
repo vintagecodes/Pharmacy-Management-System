@@ -24,7 +24,7 @@ export class CartService {
 
   DELETE_CART = 'http://localhost:7000/drugs/cart/'
 
-  ADDRESS_URL = 'http://localhost:7000/address/'
+  ADDRESS_URL = 'http://localhost:7000/address/user/'
 
   constructor(
     private _http: HttpClient

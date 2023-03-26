@@ -1,3 +1,5 @@
+import { FileHandle } from "./file-handle";
+
 export class Cart {
     constructor(
         public cartId: string,
@@ -8,6 +10,10 @@ export class Cart {
         public drugsQty: number,
         public stockQty:number,
         public drugsDescription : string,
+        public categories: string,
+        public supplierName: string,
+        public dateOfExpiration: string,
+        public productImages: FileHandle[],
         public total: number
 
     ){}

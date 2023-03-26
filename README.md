@@ -1,12 +1,27 @@
-# Pharmacy Management System
+# Frontend
 
-------------------------------
-# Better Presentable Look
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
-## Home-Page
+## Development server
 
-![localhost_4200_home](https://user-images.githubusercontent.com/64604879/206789045-a7b31a18-edac-43a7-b3c6-2c8015db69a4.png)
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Admin DashBoard
-![localhost_4200_home (1)](https://user-images.githubusercontent.com/64604879/206789579-e8d94a98-62d8-4f26-8d60-33b96cf72f10.png)
+## Code scaffolding
 
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

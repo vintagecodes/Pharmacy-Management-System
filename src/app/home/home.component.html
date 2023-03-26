@@ -34,20 +34,20 @@
 
 
 
-  <div class="middle" >
-  <a  class="cat">
-    <div class="card" *ngFor="let a of arr1 | filter: searchText">
-     <div class="card-body" >
-       <h5 class="card-title">{{a.categories}}</h5>
-     </div>
-     <button class="but-on" (click)="cat(a)">click here!</button>
-   </div></a>
-   <div class="button-area">
-               
-    <button type="button" class="prev" appCatPrev>
-      <i class="fas fa-angle-left fa-2x"></i></button>
-    <button type="button" class="next" appCatNext><i class="fas fa-angle-right fa-2x"></i></button>
-  </div>
+  <div class="carousel slide" >
+    <div class="cards-wrapper">
+      <div class="card" *ngFor="let a of arr1">
+        <div class="card-body">
+          <h5 class="card-title">{{a.categories}}</h5>
+          <p class="card-text">{{a.description}}</p>
+          <a (click)="cat(a)" class="btn btn-primary">View</a>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" role="button" appCatPrev data-slide="appCatPrev">
+      <i class="fas fa-angle-left fa-2x"></i></a>
+    <a class="carousel-control-next" role="button" appCatNext data-slide="appCatNext">
+      <i class="fas fa-angle-right fa-2x"></i></a>
    </div>
 
    <div class="sub-container">

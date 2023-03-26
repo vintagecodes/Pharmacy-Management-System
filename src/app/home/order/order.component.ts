@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { OrderListService } from 'src/app/service/order-list.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { Drugs } from 'src/app/models/drugs';
+import { DrugsService } from 'src/app/service/drugs.service';
+import { DrugSService } from 'src/app/service/drug-s.service';
 
 
 @Component({
@@ -31,11 +34,14 @@ export class OrderComponent  implements OnInit {
   cartList:any = [];
   abc: any = [];
   isLoggedIn = false;
-  
+
+  DrugsToUpdate:Drugs[] = [];
+
   constructor(
     private cartService: CartService,
     private tokenStorageService: TokenStorageService, private route:Router,
-    private pay:OrderListService
+    private order:OrderListService,
+    private drugs:DrugSService
   ) {  
     this.currentUser = this.tokenStorageService.getUser().username;
     console.log(this.currentUser);
@@ -141,7 +147,31 @@ confirmOrder() {
     // this.cartService.pay(this.orderId);
     // {this.route.navigateByUrl('http://localhost:8080/submitPaymentDetail/'+this.orderId);}
     // window.location.href=`http://localhost:8080/submitPaymentDetail/${order.orderId}`;
+    this.updateDrugs();
 
+  }
+
+  updateDrugs(){
+    console.log(this.cartList);
+    for(let i=0; i<this.cartList.length; i++){
+      let properties = {
+        "drugsId": this.cartList[i].drugsId,
+        "drugsName":this.cartList[i].drugsName,
+        "drugsDescription":this.cartList[i].drugsDescription,
+        "drugsCost":this.cartList[i].drugsCost,
+        "stockQty":this.cartList[i].stockQty - this.cartList[i].drugsQty,
+        "categories":this.cartList[i].categories,
+        "supplierName":this.cartList[i].supplierName,
+        "dateOfExpiration":this.cartList[i].dateOfExpiration,
+        "productImages":this.cartList[i].productImages,
+      };
+      this.drugs.updateDrugs(properties, this.cartList[i].drugsId).subscribe((data) => {
+        console.log(data);
+      })
+      
+    }
+    
+    
   }
 
 

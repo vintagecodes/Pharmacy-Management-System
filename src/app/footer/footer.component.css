@@ -125,34 +125,17 @@
 	font: inherit;
 	font-size: 14px;
 	font-weight: normal;
-	color:  #d1d2d2;
+	color:  black;
 
 	width: 400px;
 	padding: 18px;
+	height: 100px;
+	margin-bottom: 20px;
 }
-
-.footer-distributed ::-webkit-input-placeholder {
-	color:  #5c666b;
-}
-
-.footer-distributed ::-moz-placeholder {
-	color:  #5c666b;
-	opacity: 1;
-}
-
-.footer-distributed :-ms-input-placeholder{
-	color:  #5c666b;
-}
-
 
 .footer-distributed form input{
 	height: 55px;
 	margin-bottom: 15px;
-}
-
-.footer-distributed form textarea{
-	height: 100px;
-	margin-bottom: 20px;
 }
 
 .footer-distributed form button{

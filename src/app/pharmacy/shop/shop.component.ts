@@ -111,7 +111,7 @@ export class ShopComponent implements OnInit {
 
     const qty = 1;
   // this.addToCarts = true;   
-let user = new Cart(this.cartId, this.currentUser,item.drugsId,item.drugsName,item.drugsCost, qty, item.stockQty,item.drugsDescription,item.total);
+let user = new Cart(this.cartId, this.currentUser,item.drugsId,item.drugsName,item.drugsCost, qty, item.stockQty,item.drugsDescription,item.categories,item.supplierName,item.dateOfExpiration,item.productImages,item.total);
     console.log(user.drugsId);
 
 

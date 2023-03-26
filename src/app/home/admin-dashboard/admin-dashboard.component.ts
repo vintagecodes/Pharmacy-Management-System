@@ -62,7 +62,7 @@ export class AdminDashboardComponent implements OnInit {
     supplierName: "",
     dateOfExpiration: "",
     productImages: [],
-    
+    drugsId: ''
   }
 
   displayStyle = "none";
@@ -170,11 +170,11 @@ export class AdminDashboardComponent implements OnInit {
   ngAfterViewInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
       if (res.matches) {
-        // this.sidenav.mode = 'over';
+        this.sidenav.mode = 'over';
         this.sidenav.close();
       } else {
-        // this.sidenav.mode = 'side';
-        // this.sidenav.open();
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
       }
     });
   }

@@ -13,7 +13,7 @@
   </mat-toolbar> -->
   
   <mat-sidenav-container>
-      <mat-sidenav #sidenav="matSidenav">
+      <mat-sidenav #sidenav mode="side" opened>
         <a routerLink="/profile" ><img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" /></a>
 
         <h4 *ngIf="this.roles[0] === 'ROLE_ADMIN'; else user">Hi, {{this.currentUser| uppercase}}</h4>
@@ -97,4 +97,5 @@
             </a>
           </button>
       </mat-sidenav>
+        
   </mat-sidenav-container>

@@ -96,12 +96,12 @@ import { UserComponent } from './home/admin-dashboard/user/user.component';
     
   ],
   imports: [
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     Ng2SearchPipeModule,
-    BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
@@ -122,6 +122,7 @@ import { UserComponent } from './home/admin-dashboard/user/user.component';
       echarts: () => import('echarts'),
     }),
   ],
+  
   exports:[
     CommonModule, NgxPaginationModule
   ],

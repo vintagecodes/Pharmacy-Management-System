@@ -20,6 +20,8 @@ export class NavComponent implements OnInit {
   xyz:any = [];
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
+  events: string[] = [];
+  opened!: boolean;
 
  
   constructor( private cd: ChangeDetectorRef,  private tokenStorageService: TokenStorageService, private observer: BreakpointObserver) { }
@@ -52,19 +54,19 @@ export class NavComponent implements OnInit {
     window.location.reload();
   }
 
-  ngAfterViewInit() {
-    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
-      if (res.matches) {
-        this.sidenav.mode = 'over';
-        this.sidenav.close();
-      } else {
-        this.sidenav.mode = 'side';
-        this.sidenav.open();
-      }
-    });
+  // ngAfterViewInit() {
+  //   this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+  //     if (res.matches) {
+  //       this.sidenav.mode = 'over';
+  //       this.sidenav.close();
+  //     } else {
+  //       this.sidenav.mode = 'side';
+  //       this.sidenav.open();
+  //     }
+  //   });
 
-    this.cd.detectChanges();
-  }
+  //   this.cd.detectChanges();
+  // }
 
   
 
