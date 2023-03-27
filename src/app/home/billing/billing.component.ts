@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address';
 import { BillingService } from 'src/app/service/billing.service';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class BillingComponent implements OnInit {
 
-  checkoutForm!: FormGroup;
+  checkoutForm!: UntypedFormGroup;
   formData: any;
   address: any;
   currentUser: any;
@@ -35,7 +35,7 @@ export class BillingComponent implements OnInit {
     
   // })
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private service: BillingService, private tokenStorageService: TokenStorageService) {
+  constructor(private router: Router, private formBuilder: UntypedFormBuilder, private service: BillingService, private tokenStorageService: TokenStorageService) {
     
    }
 
