@@ -28,8 +28,9 @@
               <div class="row">
                   <!-- Single Product -->
                   <div class="items" *ngFor="let item of content | filter:searchText">
-                      <div id="product-1" class="single-product">
+                      <div id="product-1" class="single-product" *ngFor="let j of item.productImages">
                           <div class="part-1">
+                            <img [src]="j.picByte | safeUrl" class="img-fluid thumbnail-image" >
                               <!-- <ul>
                                   <li><a (click)="addToCart(item)"><i class="fas fa-shopping-cart"></i></a></li>
                                  
