@@ -11,7 +11,7 @@ import { AdminDashboardComponent } from './home/admin-dashboard/admin-dashboard.
 import { UserDashboardComponent } from './home/user-dashboard/user-dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AddtocartComponent } from './addtocart/addtocart.component';
+import { LoginControllerComponent } from './login-controller/login-controller.component';
 import { CartService } from 'cartService/cart.service';
 import { CartComponent } from './home/cart/cart.component';
 import { NavComponent } from './home/nav/nav.component';
@@ -54,6 +54,7 @@ import { SafeUrlPipe } from './pharmacy/shop/safe-url.pipe';
 import { HeaderComponent } from './header/header.component';
 import {NgxEchartsModule} from 'ngx-echarts';
 import { UserComponent } from './home/admin-dashboard/user/user.component';
+import { RegisterControllerComponent } from './register-controller/register-controller.component';
 
 
 
@@ -68,7 +69,7 @@ import { UserComponent } from './home/admin-dashboard/user/user.component';
     ProfileComponent,
     AdminDashboardComponent,
     UserDashboardComponent,
-    AddtocartComponent,
+    LoginControllerComponent,
     CartComponent,
     NavComponent,
     PharmacyComponent,
@@ -92,6 +93,7 @@ import { UserComponent } from './home/admin-dashboard/user/user.component';
     SafeUrlPipe,
     HeaderComponent,
     UserComponent,
+    RegisterControllerComponent,
     
     
   ],

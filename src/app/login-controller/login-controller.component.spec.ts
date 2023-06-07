@@ -1,22 +1,22 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddtocartComponent } from './addtocart.component';
+import { LoginControllerComponent } from './login-controller.component';
 
-describe('AddtocartComponent', () => {
-  let component: AddtocartComponent;
-  let fixture: ComponentFixture<AddtocartComponent>;
+describe('LoginControllerComponent', () => {
+  let component: LoginControllerComponent;
+  let fixture: ComponentFixture<LoginControllerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddtocartComponent ],
+      declarations: [ LoginControllerComponent ],
       imports: [HttpClientModule]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddtocartComponent);
+    fixture = TestBed.createComponent(LoginControllerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

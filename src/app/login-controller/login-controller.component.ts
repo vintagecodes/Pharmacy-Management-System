@@ -4,11 +4,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { DrugsService } from '../service/drugs.service';
 
 @Component({
-  selector: 'app-addtocart',
-  templateUrl: './addtocart.component.html',
-  styleUrls: ['./addtocart.component.css']
+  selector: 'app-login-controller',
+  templateUrl: './login-controller.component.html',
+  styleUrls: ['./login-controller.component.css']
 })
-export class AddtocartComponent implements OnInit {
+export class LoginControllerComponent implements OnInit {
   itemList: any;
   photoItems: any;
   image:any;

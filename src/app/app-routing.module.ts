@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddtocartComponent } from './addtocart/addtocart.component';
+import { LoginControllerComponent } from './login-controller/login-controller.component';
 import { AdminDashboardComponent } from './home/admin-dashboard/admin-dashboard.component';
 import { CartComponent } from './home/cart/cart.component';
 import { HomeComponent } from './home/home.component';
@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'myorders', component: UserDashboardComponent },
   { path: 'api/user-auth/admin', component: AdminDashboardComponent },
-  { path: 'addtocart', component: AddtocartComponent },
+  { path: 'addtocart', component: LoginControllerComponent },
   { path: 'cart', component: CartComponent },
   {path: 'hi', component: PharmacyComponent},
   {path: 'shop', component: ShopComponent},
