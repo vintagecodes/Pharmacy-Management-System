@@ -44,7 +44,7 @@
                           <div class="part-2">
                               <h3 class="product-title">{{item.drugsName}}</h3>
                               <h4 class="product-price">{{item.drugsCost | currency:'INR':'symbol-narrow'}}</h4>&nbsp;&nbsp;&nbsp;
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >More</button>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="more(item)" >Details</button>
                           </div>
                       </div>
                   </div>
@@ -67,12 +67,12 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body" *ngIf="drugsList">
+            <div class="modal-body" *ngIf="cont">
               <!-- <h3>{{drugs}}: -</h3> -->
-              <h3>Drugs Cost: </h3><small>{{drugsList.drugsCost | currency:'INR':'symbol-narrow'}}</small>
-              <h3>Drugs Description: </h3><small>{{drugsList.drugsDescription}}</small>
-              <h3>Drugs Name: </h3><small>{{drugsList.drugsName}}</small>
-              <h2>Supplier: - {{drugsList.supplierName}}</h2>
+              <h3>Drugs Cost: </h3><small>{{cont.drugsCost | currency:'INR':'symbol-narrow'}}</small>
+              <h3>Drugs Description: </h3><small>{{cont.drugsDescription}}</small>
+              <h3>Drugs Name: </h3><small>{{cont.drugsName}}</small>
+              <h2>Supplier: - {{cont.supplierName}}</h2>
       
               
             </div>

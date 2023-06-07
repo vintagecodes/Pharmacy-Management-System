@@ -30,6 +30,7 @@ export class CategoryComponent implements OnInit {
   public categories: any;
   abc:any;
   drugsList:any = {};
+  cont: any;
 
   constructor(private drugsService: DrugsService,
     private tokenStorageService: TokenStorageService, 
@@ -147,15 +148,13 @@ export class CategoryComponent implements OnInit {
   })
   }
 
-  // more(item: any){
-  //   console.log(item.drugsId);
-  //   let drugs = new Drugs(item.drugsName,item.drugsDescription, item.drugsCost, item.supplierName);
-  //   this.abc = drugs;
-  //   this.drugsList = this.abc;
-  //   console.log(this.drugsList.drugsCost);
-  //   // this.drugsList.pop();
+  more(item: any){
+    this.cont = item;
+    console.log(this.cont);
+   
+    // this.drugsList.pop();
     
-  // }
+  }
 
 
 }
